@@ -2,4 +2,7 @@
     <string name="app_name">QuizzardApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="notes_title">Title</string>
+    <string name="notes_text">Text</string>
+    <string name="notes_date">Date</string>
 </resources>

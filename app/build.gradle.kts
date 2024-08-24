@@ -44,4 +44,10 @@ dependencies {
     val fragmentVersion = "1.5.7"
     //noinspection UseTomlInstead,GradleDependency
     implementation("androidx.fragment:fragment-ktx:$fragmentVersion")
+
+    val roomVersion = "2.6.1"
+    //noinspection UseTomlInstead
+    implementation("androidx.room:room-runtime:$roomVersion")
+    //noinspection UseTomlInstead
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
 }
