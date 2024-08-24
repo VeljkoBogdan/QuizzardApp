@@ -1,6 +1,9 @@
 package com.veljkobogdan.quizzardapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -52,11 +55,17 @@ public class MainActivity extends AppCompatActivity{
                     return true;
                 } else if (itemId == R.id.add) {
                     // TODO: Add an add button, an onClick listener and popup
+                    try {
+                        Intent intent = new Intent(MainActivity.this, NotesListActivity.class);
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
                     return true;
                 }
             }
             catch (Exception e) {
-                throw e;
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             }
 
             return false;
@@ -65,9 +74,13 @@ public class MainActivity extends AppCompatActivity{
 
     private void loadFragment(Fragment fragment) {
         if (fragment != null) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(com.google.android.material.R.id.container, fragment);
-            transaction.commit();
+            try {
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(com.google.android.material.R.id.container, fragment);
+                transaction.commit();
+            } catch (Exception e) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
