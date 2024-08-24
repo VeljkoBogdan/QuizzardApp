@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity{
         bottomNavigationView = findViewById(R.id.btmNavBar);
         loadFragment(homeFragment);
 
+        // separate the anonymous class in a method
         bottomNavigationView.setOnItemSelectedListener(item -> {
             try {
                 int itemId = item.getItemId();
@@ -48,6 +49,9 @@ public class MainActivity extends AppCompatActivity{
                     return true;
                 } else if (itemId == R.id.profile) {
                     loadFragment(profileFragment);
+                    return true;
+                } else if (itemId == R.id.add) {
+                    // TODO: Add an add button, an onClick listener and popup
                     return true;
                 }
             }
