@@ -1,5 +1,6 @@
 package com.veljkobogdan.quizzardapp.activity.note;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -25,7 +26,10 @@ public class NotesListActivity extends AppCompatActivity {
     private final NoteClickListener noteClickListener = new NoteClickListener() {
         @Override
         public void onClick(Note note) {
-
+            Intent intent = new Intent(NotesListActivity.this, NoteActivity.class);
+            // send Note data to NoteActivity
+            intent.putExtra("note", note);
+            startActivity(intent);
         }
 
         @Override
