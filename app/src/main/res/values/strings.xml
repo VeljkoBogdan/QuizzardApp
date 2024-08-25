@@ -8,4 +8,5 @@
     <string name="add_note">Add a Note</string>
     <string name="title">Title</string>
     <string name="text">Insert your text here</string>
+    <string name="name_notes">Notes</string>
 </resources>

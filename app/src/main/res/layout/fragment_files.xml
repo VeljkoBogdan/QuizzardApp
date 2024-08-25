@@ -5,10 +5,23 @@
     android:layout_height="match_parent"
     tools:context=".fragments.FilesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
+    <LinearLayout
         android:layout_height="match_parent"
-        android:text="hello" />
+        android:layout_width="match_parent"
+        android:paddingTop="32dp"
+        android:paddingHorizontal="10dp"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <Button
+            android:id="@+id/files_notes_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/name_notes"
+            style="@style/Widget.Material3.Button.IconButton.Outlined"
+            android:elevation="4dp"
+            />
+
+    </LinearLayout>
 
 </FrameLayout>
