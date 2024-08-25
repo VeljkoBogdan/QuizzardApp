@@ -1,4 +1,4 @@
-package com.veljkobogdan.quizzardapp.activity;
+package com.veljkobogdan.quizzardapp.activity.note;
 
 import android.os.Bundle;
 
@@ -10,13 +10,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.veljkobogdan.quizzardapp.R;
 
-public class NewNoteActivity extends AppCompatActivity {
+public class NoteActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.new_note_activity);
+        setContentView(R.layout.note_activity);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

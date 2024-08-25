@@ -5,4 +5,7 @@
     <string name="notes_title">Title</string>
     <string name="notes_text">Text</string>
     <string name="notes_date">Date</string>
+    <string name="add_note">Add a Note</string>
+    <string name="title">Title</string>
+    <string name="text">Insert your text here</string>
 </resources>
