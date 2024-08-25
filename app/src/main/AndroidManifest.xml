@@ -13,9 +13,11 @@
         android:theme="@style/Theme.QuizzardApp"
         tools:targetApi="31">
         <activity
+            android:name=".activity.note.EditNoteActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.note.NewNoteActivity"
-            android:exported="false"
-            />
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
