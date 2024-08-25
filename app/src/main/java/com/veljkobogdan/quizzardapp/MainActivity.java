@@ -2,6 +2,9 @@ package com.veljkobogdan.quizzardapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.MenuItem;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -38,38 +41,7 @@ public class MainActivity extends AppCompatActivity{
         loadFragment(homeFragment);
 
         // separate the anonymous class in a method
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            try {
-                int itemId = item.getItemId();
-                if (itemId == R.id.files) {
-                    loadFragment(filesFragment);
-                    return true;
-                } else if (itemId == R.id.home) {
-                    loadFragment(homeFragment);
-                    return true;
-                } else if (itemId == R.id.settings) {
-                    loadFragment(settingsFragment);
-                    return true;
-                } else if (itemId == R.id.profile) {
-                    loadFragment(profileFragment);
-                    return true;
-                } else if (itemId == R.id.add) {
-                    // TODO: Add an add button, an onClick listener and popup
-                    try {
-                        Intent intent = new Intent(MainActivity.this, NotesListActivity.class);
-                        startActivity(intent);
-                    } catch (Exception e) {
-                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                    return true;
-                }
-            }
-            catch (Exception e) {
-                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-            }
-
-            return false;
-        });
+        bottomNavigationView.setOnItemSelectedListener(this::onNavigationItemSelected);
     }
 
     private void loadFragment(Fragment fragment) {
@@ -82,5 +54,64 @@ public class MainActivity extends AppCompatActivity{
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    private boolean onMenuItemClick(MenuItem menuItem) {
+        int menuId = menuItem.getItemId();
+        if (menuId == R.id.new_note) {
+            Intent intent = new Intent(MainActivity.this, NotesListActivity.class);
+            startActivity(intent);
+            return true;
+        } else if (menuId == R.id.new_date) {
+
+            return true;
+        } else if (menuId == R.id.new_flashcard) {
+
+            return true;
+        } else if (menuId == R.id.new_question) {
+
+            return true;
+        } else if (menuId == R.id.new_schedule) {
+
+            return true;
+        }
+        return false;
+    }
+
+    private boolean onNavigationItemSelected(MenuItem item) {
+        try {
+            int itemId = item.getItemId();
+            if (itemId == R.id.files) {
+                loadFragment(filesFragment);
+                return true;
+            } else if (itemId == R.id.home) {
+                loadFragment(homeFragment);
+                return true;
+            } else if (itemId == R.id.settings) {
+                loadFragment(settingsFragment);
+                return true;
+            } else if (itemId == R.id.profile) {
+                loadFragment(profileFragment);
+                return true;
+            } else if (itemId == R.id.add) {
+                // Initializing the popup menu
+                PopupMenu popupMenu = new PopupMenu(
+                        MainActivity.this,
+                        findViewById(R.id.add),
+                        Gravity.CENTER,
+                        0,
+                        com.google.android.material.R.style.Widget_Material3_PopupMenu);
+                // Inflating popup menu
+                popupMenu.getMenuInflater().inflate(R.menu.add_file_popup, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(this::onMenuItemClick);
+                // Showing the popup menu
+                popupMenu.show();
+                return true;
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+        return false;
     }
 }

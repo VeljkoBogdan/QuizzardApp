@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <item android:id="@+id/new_note"
+        android:title="Note"
+        />
+    <item android:id="@+id/new_flashcard"
+        android:title="Flashcard"
+        />
+    <item android:id="@+id/new_question"
+        android:title="Control Question"
+        />
+    <item android:id="@+id/new_date"
+        android:title="Calendar Date"
+        />
+    <item android:id="@+id/new_schedule"
+        android:title="Schedule"
+        />
+</menu>
