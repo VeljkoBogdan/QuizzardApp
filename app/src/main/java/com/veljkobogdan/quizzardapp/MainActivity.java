@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.veljkobogdan.quizzardapp.activity.NotesListActivity;
+import com.veljkobogdan.quizzardapp.activity.note.NewNoteActivity;
 import com.veljkobogdan.quizzardapp.fragments.FilesFragment;
 import com.veljkobogdan.quizzardapp.fragments.HomeFragment;
 import com.veljkobogdan.quizzardapp.fragments.ProfileFragment;
@@ -59,8 +59,9 @@ public class MainActivity extends AppCompatActivity{
 
     private boolean onMenuItemClick(MenuItem menuItem) {
         int menuId = menuItem.getItemId();
+        // TODO: add logic for the menu items
         if (menuId == R.id.new_note) {
-            Intent intent = new Intent(MainActivity.this, NotesListActivity.class);
+            Intent intent = new Intent(MainActivity.this, NewNoteActivity.class);
             startActivity(intent);
             return true;
         } else if (menuId == R.id.new_date) {

@@ -1,4 +1,4 @@
-package com.veljkobogdan.quizzardapp.activity;
+package com.veljkobogdan.quizzardapp.activity.note;
 
 import android.os.Bundle;
 
