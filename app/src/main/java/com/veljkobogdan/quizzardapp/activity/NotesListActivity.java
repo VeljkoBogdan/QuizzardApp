@@ -1,6 +1,5 @@
-package com.veljkobogdan.quizzardapp;
+package com.veljkobogdan.quizzardapp.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -9,6 +8,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.adapter.NotesListAdapter;
 import com.veljkobogdan.quizzardapp.database.RoomDB;
 import com.veljkobogdan.quizzardapp.entity.Note;
