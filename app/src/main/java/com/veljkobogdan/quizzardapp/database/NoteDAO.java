@@ -19,7 +19,7 @@ public interface NoteDAO {
 
     @Query("SELECT * FROM notes\n" +
             "ORDER BY \n" +
-            "  CASE WHEN pin = TRUE THEN 0 ELSE 1 END,\n" +
+            "  CASE WHEN pin = 1 THEN 0 ELSE 1 END,\n" +
             "  id DESC;")
     List<Note> getAll();
 

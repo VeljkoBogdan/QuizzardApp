@@ -9,4 +9,8 @@
     <string name="title">Title</string>
     <string name="text">Insert your text here</string>
     <string name="name_notes">Notes</string>
+    <string name="edit">Edit</string>
+    <string name="pin">Pin</string>
+    <string name="delete">Delete</string>
+    <string name="back">back</string>
 </resources>

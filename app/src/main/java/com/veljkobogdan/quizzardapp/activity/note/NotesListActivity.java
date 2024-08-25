@@ -13,7 +13,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.veljkobogdan.quizzardapp.MainActivity;
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.adapter.NotesListAdapter;
 import com.veljkobogdan.quizzardapp.database.RoomDB;
@@ -26,7 +25,7 @@ import java.util.List;
 public class NotesListActivity extends AppCompatActivity {
     RecyclerView notes_recycler;
     NotesListAdapter notesListAdapter;
-    List<Note> list = new ArrayList<Note>();
+    List<Note> list = new ArrayList<>();
     RoomDB database;
     private final NoteClickListener noteClickListener = new NoteClickListener() {
         @Override

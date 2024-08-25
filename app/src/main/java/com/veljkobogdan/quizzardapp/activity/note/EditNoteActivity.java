@@ -17,7 +17,6 @@ import com.veljkobogdan.quizzardapp.database.NoteDAO;
 import com.veljkobogdan.quizzardapp.database.RoomDB;
 import com.veljkobogdan.quizzardapp.entity.Note;
 
-import java.util.Calendar;
 
 public class EditNoteActivity extends AppCompatActivity {
     ImageView image_submit, image_back;

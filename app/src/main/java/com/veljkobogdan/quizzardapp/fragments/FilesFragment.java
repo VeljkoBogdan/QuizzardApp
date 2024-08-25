@@ -1,6 +1,5 @@
 package com.veljkobogdan.quizzardapp.fragments;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,8 +12,6 @@ import android.widget.Button;
 
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.activity.note.NotesListActivity;
-
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +32,7 @@ public class FilesFragment extends Fragment {
      * @return A new instance of fragment FilesFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FilesFragment newInstance(String param1, String param2) {
+    public static FilesFragment newInstance() {
         FilesFragment fragment = new FilesFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
