@@ -40,7 +40,10 @@ public class NoteActivity extends AppCompatActivity {
         note_view_text = findViewById(R.id.note_view_text);
 
         // set click listeners
-        image_back.setOnClickListener(v -> finish());
+        image_back.setOnClickListener(v -> {
+            Intent intent = new Intent(NoteActivity.this, NotesListActivity.class);
+            startActivity(intent);
+        });
         image_edit.setOnClickListener(v -> {
             Intent intent = new Intent(NoteActivity.this, EditNoteActivity.class);
             intent.putExtra("note", note);
