@@ -17,11 +17,14 @@ public interface NoteDAO {
     @Insert(onConflict = REPLACE)
     void insert(Note note);
 
-    @Query("SELECT * FROM notes ORDER BY id DESC")
+    @Query("SELECT * FROM notes\n" +
+            "ORDER BY \n" +
+            "  CASE WHEN pin = TRUE THEN 0 ELSE 1 END,\n" +
+            "  id DESC;")
     List<Note> getAll();
 
-    @Query("UPDATE notes SET title = :title, text = :text WHERE id = :id")
-    void update(int id, String title, String text);
+    @Query("UPDATE notes SET title = :title, text = :text, date = :date, pin = :isPinned WHERE id = :id")
+    void update(int id, String title, String text, String date, boolean isPinned);
 
     @Delete
     void delete(Note note);
