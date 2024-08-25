@@ -2,6 +2,10 @@ package com.veljkobogdan.quizzardapp.activity.note;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.PopupMenu;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.veljkobogdan.quizzardapp.MainActivity;
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.adapter.NotesListAdapter;
 import com.veljkobogdan.quizzardapp.database.RoomDB;
@@ -34,7 +39,51 @@ public class NotesListActivity extends AppCompatActivity {
 
         @Override
         public void onLongClick(Note note, CardView cardView) {
+            PopupMenu popupMenu = new PopupMenu(
+                    NotesListActivity.this,
+                    new View(cardView.getContext()),
+                    Gravity.CENTER,
+                    0,
+                    com.google.android.material.R.style.Widget_Material3_PopupMenu);
+            // Inflating popup menu
+            popupMenu.getMenuInflater().inflate(R.menu.note_options_popup, popupMenu.getMenu());
+            popupMenu.setOnMenuItemClickListener(menuItem -> onMenuItemClick(note, menuItem));
+            // Showing the popup menu
+            MenuItem item = popupMenu.getMenu().findItem(R.id.pin);
+            if (note.isPinned){
+                item.setTitle("Unpin");
+            } else {
+                item.setTitle("Pin");
+            }
+            popupMenu.show();
+        }
 
+        private boolean onMenuItemClick(Note note, MenuItem menuItem) {
+            int menuId = menuItem.getItemId();
+            if (menuId == R.id.delete) {
+                database.noteDAO().delete(note);
+                updateRecycler(database.noteDAO().getAll());
+                return true;
+            } else if (menuId == R.id.edit) {
+                // go to EditNoteActivity
+                Intent intent = new Intent(NotesListActivity.this, EditNoteActivity.class);
+                // send Note data to EditNoteActivity
+                intent.putExtra("note", note);
+                startActivity(intent);
+                return true;
+            } else if (menuId == R.id.pin) {
+                // set isPinned of the note to true
+                if (note.isPinned()) {
+                    note.setPinned(false);
+                    database.noteDAO().update(note.getId(), note.getTitle(), note.getText(), note.getDate(), note.isPinned());
+                } else {
+                    note.setPinned(true);
+                    database.noteDAO().update(note.getId(), note.getTitle(), note.getText(), note.getDate(), note.isPinned());
+                }
+                updateRecycler(database.noteDAO().getAll());
+                return true;
+            }
+            return false;
         }
     };
 
