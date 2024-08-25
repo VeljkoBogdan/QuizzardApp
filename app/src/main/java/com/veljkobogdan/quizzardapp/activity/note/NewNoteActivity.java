@@ -56,7 +56,7 @@ public class NewNoteActivity extends AppCompatActivity {
         Note note = new Note()
                 .setText(text)
                 .setTitle(title)
-                .setDate(Calendar.getInstance().getTime().toString());
+                .setDate(android.text.format.DateFormat.format("dd-MM-yyyy hh:mm:ss", new java.util.Date()).toString());
 
         NoteDAO noteDAO = RoomDB.getInstance(this).noteDAO();
         noteDAO.insert(note);
