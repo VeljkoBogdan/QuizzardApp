@@ -15,7 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.veljkobogdan.quizzardapp.activity.note.NewNoteActivity;
 import com.veljkobogdan.quizzardapp.fragments.FilesFragment;
 import com.veljkobogdan.quizzardapp.fragments.HomeFragment;
-import com.veljkobogdan.quizzardapp.fragments.ProfileFragment;
+import com.veljkobogdan.quizzardapp.fragments.CalendarFragment;
 import com.veljkobogdan.quizzardapp.fragments.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity{
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity{
 
     HomeFragment homeFragment;
     FilesFragment filesFragment;
-    ProfileFragment profileFragment;
+    CalendarFragment calendarFragment;
     SettingsFragment settingsFragment;
 
     @Override
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity{
 
         homeFragment = new HomeFragment();
         filesFragment = new FilesFragment();
-        profileFragment = new ProfileFragment();
+        calendarFragment = new CalendarFragment();
         settingsFragment = new SettingsFragment();
 
         bottomNavigationView = findViewById(R.id.btmNavBar);
@@ -92,8 +92,8 @@ public class MainActivity extends AppCompatActivity{
             } else if (itemId == R.id.settings) {
                 loadFragment(settingsFragment);
                 return true;
-            } else if (itemId == R.id.profile) {
-                loadFragment(profileFragment);
+            } else if (itemId == R.id.calendar) {
+                loadFragment(calendarFragment);
                 return true;
             } else if (itemId == R.id.add) {
                 // Initializing the popup menu

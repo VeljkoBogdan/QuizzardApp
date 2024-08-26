@@ -13,4 +13,7 @@
     <string name="pin">Pin</string>
     <string name="delete">Delete</string>
     <string name="back">back</string>
+    <string name="name_flashcards">Flashcards</string>
+    <string name="name_files">Your Files:</string>
+    <string name="name_questions">Control Questions</string>
 </resources>

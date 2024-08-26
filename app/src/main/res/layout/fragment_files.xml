@@ -10,14 +10,36 @@
         android:layout_width="match_parent"
         android:paddingTop="32dp"
         android:paddingHorizontal="10dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         tools:ignore="UselessParent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/name_files"
+            style="@style/TextAppearance.Material3.ActionBar.Title"
+            />
 
         <Button
             android:id="@+id/files_notes_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/name_notes"
+            style="@style/Widget.Material3.Button.IconButton.Outlined"
+            android:elevation="4dp"
+            />
+        <Button
+            android:id="@+id/files_flashcards_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/name_flashcards"
+            style="@style/Widget.Material3.Button.IconButton.Outlined"
+            android:elevation="4dp"
+            />
+        <Button
+            android:id="@+id/files_questions_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/name_questions"
             style="@style/Widget.Material3.Button.IconButton.Outlined"
             android:elevation="4dp"
             />
