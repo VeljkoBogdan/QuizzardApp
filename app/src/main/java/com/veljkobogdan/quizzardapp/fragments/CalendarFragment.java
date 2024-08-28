@@ -1,7 +1,7 @@
 package com.veljkobogdan.quizzardapp.fragments;
 
 import android.annotation.SuppressLint;
-import android.app.Notification;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.veljkobogdan.quizzardapp.R;
+import com.veljkobogdan.quizzardapp.activity.calendar.CalendarDayView;
 import com.veljkobogdan.quizzardapp.adapter.CalendarAdapter;
 
 import java.time.LocalDate;
@@ -38,16 +39,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CalendarFragment newInstance(String param1, String param2) {
+    public static CalendarFragment newInstance() {
         CalendarFragment fragment = new CalendarFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -152,13 +144,19 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
 
     }
 
+    @SuppressLint("NewApi")
     @Override
     public void onItemClick(int position, String dayText) {
         // TODO: Add logic for when an item is clicked
         if (dayText.isEmpty()) {
-            return;
         } else {
-            Toast.makeText(getActivity(), dayText, Toast.LENGTH_SHORT).show();
+            try {
+                Intent intent = new Intent(getActivity(), CalendarDayView.class);
+                intent.putExtra("date", dayText + " " + getStringFromDate(selectedDate));
+                startActivity(intent);
+            } catch (Exception e) {
+                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
