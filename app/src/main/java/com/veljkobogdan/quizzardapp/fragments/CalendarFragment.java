@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -147,7 +148,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     @SuppressLint("NewApi")
     @Override
     public void onItemClick(int position, String dayText) {
-        // TODO: Add logic for when an item is clicked
         if (dayText.isEmpty()) {
         } else {
             try {
@@ -155,7 +155,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
                 intent.putExtra("date", dayText + " " + getStringFromDate(selectedDate));
                 startActivity(intent);
             } catch (Exception e) {
-                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                Log.e("RUNTIME_ERROR", e.getMessage());
             }
         }
     }

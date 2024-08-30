@@ -2,6 +2,7 @@ package com.veljkobogdan.quizzardapp.activity.calendar;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +20,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class CalendarDayView extends AppCompatActivity {
-
     private RecyclerView dayRecyclerView;
     private DayAdapter dayAdapter;
     private LocalDate selectedDate;
@@ -54,7 +54,7 @@ public class CalendarDayView extends AppCompatActivity {
         try {
             return database.calendarDAO().getCalendarInsertsForDay(date.toString());
         } catch (Exception e) {
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Log.e("RUNTIME_ERROR", e.getMessage());
             return null;
         }
     }
