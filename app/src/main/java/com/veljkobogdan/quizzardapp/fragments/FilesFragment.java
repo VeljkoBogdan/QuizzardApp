@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.activity.note.NotesListActivity;
+import com.veljkobogdan.quizzardapp.helper.RedirectHelper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -56,7 +58,10 @@ public class FilesFragment extends Fragment {
 
     private void onNotesButtonClick(View v) {
         // go to NotesListActivity
-        Intent intent = new Intent(getActivity(), NotesListActivity.class);
-        startActivity(intent);
+        try {
+            RedirectHelper.toNotesListActivity(this.getActivity());
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 }

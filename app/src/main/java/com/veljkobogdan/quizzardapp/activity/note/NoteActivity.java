@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.entity.Note;
+import com.veljkobogdan.quizzardapp.helper.RedirectHelper;
 
 public class NoteActivity extends AppCompatActivity {
     ImageButton image_back, image_edit;
@@ -41,8 +42,7 @@ public class NoteActivity extends AppCompatActivity {
 
         // set click listeners
         image_back.setOnClickListener(v -> {
-            Intent intent = new Intent(NoteActivity.this, NotesListActivity.class);
-            startActivity(intent);
+            RedirectHelper.toNotesListActivity(this);
         });
         image_edit.setOnClickListener(v -> {
             Intent intent = new Intent(NoteActivity.this, EditNoteActivity.class);

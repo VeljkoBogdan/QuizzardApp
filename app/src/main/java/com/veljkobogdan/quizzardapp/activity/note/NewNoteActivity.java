@@ -17,6 +17,7 @@ import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.database.NoteDAO;
 import com.veljkobogdan.quizzardapp.database.RoomDB;
 import com.veljkobogdan.quizzardapp.entity.Note;
+import com.veljkobogdan.quizzardapp.helper.RedirectHelper;
 
 public class NewNoteActivity extends AppCompatActivity {
     ImageButton image_back, image_add;
@@ -38,7 +39,7 @@ public class NewNoteActivity extends AppCompatActivity {
         edit_note_title = findViewById(R.id.edit_note_title);
         edit_note_text = findViewById(R.id.edit_note_text);
 
-        image_back.setOnClickListener(v -> finish());
+        image_back.setOnClickListener(v -> RedirectHelper.toNotesListActivity(this));
         image_add.setOnClickListener(this::onClick);
     }
 
@@ -59,7 +60,6 @@ public class NewNoteActivity extends AppCompatActivity {
         NoteDAO noteDAO = RoomDB.getInstance(this).noteDAO();
         noteDAO.insert(note);
 
-        Intent intent = new Intent(this, NotesListActivity.class);
-        startActivity(intent);
+        RedirectHelper.toNotesListActivity(this);
     }
 }
