@@ -16,4 +16,5 @@
     <string name="name_flashcards">Flashcards</string>
     <string name="name_files">Your Files:</string>
     <string name="name_questions">Control Questions</string>
+    <string name="time_picker_title">Select a time</string>
 </resources>
