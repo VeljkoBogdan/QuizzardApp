@@ -28,31 +28,35 @@ public class CalendarInsert implements Serializable {
         return title;
     }
 
-    public void setTitle(String title) {
+    public CalendarInsert setTitle(String title) {
         this.title = title;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public CalendarInsert setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public String getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public CalendarInsert setDate(String date) {
         this.date = date;
+        return this;
     }
 
     public String getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public CalendarInsert setTime(String time) {
         this.time = time;
+        return this;
     }
 }
