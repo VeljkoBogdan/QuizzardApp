@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import com.veljkobogdan.quizzardapp.entity.CalendarInsert;
 import com.veljkobogdan.quizzardapp.entity.Note;
 
-@Database(entities = {Note.class, CalendarInsert.class}, version = 1, exportSchema = false)
+@Database(entities = {Note.class, CalendarInsert.class}, version = 2, exportSchema = false)
 public abstract class RoomDB extends RoomDatabase {
     private static RoomDB db;
 
