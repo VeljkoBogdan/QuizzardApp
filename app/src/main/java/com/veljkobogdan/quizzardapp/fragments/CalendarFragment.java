@@ -24,6 +24,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -126,8 +127,8 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
             calendar_previous = view.findViewById(R.id.calendar_previous);
             calendar_date = view.findViewById(R.id.calendar_date);
 
-            calendar_next.setOnClickListener(v -> onNextClick(v));
-            calendar_previous.setOnClickListener(v -> onPreviousClick(v));
+            calendar_next.setOnClickListener(this::onNextClick);
+            calendar_previous.setOnClickListener(this::onPreviousClick);
         } catch (Exception e) {
             Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
@@ -150,13 +151,14 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     @Override
     public void onItemClick(int position, String dayText) {
         if (dayText.isEmpty()) {
+            return;
         } else {
             try {
                 Intent intent = new Intent(getActivity(), CalendarDayView.class);
                 intent.putExtra("date", dayText + " " + getStringFromDate(selectedDate));
                 startActivity(intent);
             } catch (Exception e) {
-                Log.e("RUNTIME_ERROR", e.getMessage());
+                Log.e("RUNTIME_ERROR", Objects.requireNonNull(e.getMessage()));
             }
         }
     }

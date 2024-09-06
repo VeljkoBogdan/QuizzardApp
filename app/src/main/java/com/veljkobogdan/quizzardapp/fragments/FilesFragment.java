@@ -1,6 +1,5 @@
 package com.veljkobogdan.quizzardapp.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,7 +11,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.veljkobogdan.quizzardapp.R;
-import com.veljkobogdan.quizzardapp.activity.note.NotesListActivity;
 import com.veljkobogdan.quizzardapp.helper.RedirectHelper;
 
 /**

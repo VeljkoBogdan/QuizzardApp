@@ -72,11 +72,7 @@ public class MainActivity extends AppCompatActivity{
         } else if (menuId == R.id.new_question) {
 
             return true;
-        } else if (menuId == R.id.new_schedule) {
-
-            return true;
-        }
-        return false;
+        } else return menuId == R.id.new_schedule;
     }
 
     private boolean onNavigationItemSelected(MenuItem item) {

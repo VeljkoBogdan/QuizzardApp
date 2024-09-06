@@ -15,7 +15,6 @@ import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.entity.Note;
 import com.veljkobogdan.quizzardapp.listener.NoteClickListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NotesListAdapter extends RecyclerView.Adapter<NotesViewHolder> {

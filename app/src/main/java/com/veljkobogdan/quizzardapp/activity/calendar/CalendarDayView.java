@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.adapter.DayAdapter;
-import com.veljkobogdan.quizzardapp.database.CalendarDAO;
-import com.veljkobogdan.quizzardapp.database.RoomDB;
 import com.veljkobogdan.quizzardapp.entity.CalendarInsert;
 import com.veljkobogdan.quizzardapp.helper.DateTimeFormatterHelper;
 import com.veljkobogdan.quizzardapp.helper.RedirectHelper;
@@ -24,7 +22,6 @@ import com.veljkobogdan.quizzardapp.repository.CalendarInsertRepository;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 
 public class CalendarDayView extends AppCompatActivity {
     private RecyclerView dayRecyclerView;

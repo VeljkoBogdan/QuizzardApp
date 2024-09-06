@@ -1,6 +1,6 @@
 package com.veljkobogdan.quizzardapp.activity.calendar;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -16,14 +16,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.veljkobogdan.quizzardapp.MainActivity;
 import com.veljkobogdan.quizzardapp.R;
-import com.veljkobogdan.quizzardapp.activity.note.NotesListActivity;
 import com.veljkobogdan.quizzardapp.database.CalendarDAO;
-import com.veljkobogdan.quizzardapp.database.NoteDAO;
 import com.veljkobogdan.quizzardapp.database.RoomDB;
 import com.veljkobogdan.quizzardapp.entity.CalendarInsert;
-import com.veljkobogdan.quizzardapp.entity.Note;
 import com.veljkobogdan.quizzardapp.helper.DateTimeFormatterHelper;
 import com.veljkobogdan.quizzardapp.helper.RedirectHelper;
 
