@@ -32,7 +32,8 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesViewHolder> {
     @NonNull
     @Override
     public NotesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new NotesViewHolder(LayoutInflater.from(context).inflate(R.layout.notes_list, parent, false));
+        return new NotesViewHolder(LayoutInflater.from(context)
+                .inflate(R.layout.notes_list, parent, false));
     }
 
     @Override
@@ -53,19 +54,12 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesViewHolder> {
             holder.notes_pin_image.setImageResource(0);
         }
 
-        holder.notes_card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onClick(list.get(holder.getAdapterPosition()));
-            }
-        });
+        holder.notes_card.setOnClickListener(view -> listener
+                .onClick(list.get(holder.getAdapterPosition())));
 
-        holder.notes_card.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                listener.onLongClick(list.get(holder.getAdapterPosition()), holder.notes_card);
-                return false;
-            }
+        holder.notes_card.setOnLongClickListener(view -> {
+            listener.onLongClick(list.get(holder.getAdapterPosition()), holder.notes_card);
+            return false;
         });
     }
 

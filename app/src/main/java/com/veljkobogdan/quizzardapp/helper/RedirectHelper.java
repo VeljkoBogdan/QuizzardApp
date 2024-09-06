@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.veljkobogdan.quizzardapp.MainActivity;
+import com.veljkobogdan.quizzardapp.activity.calendar.CalendarDayView;
+import com.veljkobogdan.quizzardapp.activity.calendar.NewCalendarInsertView;
 import com.veljkobogdan.quizzardapp.activity.note.NewNoteActivity;
 import com.veljkobogdan.quizzardapp.activity.note.NotesListActivity;
 
@@ -23,5 +25,11 @@ public interface RedirectHelper {
 
     static void toNewNoteActivity(Context context) {
         toActivity(context, NewNoteActivity.class);
+    }
+
+    static void toNewCalendarInsertView(CalendarDayView calendarDayView, String string) {
+        Intent intent = new Intent(calendarDayView, NewCalendarInsertView.class);
+        intent.putExtra("date", string);
+        calendarDayView.startActivity(intent);
     }
 }

@@ -34,6 +34,14 @@ public class NoteActivity extends AppCompatActivity {
         Note note = (Note) getIntent().getSerializableExtra("note");
         assert note != null;
 
+        initWidgets(note);
+
+        // set note data
+        note_view_title.setText(note.getTitle());
+        note_view_text.setText(note.getText());
+    }
+
+    private void initWidgets(Note note) {
         // find views
         image_back = findViewById(R.id.image_back);
         image_edit = findViewById(R.id.image_edit);
@@ -49,9 +57,5 @@ public class NoteActivity extends AppCompatActivity {
             intent.putExtra("note", note);
             startActivity(intent);
         });
-
-        // set note data
-        note_view_title.setText(note.getTitle());
-        note_view_text.setText(note.getText());
     }
 }

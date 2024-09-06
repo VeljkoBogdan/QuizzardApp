@@ -3,16 +3,23 @@ package com.veljkobogdan.quizzardapp.activity.calendar;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.adapter.DayAdapter;
 import com.veljkobogdan.quizzardapp.database.CalendarDAO;
 import com.veljkobogdan.quizzardapp.database.RoomDB;
 import com.veljkobogdan.quizzardapp.entity.CalendarInsert;
+import com.veljkobogdan.quizzardapp.helper.DateTimeFormatterHelper;
+import com.veljkobogdan.quizzardapp.helper.RedirectHelper;
+import com.veljkobogdan.quizzardapp.listener.CalendarInsertClickListener;
+import com.veljkobogdan.quizzardapp.repository.CalendarInsertRepository;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -23,7 +30,19 @@ public class CalendarDayView extends AppCompatActivity {
     private RecyclerView dayRecyclerView;
     private DayAdapter dayAdapter;
     private LocalDate selectedDate;
-    private RoomDB database;
+    private ImageButton image_back, image_add;
+    private final CalendarInsertClickListener calendarInsertClickListener =
+            new CalendarInsertClickListener() {
+        @Override
+        public void onClick(CalendarInsert calendarInsert) {
+            Log.i("CLICKED", calendarInsert.toString());
+        }
+
+        @Override
+        public void onLongClick(CalendarInsert calendarInsert, CardView cardView) {
+            Log.i("LONG_CLICKED", calendarInsert.toString());
+        }
+    };
 
     @SuppressLint("NewApi")
     @Override
@@ -31,31 +50,41 @@ public class CalendarDayView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.day_view);
 
+        initWidgets();
+
         try {
-            database = RoomDB.getInstance(this);
-
             dayRecyclerView = findViewById(R.id.day_recycler_view);
-
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy",
-                    Locale.ENGLISH);
+            // Parse to LocalDate
+            DateTimeFormatter formatter = DateTimeFormatterHelper.getCalendarFormat();
             selectedDate = LocalDate.parse(getIntent().getStringExtra("date"), formatter);
-            // When a day is tapped, get the list of CalendarInsert entities for that day
-            List<CalendarInsert> calendarInserts = getCalendarInsertsForDay(selectedDate);
+            // Add onclick to image_add
+            image_add.setOnClickListener(v -> RedirectHelper
+                    .toNewCalendarInsertView(this, selectedDate.toString()));
 
-            dayAdapter = new DayAdapter(calendarInserts);
-            dayRecyclerView.setAdapter(dayAdapter);
+            // Update recycler
+            updateRecycler();
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-            finish();
+            RedirectHelper.toMainActivity(this);
         }
     }
 
-    private List<CalendarInsert> getCalendarInsertsForDay(LocalDate date) {
-        try {
-            return database.calendarDAO().getCalendarInsertsForDay(date.toString());
-        } catch (Exception e) {
-            Log.e("RUNTIME_ERROR", e.getMessage());
-            return null;
-        }
+    private void updateRecycler() {
+        dayRecyclerView.setHasFixedSize(true);
+        dayRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+
+        List<CalendarInsert> calendarInserts = CalendarInsertRepository
+                .getCalendarInsertsForDay(selectedDate, this);
+
+        dayAdapter = new DayAdapter(CalendarDayView.this, calendarInserts,
+                calendarInsertClickListener);
+        dayRecyclerView.setAdapter(dayAdapter);
     }
+
+    private void initWidgets() {
+        image_add = findViewById(R.id.image_add);
+        image_back = findViewById(R.id.image_back);
+        image_back.setOnClickListener(v -> RedirectHelper.toMainActivity(this));
+    }
+
 }

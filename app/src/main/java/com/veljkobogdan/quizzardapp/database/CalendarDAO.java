@@ -20,7 +20,8 @@ public interface CalendarDAO {
     @Query("SELECT * FROM calendar_insert")
     List<CalendarInsert> getAll();
 
-    @Query("UPDATE calendar_insert SET title = :title, description = :description, date = :date, time = :time WHERE id = :id")
+    @Query("UPDATE calendar_insert SET title = :title, description = :description, date = :date," +
+            " time = :time WHERE id = :id")
     void update(int id, String title, String description, String date, String time);
 
     @Delete

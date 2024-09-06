@@ -24,7 +24,10 @@ import com.veljkobogdan.quizzardapp.database.NoteDAO;
 import com.veljkobogdan.quizzardapp.database.RoomDB;
 import com.veljkobogdan.quizzardapp.entity.CalendarInsert;
 import com.veljkobogdan.quizzardapp.entity.Note;
+import com.veljkobogdan.quizzardapp.helper.DateTimeFormatterHelper;
 import com.veljkobogdan.quizzardapp.helper.RedirectHelper;
+
+import java.util.Objects;
 
 public class NewCalendarInsertView extends AppCompatActivity {
     ImageButton image_add, image_back;
@@ -32,6 +35,7 @@ public class NewCalendarInsertView extends AppCompatActivity {
     EditText edit_calendar_insert_title, edit_calendar_insert_description;
     TimePicker time_picker;
     CheckBox checkbox_all_day;
+    String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,19 @@ public class NewCalendarInsertView extends AppCompatActivity {
             return insets;
         });
 
+        initWidgets();
+
+        try {
+            // parse date from intent
+            date = String.format(Objects.requireNonNull(getIntent().getStringExtra("date")),
+                    DateTimeFormatterHelper.getCalendarFormat());
+        } catch (Exception e) {
+            Toast.makeText(this, "Activity initialized without a date",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void initWidgets() {
         image_back = findViewById(R.id.image_back);
         image_add = findViewById(R.id.image_add);
         edit_calendar_insert_description = findViewById(R.id.edit_calendar_insert_description);
@@ -67,7 +84,8 @@ public class NewCalendarInsertView extends AppCompatActivity {
 
         CalendarInsert calendarInsert = new CalendarInsert()
                 .setTitle(title)
-                .setDescription(text);
+                .setDescription(text)
+                .setDate(date);
 
         if (checkbox_all_day.isChecked()) {
             calendarInsert.setTime(null);

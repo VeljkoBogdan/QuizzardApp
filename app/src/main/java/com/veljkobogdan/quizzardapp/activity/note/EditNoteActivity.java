@@ -2,6 +2,7 @@ package com.veljkobogdan.quizzardapp.activity.note;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -33,11 +34,18 @@ public class EditNoteActivity extends AppCompatActivity {
             return insets;
         });
 
-
         // get Note from intent
         Note note = (Note) getIntent().getSerializableExtra("note");
         assert note != null;
 
+        initWidgets(note);
+
+        // set note data
+        edit_note_text.setText(note.getTitle());
+        edit_note_title.setText(note.getText());
+    }
+
+    private void initWidgets(Note note) {
         // find views
         image_back = findViewById(R.id.image_back);
         image_submit = findViewById(R.id.image_submit);
@@ -46,29 +54,22 @@ public class EditNoteActivity extends AppCompatActivity {
 
         // set click listeners
         image_back.setOnClickListener(v -> finish());
-        image_submit.setOnClickListener(v -> {
+        image_submit.setOnClickListener((View v) -> {
             String title = edit_note_title.getText().toString();
             String text = edit_note_text.getText().toString();
 
             if (title.isEmpty() || text.isEmpty()) {
-                Toast.makeText(this, "All fields are required", Toast.LENGTH_LONG).show();
-                return;
+                Toast.makeText(EditNoteActivity.this, "All fields are required", Toast.LENGTH_LONG).show();
+            } else {
+                Note newNote = new Note()
+                        .setText(text)
+                        .setTitle(title);
+                NoteDAO noteDAO = RoomDB.getInstance(EditNoteActivity.this).noteDAO();
+                noteDAO.update(note.getId(), newNote.getTitle(), newNote.getText(), note.getDate(), note.isPinned);
+                Intent intent = new Intent(EditNoteActivity.this, NoteActivity.class);
+                intent.putExtra("note", newNote);
+                EditNoteActivity.this.startActivity(intent);
             }
-
-            Note newNote = new Note()
-                    .setText(text)
-                    .setTitle(title);
-
-            NoteDAO noteDAO = RoomDB.getInstance(this).noteDAO();
-            noteDAO.update(note.getId(), newNote.getTitle(), newNote.getText(), note.getDate(), note.isPinned);
-
-            Intent intent = new Intent(EditNoteActivity.this, NoteActivity.class);
-            intent.putExtra("note", newNote);
-            startActivity(intent);
         });
-
-        // set note data
-        edit_note_text.setText(note.getTitle());
-        edit_note_title.setText(note.getText());
     }
 }

@@ -1,4 +1,4 @@
-package com.veljkobogdan.quizzardapp;
+package com.veljkobogdan.quizzardapp.adapter;
 
 import android.view.View;
 import android.widget.TextView;
@@ -6,7 +6,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.veljkobogdan.quizzardapp.adapter.CalendarAdapter;
+import com.veljkobogdan.quizzardapp.R;
 
 public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     public TextView calendar_item_text;

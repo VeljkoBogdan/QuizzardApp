@@ -23,7 +23,8 @@ public interface NoteDAO {
             "  id DESC;")
     List<Note> getAll();
 
-    @Query("UPDATE notes SET title = :title, text = :text, date = :date, pin = :isPinned WHERE id = :id")
+    @Query("UPDATE notes SET title = :title, text = :text, date = :date," +
+            " pin = :isPinned WHERE id = :id")
     void update(int id, String title, String text, String date, boolean isPinned);
 
     @Delete

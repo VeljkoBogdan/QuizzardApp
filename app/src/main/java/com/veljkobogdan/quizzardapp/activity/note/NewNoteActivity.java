@@ -34,6 +34,10 @@ public class NewNoteActivity extends AppCompatActivity {
             return insets;
         });
 
+        initWidgets();
+    }
+
+    private void initWidgets() {
         image_back = findViewById(R.id.image_back);
         image_add = findViewById(R.id.image_add);
         edit_note_title = findViewById(R.id.edit_note_title);
