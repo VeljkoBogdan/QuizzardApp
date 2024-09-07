@@ -7,9 +7,16 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.veljkobogdan.quizzardapp.entity.CalendarInsert;
+import com.veljkobogdan.quizzardapp.entity.Flashcard;
+import com.veljkobogdan.quizzardapp.entity.FlashcardCollection;
 import com.veljkobogdan.quizzardapp.entity.Note;
 
-@Database(entities = {Note.class, CalendarInsert.class}, version = 2, exportSchema = false)
+@Database(entities = {
+        Note.class,
+        CalendarInsert.class,
+        Flashcard.class,
+        FlashcardCollection.class},
+        version = 3, exportSchema = false)
 public abstract class RoomDB extends RoomDatabase {
     private static RoomDB db;
 
@@ -29,4 +36,6 @@ public abstract class RoomDB extends RoomDatabase {
 
     public abstract NoteDAO noteDAO();
     public abstract CalendarDAO calendarDAO();
+    public abstract FlashcardDAO flashcardDAO();
+    public abstract FlashcardCollectionDAO flashcardCollectionDAO();
 }
