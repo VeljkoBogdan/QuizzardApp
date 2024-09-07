@@ -1,10 +1,12 @@
 package com.veljkobogdan.quizzardapp.entity;
 
 import androidx.room.ColumnInfo;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = "flashcard_collection")
@@ -14,7 +16,7 @@ public class FlashcardCollection implements Serializable {
     @ColumnInfo(name = "name")
     public String name;
     @ColumnInfo(name = "flashcards")
-    public List<Flashcard> flashcards; // <List<Flashcard>>
+    public ArrayList<Flashcard> flashcards;
 
     public int getId() {
         return id;
@@ -33,7 +35,7 @@ public class FlashcardCollection implements Serializable {
         return flashcards;
     }
 
-    public FlashcardCollection setFlashcards(List<Flashcard> flashcards) {
+    public FlashcardCollection setFlashcards(ArrayList<Flashcard> flashcards) {
         this.flashcards = flashcards;
         return this;
     }

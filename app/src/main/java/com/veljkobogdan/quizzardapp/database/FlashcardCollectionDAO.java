@@ -10,6 +10,7 @@ import androidx.room.Query;
 import com.veljkobogdan.quizzardapp.entity.Flashcard;
 import com.veljkobogdan.quizzardapp.entity.FlashcardCollection;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -21,7 +22,7 @@ public interface FlashcardCollectionDAO {
     List<FlashcardCollection> getAll();
 
     @Query("UPDATE flashcard_collection SET name = :name, flashcards = :flashcards WHERE id = :id")
-    void update(int id, String name, List<Flashcard> flashcards);
+    void update(int id, String name, ArrayList<Flashcard> flashcards);
 
     @Delete
     void delete(FlashcardCollection flashcardCollection);

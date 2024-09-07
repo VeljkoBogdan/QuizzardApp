@@ -50,4 +50,6 @@ dependencies {
     implementation("androidx.room:room-runtime:$roomVersion")
     //noinspection UseTomlInstead
     annotationProcessor("androidx.room:room-compiler:$roomVersion")
+
+    implementation(libs.gson)
 }

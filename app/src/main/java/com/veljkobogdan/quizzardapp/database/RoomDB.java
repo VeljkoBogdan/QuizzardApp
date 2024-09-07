@@ -5,11 +5,13 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import com.veljkobogdan.quizzardapp.entity.CalendarInsert;
 import com.veljkobogdan.quizzardapp.entity.Flashcard;
 import com.veljkobogdan.quizzardapp.entity.FlashcardCollection;
 import com.veljkobogdan.quizzardapp.entity.Note;
+import com.veljkobogdan.quizzardapp.helper.FlashcardListConverter;
 
 @Database(entities = {
         Note.class,
@@ -17,6 +19,7 @@ import com.veljkobogdan.quizzardapp.entity.Note;
         Flashcard.class,
         FlashcardCollection.class},
         version = 3, exportSchema = false)
+@TypeConverters({FlashcardListConverter.class})
 public abstract class RoomDB extends RoomDatabase {
     private static RoomDB db;
 
