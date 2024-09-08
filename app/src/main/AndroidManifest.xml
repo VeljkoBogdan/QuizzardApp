@@ -15,6 +15,12 @@
         tools:ignore="UnusedAttribute"
         tools:targetApi="31">
         <activity
+            android:name=".activity.flashcard.FlashcardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.flashcard.FlashcardCollectionListView"
+            android:exported="false" />
+        <activity
             android:name=".activity.calendar.NewCalendarInsertView"
             android:exported="false" />
         <activity

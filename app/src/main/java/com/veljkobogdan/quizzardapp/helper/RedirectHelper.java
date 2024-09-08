@@ -3,12 +3,10 @@ package com.veljkobogdan.quizzardapp.helper;
 import android.content.Context;
 import android.content.Intent;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.StringDef;
-
 import com.veljkobogdan.quizzardapp.MainActivity;
 import com.veljkobogdan.quizzardapp.activity.calendar.CalendarDayView;
 import com.veljkobogdan.quizzardapp.activity.calendar.NewCalendarInsertView;
+import com.veljkobogdan.quizzardapp.activity.flashcard.FlashcardCollectionListView;
 import com.veljkobogdan.quizzardapp.activity.note.NewNoteActivity;
 import com.veljkobogdan.quizzardapp.activity.note.NotesListActivity;
 
@@ -37,5 +35,9 @@ public interface RedirectHelper {
         Intent intent = new Intent(calendarDayView, NewCalendarInsertView.class);
         intent.putExtra("date", string);
         calendarDayView.startActivity(intent);
+    }
+
+    static void toFlashcardCollectionListView(Context context, int flag) {
+        toActivity(context, FlashcardCollectionListView.class, flag);
     }
 }

@@ -14,25 +14,15 @@ import android.widget.Toast;
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.helper.RedirectHelper;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FilesFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FilesFragment extends Fragment {
     Button files_notes_button;
+    Button files_flashcards_button;
+    Button files_control_questions_button;
 
     public FilesFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment FilesFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static FilesFragment newInstance() {
         FilesFragment fragment = new FilesFragment();
         Bundle args = new Bundle();
@@ -50,10 +40,21 @@ public class FilesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_files, container, false);
-        // Find button and attach a click listener
+        // Find buttons and attach a click listener
         files_notes_button = view.findViewById(R.id.files_notes_button);
         files_notes_button.setOnClickListener(this::onNotesButtonClick);
+        files_flashcards_button = view.findViewById(R.id.files_flashcards_button);
+        files_flashcards_button.setOnClickListener(this::onFlashcardsButtonClick);
         return view;
+    }
+
+    private void onFlashcardsButtonClick(View view) {
+        // go to FlashcardCollectionListView
+        try {
+            RedirectHelper.toFlashcardCollectionListView(this.getActivity(), Intent.FLAG_ACTIVITY_NEW_TASK);
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     private void onNotesButtonClick(View v) {
