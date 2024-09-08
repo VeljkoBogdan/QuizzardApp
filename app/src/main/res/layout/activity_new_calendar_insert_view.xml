@@ -8,44 +8,7 @@
     tools:context=".activity.calendar.NewCalendarInsertView"
     android:orientation="vertical"
     >
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/tool_bar_add_calendar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        >
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="-16dp"
-            tools:ignore="RtlSymmetry">
-            <ImageButton
-                android:id="@+id/image_back"
-                android:src="@drawable/image_back"
-                android:layout_margin="8dp"
-                android:layout_alignParentStart="true"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                />
-            <TextView
-                android:id="@+id/title_date"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Date"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:textSize="18sp"
-                />
-            <ImageButton
-                android:id="@+id/image_add"
-                android:src="@drawable/image_add"
-                android:layout_margin="8dp"
-
-                android:layout_alignParentEnd="true"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                />
-        </RelativeLayout>
-    </com.google.android.material.appbar.MaterialToolbar>
+    <include layout="@layout/toolbar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
