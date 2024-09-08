@@ -61,7 +61,7 @@ public class NewCalendarInsertView extends AppCompatActivity {
         image_add = findViewById(R.id.image_add);
         edit_calendar_insert_description = findViewById(R.id.edit_calendar_insert_description);
         edit_calendar_insert_title = findViewById(R.id.edit_calendar_insert_title);
-        title_date = findViewById(R.id.title_date);
+        title_date = findViewById(R.id.title);
         time_picker = findViewById(R.id.time_picker);
         checkbox_all_day = findViewById(R.id.checkbox_all_day);
 
@@ -92,6 +92,6 @@ public class NewCalendarInsertView extends AppCompatActivity {
         CalendarDAO calendarDAO = RoomDB.getInstance(this).calendarDAO();
         calendarDAO.insert(calendarInsert);
 
-        RedirectHelper.toMainActivity(this);
+        RedirectHelper.toMainActivity(this, 0);
     }
 }

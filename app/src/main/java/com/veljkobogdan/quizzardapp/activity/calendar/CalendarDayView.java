@@ -62,7 +62,7 @@ public class CalendarDayView extends AppCompatActivity {
             updateRecycler();
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-            RedirectHelper.toMainActivity(this);
+            RedirectHelper.toMainActivity(this, 0);
         }
     }
 
@@ -81,7 +81,10 @@ public class CalendarDayView extends AppCompatActivity {
     private void initWidgets() {
         image_add = findViewById(R.id.image_add);
         image_back = findViewById(R.id.image_back);
-        image_back.setOnClickListener(v -> RedirectHelper.toMainActivity(this));
+        image_back.setOnClickListener(v -> {
+            RedirectHelper.toMainActivity(this, 0);
+            CalendarDayView.this.finish();
+        });
     }
 
 }

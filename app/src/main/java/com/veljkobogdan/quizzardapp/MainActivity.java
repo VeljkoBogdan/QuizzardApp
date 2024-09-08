@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity{
         int menuId = menuItem.getItemId();
         // TODO: add logic for the menu items
         if (menuId == R.id.new_note) {
-            RedirectHelper.toNewNoteActivity(this);
+            RedirectHelper.toNewNoteActivity(this, 0);
             return true;
         } else if (menuId == R.id.new_date) {
 

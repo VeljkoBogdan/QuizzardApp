@@ -1,5 +1,6 @@
 package com.veljkobogdan.quizzardapp.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -58,7 +59,7 @@ public class FilesFragment extends Fragment {
     private void onNotesButtonClick(View v) {
         // go to NotesListActivity
         try {
-            RedirectHelper.toNotesListActivity(this.getActivity());
+            RedirectHelper.toNotesListActivity(this.getActivity(), Intent.FLAG_ACTIVITY_NEW_TASK);
         } catch (Exception e) {
             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
         }

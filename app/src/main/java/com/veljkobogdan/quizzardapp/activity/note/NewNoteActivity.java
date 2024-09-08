@@ -42,7 +42,7 @@ public class NewNoteActivity extends AppCompatActivity {
         edit_note_title = findViewById(R.id.edit_note_title);
         edit_note_text = findViewById(R.id.edit_note_text);
 
-        image_back.setOnClickListener(v -> RedirectHelper.toNotesListActivity(this));
+        image_back.setOnClickListener(v -> RedirectHelper.toNotesListActivity(this, 0));
         image_add.setOnClickListener(this::onClick);
     }
 
@@ -63,6 +63,6 @@ public class NewNoteActivity extends AppCompatActivity {
         NoteDAO noteDAO = RoomDB.getInstance(this).noteDAO();
         noteDAO.insert(note);
 
-        RedirectHelper.toNotesListActivity(this);
+        RedirectHelper.toNotesListActivity(this, 0);
     }
 }

@@ -144,7 +144,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     private void onPreviousClick(View v) {
         selectedDate = selectedDate.minusMonths(1);
         setMonthView(v);
-
     }
 
     @SuppressLint("NewApi")
@@ -156,6 +155,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
             try {
                 Intent intent = new Intent(getActivity(), CalendarDayView.class);
                 intent.putExtra("date", dayText + " " + getStringFromDate(selectedDate));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             } catch (Exception e) {
                 Log.e("RUNTIME_ERROR", Objects.requireNonNull(e.getMessage()));

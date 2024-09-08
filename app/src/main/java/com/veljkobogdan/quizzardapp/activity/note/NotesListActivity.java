@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.adapter.NotesListAdapter;
 import com.veljkobogdan.quizzardapp.database.RoomDB;
 import com.veljkobogdan.quizzardapp.entity.Note;
+import com.veljkobogdan.quizzardapp.helper.RedirectHelper;
 import com.veljkobogdan.quizzardapp.listener.NoteClickListener;
 
 import java.util.ArrayList;
@@ -27,6 +30,9 @@ public class NotesListActivity extends AppCompatActivity {
     NotesListAdapter notesListAdapter;
     List<Note> list = new ArrayList<>();
     RoomDB database;
+    TextView title;
+    ImageButton image_back, image_add;
+
     private final NoteClickListener noteClickListener = new NoteClickListener() {
         @Override
         public void onClick(Note note) {
@@ -90,6 +96,19 @@ public class NotesListActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notes_list_activity);
+
+        image_back = findViewById(R.id.image_back);
+        image_add = findViewById(R.id.image_add);
+        title = findViewById(R.id.title);
+        title.setText("Your notes");
+
+        image_back.setOnClickListener(v -> {
+
+            RedirectHelper.toMainActivity(NotesListActivity.this, 0);
+        });
+        image_add.setOnClickListener(v -> {
+            RedirectHelper.toNewNoteActivity(NotesListActivity.this, 0);
+        });
 
         notes_recycler = findViewById(R.id.notes_recycler);
         database = RoomDB.getInstance(this);
