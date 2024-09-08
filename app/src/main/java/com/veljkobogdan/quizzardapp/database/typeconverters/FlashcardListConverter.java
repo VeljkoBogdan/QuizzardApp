@@ -1,4 +1,4 @@
-package com.veljkobogdan.quizzardapp.helper;
+package com.veljkobogdan.quizzardapp.database.typeconverters;
 
 import androidx.room.TypeConverter;
 

@@ -11,7 +11,7 @@ import com.veljkobogdan.quizzardapp.entity.CalendarInsert;
 import com.veljkobogdan.quizzardapp.entity.Flashcard;
 import com.veljkobogdan.quizzardapp.entity.FlashcardCollection;
 import com.veljkobogdan.quizzardapp.entity.Note;
-import com.veljkobogdan.quizzardapp.helper.FlashcardListConverter;
+import com.veljkobogdan.quizzardapp.database.typeconverters.FlashcardListConverter;
 
 @Database(entities = {
         Note.class,
