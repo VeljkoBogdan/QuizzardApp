@@ -17,6 +17,8 @@ public class FlashcardCollection implements Serializable {
     public String name;
     @ColumnInfo(name = "flashcards")
     public ArrayList<Flashcard> flashcards;
+    @ColumnInfo(name = "description")
+    public String description;
 
     public int getId() {
         return id;
@@ -37,6 +39,11 @@ public class FlashcardCollection implements Serializable {
 
     public FlashcardCollection setFlashcards(ArrayList<Flashcard> flashcards) {
         this.flashcards = flashcards;
+        return this;
+    }
+
+    public FlashcardCollection setDescription(String description) {
+        this.description = description;
         return this;
     }
 }

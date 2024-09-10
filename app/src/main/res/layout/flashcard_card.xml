@@ -9,6 +9,8 @@
         android:id="@+id/flashcard_flipper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:elevation="8dp"
         tools:ignore="UselessParent">
 
         <!-- Front side of the flashcard -->

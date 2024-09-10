@@ -5,37 +5,43 @@
     android:layout_height="?attr/actionBarSize"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.Material3.Toolbar"
     >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="-16dp"
-        tools:ignore="RtlSymmetry">
+        android:paddingStart="-18dp"
+        android:layout_alignParentStart="true"
+        tools:ignore="RtlSymmetry"
+        >
         <ImageButton
             android:id="@+id/image_back"
+            android:contentDescription="Back"
             android:src="@drawable/image_back"
             android:layout_margin="8dp"
             android:layout_alignParentStart="true"
             android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="match_parent"
+            style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
             />
+
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:text="TITLE"
             android:textAlignment="center"
-            android:gravity="center"
-            android:textSize="18sp"
-            />
+            android:textSize="18sp" />
         <ImageButton
             android:id="@+id/image_add"
+            android:contentDescription="Add"
             android:src="@drawable/image_add"
             android:layout_margin="8dp"
-
             android:layout_alignParentEnd="true"
             android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="match_parent"
+            style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
             />
     </RelativeLayout>
 </com.google.android.material.appbar.MaterialToolbar>

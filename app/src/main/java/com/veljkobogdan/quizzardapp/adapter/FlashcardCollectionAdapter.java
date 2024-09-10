@@ -1,5 +1,6 @@
 package com.veljkobogdan.quizzardapp.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.veljkobogdan.quizzardapp.R;
+import com.veljkobogdan.quizzardapp.activity.flashcard.FlashcardActivity;
 import com.veljkobogdan.quizzardapp.entity.FlashcardCollection;
+import com.veljkobogdan.quizzardapp.helper.RedirectHelper;
 
 import java.util.List;
 
@@ -40,7 +43,7 @@ public class FlashcardCollectionAdapter extends RecyclerView.Adapter<FlashcardCo
         return flashcardCollections.size();
     }
 
-    public static class FlashcardCollectionViewHolder extends RecyclerView.ViewHolder {
+    public class FlashcardCollectionViewHolder extends RecyclerView.ViewHolder {
         public TextView nameTextView;
 
         public FlashcardCollectionViewHolder(View itemView) {
@@ -50,6 +53,14 @@ public class FlashcardCollectionAdapter extends RecyclerView.Adapter<FlashcardCo
 
         public void bind(FlashcardCollection flashcardCollection) {
             nameTextView.setText(flashcardCollection.getName());
+
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                FlashcardCollection fc = flashcardCollections.get(position);
+                Intent intent = new Intent(itemView.getContext(), FlashcardActivity.class);
+                intent.putExtra("flashcardCollection", fc);
+                itemView.getContext().startActivity(intent);
+            });
         }
     }
 }

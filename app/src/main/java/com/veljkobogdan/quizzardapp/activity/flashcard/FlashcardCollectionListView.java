@@ -28,6 +28,10 @@ public class FlashcardCollectionListView extends AppCompatActivity {
         // Initialize the adapter with your data
         adapter = new FlashcardCollectionAdapter(getFlashcardCollections());
         flashcardCollectionList.setAdapter(adapter);
+
+        flashcardCollectionList.setOnClickListener(v -> {
+
+        });
     }
 
     // Get the list of Flashcard collections from your database or other data source

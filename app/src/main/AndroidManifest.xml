@@ -15,6 +15,12 @@
         tools:ignore="UnusedAttribute"
         tools:targetApi="31">
         <activity
+            android:name=".activity.flashcard.CreateFlashcardCollectionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.flashcard.CreateFlashcardActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.flashcard.FlashcardActivity"
             android:exported="false" />
         <activity
