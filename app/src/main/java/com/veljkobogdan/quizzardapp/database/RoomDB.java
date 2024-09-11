@@ -18,7 +18,7 @@ import com.veljkobogdan.quizzardapp.database.typeconverters.FlashcardListConvert
         CalendarInsert.class,
         Flashcard.class,
         FlashcardCollection.class},
-        version = 3, exportSchema = false)
+        version = 4, exportSchema = false)
 @TypeConverters({FlashcardListConverter.class})
 public abstract class RoomDB extends RoomDatabase {
     private static RoomDB db;

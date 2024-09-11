@@ -47,9 +47,9 @@ public class CalendarDayView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.day_view);
 
-        initWidgets();
-
         try {
+            initWidgets();
+
             dayRecyclerView = findViewById(R.id.day_recycler_view);
             // Parse to LocalDate
             DateTimeFormatter formatter = DateTimeFormatterHelper.getCalendarFormat();
@@ -67,15 +67,20 @@ public class CalendarDayView extends AppCompatActivity {
     }
 
     private void updateRecycler() {
-        dayRecyclerView.setHasFixedSize(true);
-        dayRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+        try {
+            dayRecyclerView.setHasFixedSize(true);
+            dayRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1,
+                    StaggeredGridLayoutManager.VERTICAL));
 
-        List<CalendarInsert> calendarInserts = CalendarInsertRepository
-                .getCalendarInsertsForDay(selectedDate, this);
+            List<CalendarInsert> calendarInserts = CalendarInsertRepository
+                    .getCalendarInsertsForDay(selectedDate, this);
 
-        dayAdapter = new DayAdapter(CalendarDayView.this, calendarInserts,
-                calendarInsertClickListener);
-        dayRecyclerView.setAdapter(dayAdapter);
+            dayAdapter = new DayAdapter(CalendarDayView.this, calendarInserts,
+                    calendarInsertClickListener);
+            dayRecyclerView.setAdapter(dayAdapter);
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     private void initWidgets() {
