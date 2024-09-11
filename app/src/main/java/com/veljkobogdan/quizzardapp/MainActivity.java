@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity{
 
             return true;
         } else if (menuId == R.id.new_flashcard) {
-
+            RedirectHelper.toNewFlashcardActivity(this, 0);
             return true;
         } else if (menuId == R.id.new_question) {
 

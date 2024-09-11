@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.veljkobogdan.quizzardapp.MainActivity;
 import com.veljkobogdan.quizzardapp.activity.calendar.CalendarDayView;
 import com.veljkobogdan.quizzardapp.activity.calendar.NewCalendarInsertView;
+import com.veljkobogdan.quizzardapp.activity.flashcard.CreateFlashcardActivity;
 import com.veljkobogdan.quizzardapp.activity.flashcard.FlashcardCollectionListView;
 import com.veljkobogdan.quizzardapp.activity.note.NewNoteActivity;
 import com.veljkobogdan.quizzardapp.activity.note.NotesListActivity;
@@ -39,5 +40,9 @@ public interface RedirectHelper {
 
     static void toFlashcardCollectionListView(Context context, int flag) {
         toActivity(context, FlashcardCollectionListView.class, flag);
+    }
+
+    static void toNewFlashcardActivity(Context context, int flag) {
+        toActivity(context, CreateFlashcardActivity.class, flag);
     }
 }

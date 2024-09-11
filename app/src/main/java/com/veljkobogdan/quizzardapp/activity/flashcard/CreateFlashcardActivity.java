@@ -27,30 +27,38 @@ public class CreateFlashcardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_flashcard);
 
-        questionEditText = findViewById(R.id.question_edit_text);
-        answerEditText = findViewById(R.id.answer_edit_text);
+        try {
+            setContentView(R.layout.activity_create_flashcard);
 
-        image_add = findViewById(R.id.image_add);
-        image_back = findViewById(R.id.image_back);
+            questionEditText = findViewById(R.id.question_edit_text);
+            answerEditText = findViewById(R.id.answer_edit_text);
 
-        image_back.setOnClickListener(v -> finish());
-        image_add.setOnClickListener(v -> {
-            String question = questionEditText.getText().toString();
-            String answer = answerEditText.getText().toString();
+            image_add = findViewById(R.id.image_add);
+            image_back = findViewById(R.id.image_back);
 
-            if (!question.isEmpty() && !answer.isEmpty()) {
-                Flashcard flashcard = new Flashcard().setFront(question).setBack(answer);
-                // Save the flashcard to the database
-                FlashcardDAO flashcardDAO = RoomDB.getInstance(CreateFlashcardActivity.this).flashcardDAO();
-                flashcardDAO.insert(flashcard);
+            image_back.setOnClickListener(v -> finish());
+            image_add.setOnClickListener(v -> {
+                String question = questionEditText.getText().toString();
+                String answer = answerEditText.getText().toString();
 
-                Toast.makeText(CreateFlashcardActivity.this, "Flashcard created!", Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                Toast.makeText(CreateFlashcardActivity.this, "Please fill in both fields", Toast.LENGTH_SHORT).show();
-            }
-        });
+                if (!question.isEmpty() && !answer.isEmpty()) {
+                    Flashcard flashcard = new Flashcard().setFront(question).setBack(answer);
+                    // Save the flashcard to the database
+                    FlashcardDAO flashcardDAO = RoomDB
+                            .getInstance(CreateFlashcardActivity.this).flashcardDAO();
+                    flashcardDAO.insert(flashcard);
+
+                    Toast.makeText(CreateFlashcardActivity.this,
+                            "Flashcard created!", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(CreateFlashcardActivity.this,
+                            "Please fill in both fields", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 }

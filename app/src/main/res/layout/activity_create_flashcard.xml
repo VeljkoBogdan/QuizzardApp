@@ -7,7 +7,7 @@
     >
     <include layout="@layout/toolbar"/>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Question"
+            android:importantForAutofill="no"
             android:inputType="text" />
 
         <EditText
@@ -25,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Answer"
+            android:importantForAutofill="no"
             android:inputType="text" />
 
     </LinearLayout>
