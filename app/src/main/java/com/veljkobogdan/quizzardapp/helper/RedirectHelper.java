@@ -3,10 +3,13 @@ package com.veljkobogdan.quizzardapp.helper;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.veljkobogdan.quizzardapp.MainActivity;
 import com.veljkobogdan.quizzardapp.activity.calendar.CalendarDayView;
 import com.veljkobogdan.quizzardapp.activity.calendar.NewCalendarInsertView;
 import com.veljkobogdan.quizzardapp.activity.flashcard.CreateFlashcardActivity;
+import com.veljkobogdan.quizzardapp.activity.flashcard.FlashcardActivity;
 import com.veljkobogdan.quizzardapp.activity.flashcard.FlashcardCollectionListView;
 import com.veljkobogdan.quizzardapp.activity.note.NewNoteActivity;
 import com.veljkobogdan.quizzardapp.activity.note.NotesListActivity;
@@ -44,5 +47,9 @@ public interface RedirectHelper {
 
     static void toNewFlashcardActivity(Context context, int flag) {
         toActivity(context, CreateFlashcardActivity.class, flag);
+    }
+
+    static void toFlashcardListView(Context context, int flag) {
+        toActivity(context, FlashcardActivity.class, flag);
     }
 }

@@ -11,35 +11,33 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:elevation="8dp"
-        tools:ignore="UselessParent">
+        tools:ignore="UselessParent"
+        android:layout_marginBottom="16dp"
+        >
 
         <!-- Front side of the flashcard -->
-        <LinearLayout
+        <TextView
+            android:id="@+id/front_text"
+            android:text="Front"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/front_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="24sp" />
-
-        </LinearLayout>
 
         <!-- Back side of the flashcard -->
-        <LinearLayout
+        <TextView
+            android:id="@+id/back_text"
+            android:text="Back"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/back_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="24sp" />
-
-        </LinearLayout>
 
     </ViewFlipper>
 

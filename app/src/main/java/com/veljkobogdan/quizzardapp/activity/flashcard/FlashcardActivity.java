@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.adapter.FlashcardAdapter;
+import com.veljkobogdan.quizzardapp.database.FlashcardDAO;
+import com.veljkobogdan.quizzardapp.database.RoomDB;
 import com.veljkobogdan.quizzardapp.entity.Flashcard;
 import com.veljkobogdan.quizzardapp.entity.FlashcardCollection;
 
@@ -53,14 +55,21 @@ public class FlashcardActivity extends AppCompatActivity {
 
     private List<Flashcard> getFlashcards() {
         Intent intent = getIntent();
-
-        try {
-            Serializable list = intent.getSerializableExtra("flashcardCollection");
-            FlashcardCollection flashcardCollection = (FlashcardCollection) list;
-            return flashcardCollection.getFlashcards();
-        } catch (Exception e) {
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-            return null;
+        if (!intent.hasExtra("flashcardCollection")) {
+            FlashcardDAO flashcardDAO = RoomDB.getInstance(this).flashcardDAO();
+            return flashcardDAO.getAll();
+        } else {
+            try {
+                Serializable list = intent.getSerializableExtra("flashcardCollection");
+                FlashcardCollection flashcardCollection = (FlashcardCollection) list;
+                if (flashcardCollection != null) {
+                    return flashcardCollection.getFlashcards();
+                }
+            } catch (Exception e) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                return null;
+            }
         }
+        return null;
     }
 }

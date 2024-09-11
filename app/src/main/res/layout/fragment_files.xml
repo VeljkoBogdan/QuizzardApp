@@ -36,6 +36,14 @@
             android:elevation="4dp"
             />
         <Button
+            android:id="@+id/files_flashcard_collection_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/flashcard_collections"
+            style="@style/Widget.Material3.Button.IconButton.Outlined"
+            android:elevation="4dp"
+            />
+        <Button
             android:id="@+id/files_questions_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,6 +51,7 @@
             style="@style/Widget.Material3.Button.IconButton.Outlined"
             android:elevation="4dp"
             />
+
 
     </LinearLayout>
 

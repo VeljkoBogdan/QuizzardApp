@@ -13,8 +13,8 @@ import com.veljkobogdan.quizzardapp.entity.Flashcard;
 
 import java.util.List;
 
-public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.ViewHolder> {
-    private List<Flashcard> flashcards;
+public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.FlashcardViewHolder> {
+    private final List<Flashcard> flashcards;
 
     public FlashcardAdapter(List<Flashcard> flashcards) {
         this.flashcards = flashcards;
@@ -22,13 +22,14 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.View
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.flashcard_card, parent, false);
-        return new ViewHolder(itemView);
+    public FlashcardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.flashcard_card, parent, false);
+        return new FlashcardViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FlashcardViewHolder holder, int position) {
         Flashcard flashcard = flashcards.get(position);
 
         holder.front_text.setText(flashcard.getFront());
@@ -40,10 +41,10 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.View
         return flashcards.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class FlashcardViewHolder extends RecyclerView.ViewHolder {
         public TextView front_text, back_text;
 
-        public ViewHolder(View itemView) {
+        public FlashcardViewHolder(View itemView) {
             super(itemView);
             front_text = itemView.findViewById(R.id.front_text);
             back_text = itemView.findViewById(R.id.back_text);

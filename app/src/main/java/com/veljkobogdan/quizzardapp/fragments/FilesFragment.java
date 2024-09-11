@@ -16,7 +16,7 @@ import com.veljkobogdan.quizzardapp.helper.RedirectHelper;
 
 public class FilesFragment extends Fragment {
     Button files_notes_button;
-    Button files_flashcards_button;
+    Button files_flashcards_button, files_flashcard_collections_button;
     Button files_control_questions_button;
 
     public FilesFragment() {
@@ -45,13 +45,22 @@ public class FilesFragment extends Fragment {
         files_notes_button.setOnClickListener(this::onNotesButtonClick);
         files_flashcards_button = view.findViewById(R.id.files_flashcards_button);
         files_flashcards_button.setOnClickListener(this::onFlashcardsButtonClick);
+        files_flashcard_collections_button = view.findViewById(R.id.files_flashcard_collection_button);
+        files_flashcard_collections_button.setOnClickListener(this::onFlashcardsCollectionButtonClick);
         return view;
     }
 
-    private void onFlashcardsButtonClick(View view) {
-        // go to FlashcardCollectionListView
+    private void onFlashcardsCollectionButtonClick(View view) {
         try {
             RedirectHelper.toFlashcardCollectionListView(this.getActivity(), Intent.FLAG_ACTIVITY_NEW_TASK);
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void onFlashcardsButtonClick(View view) {
+        try {
+            RedirectHelper.toFlashcardListView(this.getActivity(), Intent.FLAG_ACTIVITY_NEW_TASK);
         } catch (Exception e) {
             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
