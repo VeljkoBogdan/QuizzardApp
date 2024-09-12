@@ -18,4 +18,8 @@
     <string name="name_questions">Control Questions</string>
     <string name="time_picker_title">Select a time</string>
     <string name="flashcard_collections">Flashcard Collections</string>
+    <string name="add_new_event">Add new event</string>
+    <string name="create_flashcard">Create Flashcard</string>
+    <string name="create_flashcard_collection">Create a flashcard collection</string>
+    <string name="flashcards">Your flashcards</string>
 </resources>

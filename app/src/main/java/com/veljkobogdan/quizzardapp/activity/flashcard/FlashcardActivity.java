@@ -31,6 +31,9 @@ public class FlashcardActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_flashcard);
 
+        TextView title = findViewById(R.id.title);
+        title.setText(R.string.flashcards);
+
         recyclerView = findViewById(R.id.flashcard_recycler_view);
         adapter = new FlashcardAdapter(getFlashcards());
         recyclerView.setAdapter(adapter);

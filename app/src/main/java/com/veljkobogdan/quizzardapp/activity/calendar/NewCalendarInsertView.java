@@ -27,7 +27,7 @@ import java.util.Objects;
 
 public class NewCalendarInsertView extends AppCompatActivity {
     ImageButton image_add, image_back;
-    TextView title_date;
+    TextView title;
     EditText edit_calendar_insert_title, edit_calendar_insert_description;
     TimePicker time_picker;
     CheckBox checkbox_all_day;
@@ -61,9 +61,11 @@ public class NewCalendarInsertView extends AppCompatActivity {
         image_add = findViewById(R.id.image_add);
         edit_calendar_insert_description = findViewById(R.id.edit_calendar_insert_description);
         edit_calendar_insert_title = findViewById(R.id.edit_calendar_insert_title);
-        title_date = findViewById(R.id.title);
+        title = findViewById(R.id.title);
         time_picker = findViewById(R.id.time_picker);
         checkbox_all_day = findViewById(R.id.checkbox_all_day);
+
+        title.setText(R.string.add_new_event);
 
         image_back.setOnClickListener(v -> finish());
         image_add.setOnClickListener(this::onClick);

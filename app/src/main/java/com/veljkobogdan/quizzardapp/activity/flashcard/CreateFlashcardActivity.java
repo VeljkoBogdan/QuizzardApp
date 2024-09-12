@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -23,6 +24,7 @@ public class CreateFlashcardActivity extends AppCompatActivity {
     EditText questionEditText;
     EditText answerEditText;
     ImageButton image_add, image_back;
+    TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,9 @@ public class CreateFlashcardActivity extends AppCompatActivity {
 
             image_add = findViewById(R.id.image_add);
             image_back = findViewById(R.id.image_back);
+
+            title = findViewById(R.id.title);
+            title.setText(R.string.create_flashcard);
 
             image_back.setOnClickListener(v -> finish());
             image_add.setOnClickListener(v -> {

@@ -1,6 +1,7 @@
 package com.veljkobogdan.quizzardapp.activity.flashcard;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +22,9 @@ public class FlashcardCollectionListView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashcard_collection_list_view);
+
+        TextView title = findViewById(R.id.title);
+        title.setText(R.string.flashcard_collections);
 
         flashcardCollectionList = findViewById(R.id.flashcard_collection_list);
         flashcardCollectionList.setLayoutManager(new LinearLayoutManager(this));

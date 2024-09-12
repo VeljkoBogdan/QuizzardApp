@@ -52,6 +52,7 @@ public class EditNoteActivity extends AppCompatActivity {
         edit_note_text = findViewById(R.id.edit_note_text);
         edit_note_title = findViewById(R.id.edit_note_title);
 
+
         // set click listeners
         image_back.setOnClickListener(v -> finish());
         image_submit.setOnClickListener((View v) -> {

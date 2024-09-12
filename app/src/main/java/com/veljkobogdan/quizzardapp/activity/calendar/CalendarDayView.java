@@ -3,7 +3,9 @@ package com.veljkobogdan.quizzardapp.activity.calendar;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -66,6 +68,7 @@ public class CalendarDayView extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("NewApi")
     private void updateRecycler() {
         try {
             dayRecyclerView.setHasFixedSize(true);
@@ -74,6 +77,11 @@ public class CalendarDayView extends AppCompatActivity {
 
             List<CalendarInsert> calendarInserts = CalendarInsertRepository
                     .getCalendarInsertsForDay(selectedDate, this);
+
+            // Set title
+            TextView title = findViewById(R.id.title);
+            title.setText(selectedDate.format(DateTimeFormatterHelper.getCalendarFormat()));
+            title.setVisibility(View.VISIBLE);
 
             dayAdapter = new DayAdapter(CalendarDayView.this, calendarInserts,
                     calendarInsertClickListener);
