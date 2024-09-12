@@ -17,8 +17,9 @@ import com.veljkobogdan.quizzardapp.database.typeconverters.FlashcardListConvert
         Note.class,
         CalendarInsert.class,
         Flashcard.class,
-        FlashcardCollection.class},
-        version = 4, exportSchema = false)
+        FlashcardCollection.class,
+        ControlQuestionDAO.class},
+        version = 5, exportSchema = false)
 @TypeConverters({FlashcardListConverter.class})
 public abstract class RoomDB extends RoomDatabase {
     private static RoomDB db;
@@ -41,4 +42,5 @@ public abstract class RoomDB extends RoomDatabase {
     public abstract CalendarDAO calendarDAO();
     public abstract FlashcardDAO flashcardDAO();
     public abstract FlashcardCollectionDAO flashcardCollectionDAO();
+    public abstract ControlQuestionDAO controlQuestionDAO();
 }
