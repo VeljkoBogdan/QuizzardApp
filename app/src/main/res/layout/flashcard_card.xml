@@ -1,44 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/flashcard_flipper"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="150dp"
+    android:layout_marginBottom="16dp"
+    android:elevation="8dp"
+    android:background="@android:color/white"
+    android:layout_gravity="center"
+    app:flow_horizontalAlign="center"
+    android:layout_margin="8dp">
 
-    <ViewFlipper
-        android:id="@+id/flashcard_flipper"
+    <!-- Front side of the flashcard -->
+    <TextView
+        android:id="@+id/front_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:elevation="8dp"
-        tools:ignore="UselessParent"
-        android:layout_marginBottom="16dp"
-        >
-
-        <!-- Front side of the flashcard -->
-        <TextView
-            android:id="@+id/front_text"
-            android:text="Front"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="24sp" />
+        android:gravity="center"
+        android:text="Front"
+        android:textAlignment="center"
+        android:textSize="24sp" />
 
 
-        <!-- Back side of the flashcard -->
-        <TextView
-            android:id="@+id/back_text"
-            android:text="Back"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="24sp" />
-
-
-    </ViewFlipper>
-
-</LinearLayout>
+    <!-- Back side of the flashcard -->
+    <TextView
+        android:id="@+id/back_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Back"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+</ViewFlipper>

@@ -8,6 +8,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
 import com.veljkobogdan.quizzardapp.entity.CalendarInsert;
+import com.veljkobogdan.quizzardapp.entity.ControlQuestion;
 import com.veljkobogdan.quizzardapp.entity.Flashcard;
 import com.veljkobogdan.quizzardapp.entity.FlashcardCollection;
 import com.veljkobogdan.quizzardapp.entity.Note;
@@ -18,8 +19,8 @@ import com.veljkobogdan.quizzardapp.database.typeconverters.FlashcardListConvert
         CalendarInsert.class,
         Flashcard.class,
         FlashcardCollection.class,
-        ControlQuestionDAO.class},
-        version = 5, exportSchema = false)
+        ControlQuestion.class},
+        version = 6, exportSchema = false)
 @TypeConverters({FlashcardListConverter.class})
 public abstract class RoomDB extends RoomDatabase {
     private static RoomDB db;

@@ -17,7 +17,6 @@ import com.veljkobogdan.quizzardapp.helper.RedirectHelper;
 public class FilesFragment extends Fragment {
     Button files_notes_button;
     Button files_flashcards_button, files_flashcard_collections_button;
-    Button files_control_questions_button;
 
     public FilesFragment() {
         // Required empty public constructor

@@ -7,15 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".activity.flashcard.FlashcardActivity"
     android:orientation="vertical"
+    android:paddingTop="8dp"
     >
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/flashcard_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_margin="8dp"
+        android:layout_gravity="center"
+        android:foregroundGravity="center"
         />
 
 </LinearLayout>
