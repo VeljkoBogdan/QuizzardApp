@@ -9,8 +9,10 @@ import com.veljkobogdan.quizzardapp.MainActivity;
 import com.veljkobogdan.quizzardapp.activity.calendar.CalendarDayView;
 import com.veljkobogdan.quizzardapp.activity.calendar.NewCalendarInsertView;
 import com.veljkobogdan.quizzardapp.activity.flashcard.CreateFlashcardActivity;
+import com.veljkobogdan.quizzardapp.activity.flashcard.CreateFlashcardCollectionActivity;
 import com.veljkobogdan.quizzardapp.activity.flashcard.FlashcardActivity;
 import com.veljkobogdan.quizzardapp.activity.flashcard.FlashcardCollectionListView;
+import com.veljkobogdan.quizzardapp.activity.flashcard.FlashcardCollectionView;
 import com.veljkobogdan.quizzardapp.activity.note.NewNoteActivity;
 import com.veljkobogdan.quizzardapp.activity.note.NotesListActivity;
 
@@ -51,5 +53,13 @@ public interface RedirectHelper {
 
     static void toFlashcardListView(Context context, int flag) {
         toActivity(context, FlashcardActivity.class, flag);
+    }
+
+    static void toNewFlashcardCollectionActivity(Context context, int flag) {
+        toActivity(context, CreateFlashcardCollectionActivity.class, flag);
+    }
+
+    static void toFlashcardCollectionActivity(Context context, int flag) {
+        toActivity(context, FlashcardCollectionView.class, flag);
     }
 }

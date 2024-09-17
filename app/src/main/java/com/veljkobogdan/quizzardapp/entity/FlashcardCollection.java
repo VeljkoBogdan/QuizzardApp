@@ -1,5 +1,6 @@
 package com.veljkobogdan.quizzardapp.entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 
 import androidx.room.Entity;
@@ -7,7 +8,6 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 @Entity(tableName = "flashcard_collection")
 public class FlashcardCollection implements Serializable {
@@ -33,7 +33,7 @@ public class FlashcardCollection implements Serializable {
         return this;
     }
 
-    public List<Flashcard> getFlashcards() {
+    public ArrayList<Flashcard> getFlashcards() {
         return flashcards;
     }
 
@@ -45,5 +45,11 @@ public class FlashcardCollection implements Serializable {
     public FlashcardCollection setDescription(String description) {
         this.description = description;
         return this;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

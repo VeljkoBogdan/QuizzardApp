@@ -29,5 +29,21 @@
             android:importantForAutofill="no"
             android:inputType="text" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Flashcard Collection:"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            />
+        <Spinner
+            android:id="@+id/collection_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:popupTheme="@style/Widget.AppCompat.PopupMenu.Overflow"
+            />
+
     </LinearLayout>
 </LinearLayout>

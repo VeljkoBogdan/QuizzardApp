@@ -71,7 +71,8 @@ public class NotesListActivity extends AppCompatActivity {
                 return true;
             } else if (menuId == R.id.edit) {
                 // go to EditNoteActivity
-                Intent intent = new Intent(NotesListActivity.this, EditNoteActivity.class);
+                Intent intent = new Intent(NotesListActivity.this,
+                        EditNoteActivity.class);
                 // send Note data to EditNoteActivity
                 intent.putExtra("note", note);
                 startActivity(intent);
@@ -80,10 +81,12 @@ public class NotesListActivity extends AppCompatActivity {
                 // set isPinned of the note to true
                 if (note.isPinned()) {
                     note.setPinned(false);
-                    database.noteDAO().update(note.getId(), note.getTitle(), note.getText(), note.getDate(), note.isPinned());
+                    database.noteDAO().update(note.getId(), note.getTitle(), note.getText(),
+                            note.getDate(), note.isPinned());
                 } else {
                     note.setPinned(true);
-                    database.noteDAO().update(note.getId(), note.getTitle(), note.getText(), note.getDate(), note.isPinned());
+                    database.noteDAO().update(note.getId(), note.getTitle(), note.getText(),
+                            note.getDate(), note.isPinned());
                 }
                 updateRecycler(database.noteDAO().getAll());
                 return true;
@@ -119,8 +122,10 @@ public class NotesListActivity extends AppCompatActivity {
 
     private void updateRecycler(List<Note> list) {
         notes_recycler.setHasFixedSize(true);
-        notes_recycler.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        notesListAdapter = new NotesListAdapter(NotesListActivity.this, list, noteClickListener);
+        notes_recycler.setLayoutManager(new StaggeredGridLayoutManager(2,
+                StaggeredGridLayoutManager.VERTICAL));
+        notesListAdapter = new NotesListAdapter(NotesListActivity.this, list,
+                noteClickListener);
         notes_recycler.setAdapter(notesListAdapter);
     }
 }
