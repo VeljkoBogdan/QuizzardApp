@@ -3,8 +3,6 @@ package com.veljkobogdan.quizzardapp.helper;
 import android.content.Context;
 import android.content.Intent;
 
-import androidx.fragment.app.FragmentActivity;
-
 import com.veljkobogdan.quizzardapp.MainActivity;
 import com.veljkobogdan.quizzardapp.activity.calendar.CalendarDayView;
 import com.veljkobogdan.quizzardapp.activity.calendar.NewCalendarInsertView;
