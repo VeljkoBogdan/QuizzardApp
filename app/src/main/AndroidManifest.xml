@@ -15,6 +15,12 @@
         tools:ignore="UnusedAttribute"
         tools:targetApi="31">
         <activity
+            android:name=".activity.exam.ExamListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.exam.CreateExamActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.flashcard.FlashcardCollectionView"
             android:exported="false" />
         <activity

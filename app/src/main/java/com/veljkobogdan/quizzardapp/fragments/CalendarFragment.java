@@ -26,11 +26,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CalendarFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CalendarFragment extends Fragment implements CalendarAdapter.OnItemListener {
     ImageButton calendar_previous, calendar_next;
     TextView calendar_date;
@@ -39,13 +34,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
 
     public CalendarFragment() {
         // Required empty public constructor
-    }
-
-    public static CalendarFragment newInstance() {
-        CalendarFragment fragment = new CalendarFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -91,7 +79,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
             YearMonth yearMonth = YearMonth.from(selectedDate);
             int daysInMonthInt = yearMonth.lengthOfMonth();
             LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
-            int dayOfWeekInt = firstOfMonth.getDayOfWeek().getValue();
+            int dayOfWeekInt = firstOfMonth.getDayOfWeek().getValue() % 7;
 
             for (int i = 1; i <= 42; i++) {
                 if (i <= dayOfWeekInt || i > daysInMonthInt + dayOfWeekInt) {

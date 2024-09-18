@@ -6,6 +6,8 @@ import android.content.Intent;
 import com.veljkobogdan.quizzardapp.MainActivity;
 import com.veljkobogdan.quizzardapp.activity.calendar.CalendarDayView;
 import com.veljkobogdan.quizzardapp.activity.calendar.NewCalendarInsertView;
+import com.veljkobogdan.quizzardapp.activity.exam.CreateExamActivity;
+import com.veljkobogdan.quizzardapp.activity.exam.ExamListActivity;
 import com.veljkobogdan.quizzardapp.activity.flashcard.CreateFlashcardActivity;
 import com.veljkobogdan.quizzardapp.activity.flashcard.CreateFlashcardCollectionActivity;
 import com.veljkobogdan.quizzardapp.activity.flashcard.FlashcardActivity;
@@ -59,5 +61,18 @@ public interface RedirectHelper {
 
     static void toFlashcardCollectionActivity(Context context, int flag) {
         toActivity(context, FlashcardCollectionView.class, flag);
+    }
+
+    static void toNewExamActivity(Context context, int flag) {
+        toActivity(context, CreateExamActivity.class, flag);
+    }
+
+    static void toNewDateActivity(Context context, int flag) {
+        toActivity(context, NewCalendarInsertView.class, flag);
+    }
+
+    static void toNewQuestionActivity(Context context, int flag) {
+        return;
+        // toActivity(context, .class, flag);
     }
 }

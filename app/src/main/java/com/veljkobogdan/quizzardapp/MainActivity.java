@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity{
     FilesFragment filesFragment;
     CalendarFragment calendarFragment;
     SettingsFragment settingsFragment;
+    TextView logo;
+    Toolbar top_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,13 @@ public class MainActivity extends AppCompatActivity{
         filesFragment = new FilesFragment();
         calendarFragment = new CalendarFragment();
         settingsFragment = new SettingsFragment();
+
+        logo = findViewById(R.id.logo);
+        top_bar = findViewById(R.id.top_bar);
+
+        logo.setOnClickListener(v -> {
+            RedirectHelper.toMainActivity(this, 0);
+        });
 
         bottomNavigationView = findViewById(R.id.btmNavBar);
         loadFragment(homeFragment);
@@ -63,15 +74,17 @@ public class MainActivity extends AppCompatActivity{
             RedirectHelper.toNewNoteActivity(this, 0);
             return true;
         } else if (menuId == R.id.new_date) {
-
+            RedirectHelper.toNewDateActivity(this, 0);
             return true;
         } else if (menuId == R.id.new_flashcard) {
             RedirectHelper.toNewFlashcardActivity(this, 0);
             return true;
         } else if (menuId == R.id.new_question) {
-
+            RedirectHelper.toNewQuestionActivity(this, 0);
             return true;
-        } else return menuId == R.id.new_schedule;
+        } else {
+            return menuId == R.id.new_schedule;
+        }
     }
 
     private boolean onNavigationItemSelected(MenuItem item) {
