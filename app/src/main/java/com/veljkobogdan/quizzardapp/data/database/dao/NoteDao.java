@@ -1,11 +1,11 @@
-package com.veljkobogdan.quizzardapp.dao;
+package com.veljkobogdan.quizzardapp.data.database.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.veljkobogdan.quizzardapp.entities.Note;
+import com.veljkobogdan.quizzardapp.data.database.entities.Note;
 
 import java.util.List;
 

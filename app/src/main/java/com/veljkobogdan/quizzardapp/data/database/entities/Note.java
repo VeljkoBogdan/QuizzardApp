@@ -1,10 +1,10 @@
-package com.veljkobogdan.quizzardapp.entities;
+package com.veljkobogdan.quizzardapp.data.database.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(tableName = "note")
 public class Note {
     @PrimaryKey(autoGenerate = true)
     private int id;
