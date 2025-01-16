@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/question"
+        android:title="Control Question" />
+    <item
+        android:id="@+id/calendar"
+        android:title="Calendar Entry" />
+    <item
+        android:id="@+id/flashcard"
+        android:title="Flashcard" />
+    <item
+        android:id="@+id/note"
+        android:title="Note" />
+</menu>
