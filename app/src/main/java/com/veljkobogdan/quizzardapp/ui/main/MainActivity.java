@@ -1,4 +1,4 @@
-package com.veljkobogdan.quizzardapp;
+package com.veljkobogdan.quizzardapp.ui.main;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-
     ActivityMainBinding binding;
 
     @Override
@@ -35,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Start with the home fragment loaded
+        replaceFragment(new HomeFragment());
+
+        // BotNav on click listener
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home) {
                 replaceFragment(new HomeFragment());
@@ -45,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
             return true;
+        });
+
+        // Add button on click listener
+        binding.addButton.setOnClickListener(view -> {
+            // TODO: Add a popup menu
         });
     }
 
