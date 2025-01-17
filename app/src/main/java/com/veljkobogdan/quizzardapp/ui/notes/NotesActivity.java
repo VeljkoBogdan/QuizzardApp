@@ -1,8 +1,7 @@
 package com.veljkobogdan.quizzardapp.ui.notes;
 
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.widget.Toast;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,22 +11,18 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.veljkobogdan.quizzardapp.R;
-import com.veljkobogdan.quizzardapp.data.database.AppDatabase;
-import com.veljkobogdan.quizzardapp.data.database.entities.Note;
 import com.veljkobogdan.quizzardapp.data.repository.NoteRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityNotesBinding;
-
-import java.util.List;
 
 public class NotesActivity extends AppCompatActivity {
     ActivityNotesBinding binding;
     RecyclerView recyclerView;
     NoteAdapter noteAdapter;
     NoteRepository noteRepository;
-    private List<Note> notes;
+    FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +40,20 @@ public class NotesActivity extends AppCompatActivity {
 
         noteRepository = new NoteRepository(this);
 
-        Toolbar toolbar = binding.toolbar;
+        Toolbar toolbar = binding.toolbarIncl.toolbar;
         setSupportActionBar(toolbar);
         toolbar.setTitle("Notes");
+
+        floatingActionButton = binding.addButton;
+        floatingActionButton.setOnClickListener(l -> {
+            // TODO: Intent to new Note
+        });
 
         recyclerView = binding.recycler;
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
 
         noteAdapter = new NoteAdapter(note -> {
-            // Handle note click
-
+            // TODO: Handle note click
         });
 
         recyclerView.setAdapter(noteAdapter);
@@ -63,10 +62,13 @@ public class NotesActivity extends AppCompatActivity {
     }
 
     private void loadNotes() {
-        try {
-            noteAdapter.setNotes(noteRepository.getAllNotes().getValue());
-        } catch (Exception e) {
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
+        noteRepository.getAllNotes().observe(this, notes -> {
+            if (!notes.isEmpty()) {
+                noteAdapter.setNotes(notes);
+                binding.noNotesText.setVisibility(View.GONE);
+            } else {
+                binding.noNotesText.setVisibility(View.VISIBLE);
+            }
+        });
     }
 }

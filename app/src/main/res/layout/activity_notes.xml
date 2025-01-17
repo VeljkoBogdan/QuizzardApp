@@ -7,15 +7,33 @@
     android:layout_height="match_parent"
     tools:context=".ui.notes.NotesActivity">
 
-    <include layout="@layout/common_toolbar" />
+    <include
+        android:id="@+id/toolbarIncl"
+        layout="@layout/common_toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarIncl"
         tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/noNotesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/recycler"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25"
+        android:text="No Notes Found \n Press the add button to add one!"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textColor="@color/md_theme_tertiary_mediumContrast"
+        android:visibility="gone"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addButton"
