@@ -1,9 +1,11 @@
 package com.veljkobogdan.quizzardapp.data.database.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.veljkobogdan.quizzardapp.data.database.entities.Note;
 
@@ -12,7 +14,7 @@ import java.util.List;
 @Dao
 public interface NoteDao {
     @Query("SELECT * FROM note")
-    List<Note> getAll();
+    LiveData<List<Note>> getAll();
 
     @Insert
     void insertAll(Note... notes);
@@ -22,4 +24,7 @@ public interface NoteDao {
 
     @Delete
     void delete(Note note);
+
+    @Update
+    void update(Note note);
 }

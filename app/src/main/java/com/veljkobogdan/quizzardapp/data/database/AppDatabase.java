@@ -11,7 +11,7 @@ import com.veljkobogdan.quizzardapp.data.database.entities.Note;
 
 @Database(entities = {
         Note.class
-}, version = 2)
+}, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
     public static AppDatabase db;
     public static String name = "quizzard";

@@ -17,6 +17,7 @@ import androidx.room.Room;
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.database.AppDatabase;
 import com.veljkobogdan.quizzardapp.data.database.entities.Note;
+import com.veljkobogdan.quizzardapp.data.repository.NoteRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityNotesBinding;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class NotesActivity extends AppCompatActivity {
     ActivityNotesBinding binding;
     RecyclerView recyclerView;
     NoteAdapter noteAdapter;
+    NoteRepository noteRepository;
     private List<Note> notes;
 
     @Override
@@ -40,6 +42,8 @@ public class NotesActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        noteRepository = new NoteRepository(this);
 
         Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
@@ -60,8 +64,7 @@ public class NotesActivity extends AppCompatActivity {
 
     private void loadNotes() {
         try {
-            notes = AppDatabase.getInstance(this).noteDao().getAll();
-            noteAdapter.setNotes(notes);
+            noteAdapter.setNotes(noteRepository.getAllNotes().getValue());
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
