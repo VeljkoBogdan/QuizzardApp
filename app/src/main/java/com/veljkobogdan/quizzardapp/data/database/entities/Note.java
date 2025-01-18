@@ -17,9 +17,8 @@ public class Note {
     @ColumnInfo(name = "updatedAt")
     private String updatedAt;
 
-    public Note setId(int id) {
+    public void setId(int id) {
         this.id = id;
-        return this;
     }
 
     public int getId() {
@@ -30,35 +29,31 @@ public class Note {
         return title;
     }
 
-    public Note setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
-        return this;
     }
 
     public String getContent() {
         return content;
     }
 
-    public Note setContent(String content) {
+    public void setContent(String content) {
         this.content = content;
-        return this;
     }
 
     public String getCreatedAt() {
         return createdAt;
     }
 
-    public Note setCreatedAt(String createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
-        return this;
     }
 
     public String getUpdatedAt() {
         return updatedAt;
     }
 
-    public Note setUpdatedAt(String updatedAt) {
+    public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
-        return this;
     }
 }
