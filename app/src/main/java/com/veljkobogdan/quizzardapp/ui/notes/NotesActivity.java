@@ -1,7 +1,9 @@
 package com.veljkobogdan.quizzardapp.ui.notes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.veljkobogdan.quizzardapp.R;
+import com.veljkobogdan.quizzardapp.data.database.entities.Note;
 import com.veljkobogdan.quizzardapp.data.repository.NoteRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityNotesBinding;
 
@@ -46,14 +49,23 @@ public class NotesActivity extends AppCompatActivity {
 
         floatingActionButton = binding.addButton;
         floatingActionButton.setOnClickListener(l -> {
-            // TODO: Intent to new Note
+            Intent intent = new Intent(this, NewNoteActivity.class);
+            startActivity(intent);
         });
 
         recyclerView = binding.recycler;
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
 
-        noteAdapter = new NoteAdapter(note -> {
-            // TODO: Handle note click
+        noteAdapter = new NoteAdapter(new NoteAdapter.OnNoteClickListener() {
+            @Override
+            public void onNoteClick(Note note) {
+                Toast.makeText(getApplicationContext(), "Tap", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNoteLongClick(Note note) {
+                Toast.makeText(getApplicationContext(), "Long", Toast.LENGTH_LONG).show();
+            }
         });
 
         recyclerView.setAdapter(noteAdapter);

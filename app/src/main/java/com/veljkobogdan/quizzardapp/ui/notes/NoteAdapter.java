@@ -64,6 +64,18 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                     }
                 }
             });
+
+            // Handle long press
+            itemView.setOnLongClickListener(view -> {
+                if (onNoteClickListener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        onNoteClickListener.onNoteLongClick(notes.get(position));
+                    }
+                }
+
+                return true;
+            });
         }
 
         public void bind(Note note) {
@@ -74,5 +86,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
     public interface OnNoteClickListener {
         void onNoteClick(Note note);
+        void onNoteLongClick(Note note);
     }
 }
