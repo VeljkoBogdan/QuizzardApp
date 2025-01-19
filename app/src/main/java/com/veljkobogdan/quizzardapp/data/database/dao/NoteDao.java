@@ -5,9 +5,12 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.veljkobogdan.quizzardapp.data.database.entities.Note;
+import com.veljkobogdan.quizzardapp.data.database.entities.NoteTagCrossRef;
+import com.veljkobogdan.quizzardapp.data.models.NoteWithTags;
 
 import java.util.List;
 
@@ -27,4 +30,8 @@ public interface NoteDao {
 
     @Update
     void update(Note note);
+
+    @Transaction
+    @Query("SELECT * FROM note")
+    List<NoteWithTags> getNotesWithTags();
 }

@@ -2,27 +2,48 @@ package com.veljkobogdan.quizzardapp.data.database.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import java.time.LocalDateTime;
 
 @Entity(tableName = "note")
 public class Note {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    public long noteId;
     @ColumnInfo(name = "title", defaultValue = "Note")
-    private String title;
+    public String title;
     @ColumnInfo(name = "content")
-    private String content;
+    public String content;
     @ColumnInfo(name = "createdAt")
-    private String createdAt;
+    public String createdAt;
     @ColumnInfo(name = "updatedAt")
-    private String updatedAt;
+    public String updatedAt;
 
-    public void setId(int id) {
-        this.id = id;
+    @Ignore
+    public Note(String title, String content, String createdAt, String updatedAt) {
+        this.title = title;
+        this.content = content;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
-    public int getId() {
-        return id;
+    @Ignore
+    public Note(String title, String content) {
+        this.title = title;
+        this.content = content;
+        this.createdAt = LocalDateTime.now().toString();
+        this.updatedAt = this.createdAt;
+    }
+
+    public Note() {}
+
+    public void setNoteId(long noteId) {
+        this.noteId = noteId;
+    }
+
+    public long getNoteId() {
+        return noteId;
     }
 
     public String getTitle() {
