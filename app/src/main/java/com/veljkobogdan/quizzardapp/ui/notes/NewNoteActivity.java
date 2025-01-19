@@ -1,7 +1,6 @@
 package com.veljkobogdan.quizzardapp.ui.notes;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,6 +55,8 @@ public class NewNoteActivity extends AppCompatActivity {
             note.setCreatedAt(LocalDateTime.now().toString());
 
             AppDatabase.getInstance(this).noteDao().insert(note);
+
+            finish();
         });
     }
 }
