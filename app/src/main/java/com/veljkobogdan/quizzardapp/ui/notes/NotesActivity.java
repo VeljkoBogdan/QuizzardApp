@@ -11,12 +11,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.veljkobogdan.quizzardapp.R;
-import com.veljkobogdan.quizzardapp.data.database.entities.Note;
+import com.veljkobogdan.quizzardapp.data.models.NoteWithTags;
 import com.veljkobogdan.quizzardapp.data.repository.NoteRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityNotesBinding;
 
@@ -54,16 +54,17 @@ public class NotesActivity extends AppCompatActivity {
         });
 
         recyclerView = binding.recycler;
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,
+                StaggeredGridLayoutManager.VERTICAL));
 
         noteAdapter = new NoteAdapter(new NoteAdapter.OnNoteClickListener() {
             @Override
-            public void onNoteClick(Note note) {
+            public void onNoteClick(NoteWithTags note) {
                 Toast.makeText(getApplicationContext(), "Tap", Toast.LENGTH_LONG).show();
             }
 
             @Override
-            public void onNoteLongClick(Note note) {
+            public void onNoteLongClick(NoteWithTags note) {
                 Toast.makeText(getApplicationContext(), "Long", Toast.LENGTH_LONG).show();
             }
         });
@@ -74,7 +75,7 @@ public class NotesActivity extends AppCompatActivity {
     }
 
     private void loadNotes() {
-        noteRepository.getAllNotes().observe(this, notes -> {
+        noteRepository.getAllNotesWithTags().observe(this, notes -> {
             if (!notes.isEmpty()) {
                 noteAdapter.setNotes(notes);
                 binding.noNotesText.setVisibility(View.GONE);

@@ -3,29 +3,30 @@ package com.veljkobogdan.quizzardapp.ui.notes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.veljkobogdan.quizzardapp.R;
-import com.veljkobogdan.quizzardapp.data.database.entities.Note;
+import com.veljkobogdan.quizzardapp.data.models.NoteWithTags;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /** @noinspection ClassEscapesDefinedScope*/
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder> {
-    public List<Note> notes = new ArrayList<>();
+    public List<NoteWithTags> notes = new ArrayList<>();
     public final OnNoteClickListener onNoteClickListener;
 
     public NoteAdapter(OnNoteClickListener onNoteClickListener) {
         this.onNoteClickListener = onNoteClickListener;
     }
 
-    public void setNotes(List<Note> notes) {
+    public void setNotes(List<NoteWithTags> notes) {
         this.notes = notes;
-        notifyDataSetChanged();
+        notifyItemChanged(R.id.recycler);
     }
 
     @NonNull
@@ -37,7 +38,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
-        Note note = notes.get(position);
+        NoteWithTags note = notes.get(position);
         holder.bind(note);
     }
 
@@ -49,11 +50,13 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     class NoteViewHolder extends RecyclerView.ViewHolder {
         private final TextView title;
         private final TextView content;
+        private final LinearLayout tagLayout;
 
         public NoteViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.noteTitle);
             content = itemView.findViewById(R.id.noteContent);
+            tagLayout = itemView.findViewById(R.id.tagLayout);
 
             // Handle item clicks
             itemView.setOnClickListener(view -> {
@@ -78,14 +81,34 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             });
         }
 
-        public void bind(Note note) {
-            title.setText(note.getTitle());
-            content.setText(note.getContent());
+        public void bind(NoteWithTags note) {
+            title.setText(note.note.getTitle());
+            content.setText(note.note.getContent());
+
+            tagLayout.removeAllViews();
+
+            LayoutInflater layoutInflater = LayoutInflater.from(itemView.getContext());
+            for (int i = 0; i < 5; i++){
+                View tagView = layoutInflater.inflate(R.layout.item_tag, tagLayout, false);
+
+                TextView textView = tagView.findViewById(R.id.tagTextView);
+                textView.setText("Sigma");
+
+                tagLayout.addView(tagView);
+            }
+//            for (Tag tag : note.tags) {
+//                View tagView = layoutInflater.inflate(R.layout.item_tag, tagLayout, false);
+//
+//                TextView textView = tagView.findViewById(R.id.tagTextView);
+//                textView.setText(tag.getName());
+//
+//                tagLayout.addView(tagView);
+//            }
         }
     }
 
     public interface OnNoteClickListener {
-        void onNoteClick(Note note);
-        void onNoteLongClick(Note note);
+        void onNoteClick(NoteWithTags note);
+        void onNoteLongClick(NoteWithTags note);
     }
 }

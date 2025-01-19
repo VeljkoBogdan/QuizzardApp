@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import com.veljkobogdan.quizzardapp.data.database.AppDatabase;
 import com.veljkobogdan.quizzardapp.data.database.dao.NoteDao;
 import com.veljkobogdan.quizzardapp.data.database.entities.Note;
+import com.veljkobogdan.quizzardapp.data.models.NoteWithTags;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -24,6 +25,10 @@ public class NoteRepository {
 
     public LiveData<List<Note>> getAllNotes() {
         return noteDao.getAll();
+    }
+
+    public LiveData<List<NoteWithTags>> getAllNotesWithTags() {
+        return noteDao.getNotesWithTags();
     }
 
     public void insertNote(Note note) {
