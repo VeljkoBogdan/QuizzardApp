@@ -16,7 +16,7 @@ import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
         Note.class,
         Tag.class,
         NoteTagCrossRef.class
-}, version = 8)
+}, version = 11)
 public abstract class AppDatabase extends RoomDatabase {
     public static AppDatabase db;
     public static String name = "quizzard";
