@@ -16,11 +16,14 @@ public interface TagDao {
     @Query("SELECT * FROM tag")
     LiveData<List<Tag>> getAll();
 
+    @Query("SELECT * FROM tag WHERE name = :tagName LIMIT 1")
+    Tag getTagByName(String tagName);
+
     @Insert
     void insertAll(Tag... tags);
 
     @Insert
-    void insert(Tag tag);
+    long insert(Tag tag);
 
     @Delete
     void delete(Tag tag);
