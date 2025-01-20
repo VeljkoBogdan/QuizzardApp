@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.veljkobogdan.quizzardapp.R;
+import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
 import com.veljkobogdan.quizzardapp.data.models.NoteWithTags;
 
 import java.util.ArrayList;
@@ -88,22 +89,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             tagLayout.removeAllViews();
 
             LayoutInflater layoutInflater = LayoutInflater.from(itemView.getContext());
-            for (int i = 0; i < 5; i++){
+            for (Tag tag : note.tags) {
                 View tagView = layoutInflater.inflate(R.layout.item_tag, tagLayout, false);
 
                 TextView textView = tagView.findViewById(R.id.tagTextView);
-                textView.setText("Sigma");
+                textView.setText(tag.getName());
 
                 tagLayout.addView(tagView);
             }
-//            for (Tag tag : note.tags) {
-//                View tagView = layoutInflater.inflate(R.layout.item_tag, tagLayout, false);
-//
-//                TextView textView = tagView.findViewById(R.id.tagTextView);
-//                textView.setText(tag.getName());
-//
-//                tagLayout.addView(tagView);
-//            }
         }
     }
 
