@@ -1,31 +1,23 @@
 package com.veljkobogdan.quizzardapp.ui.notes;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.text.Layout;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
-import androidx.core.view.MenuProvider;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.veljkobogdan.quizzardapp.R;
-import com.veljkobogdan.quizzardapp.data.database.AppDatabase;
 import com.veljkobogdan.quizzardapp.data.database.entities.Note;
 import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
 import com.veljkobogdan.quizzardapp.data.repository.NoteRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityNewNoteBinding;
 import com.veljkobogdan.quizzardapp.ui.tags.TagSelectionOverlay;
-import com.veljkobogdan.quizzardapp.util.OverlayHelper;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -82,7 +74,7 @@ public class NewNoteActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.tags) {
-            TagSelectionOverlay tagSelectionOverlay = new TagSelectionOverlay(this);
+            TagSelectionOverlay tagSelectionOverlay = new TagSelectionOverlay(this, tags);
             tagSelectionOverlay.setOnSaveListener(selectedTags -> {
                 tags = selectedTags;
             });
