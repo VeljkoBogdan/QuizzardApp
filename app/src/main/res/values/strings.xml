@@ -12,4 +12,8 @@
     <string name="title">Title</string>
     <string name="content">Content</string>
     <string name="save">Save</string>
+    <string name="term">Term</string>
+    <string name="definition">Definition</string>
+    <string name="enter_definition_back">Enter Definition (Back)</string>
+    <string name="enter_term_front">Enter Term (Front)</string>
 </resources>
