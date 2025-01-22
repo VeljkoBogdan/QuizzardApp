@@ -7,4 +7,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="main_add_button">Main Add Button</string>
     <string name="tags">Tags</string>
+    <string name="enter_title">Enter Title</string>
+    <string name="write_your_content_here">Write your content here</string>
+    <string name="title">Title</string>
+    <string name="content">Content</string>
+    <string name="save">Save</string>
 </resources>
