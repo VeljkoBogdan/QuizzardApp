@@ -16,4 +16,7 @@
     <string name="definition">Definition</string>
     <string name="enter_definition_back">Enter Definition (Back)</string>
     <string name="enter_term_front">Enter Term (Front)</string>
+    <string name="notes">Notes</string>
+    <string name="flashcards">Flashcards</string>
+    <string name="exams">Exams</string>
 </resources>

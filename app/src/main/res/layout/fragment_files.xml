@@ -3,12 +3,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.FilesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabIndicatorFullWidth="true"
+            app:tabIndicatorColor="@color/md_theme_primary"
+            app:tabIndicatorAnimationMode="fade"
+            >
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/notes"
+                />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabFlashcards"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/flashcards"
+                />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabExams"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/exams"
+                />
+        </com.google.android.material.tabs.TabLayout>
+
+        <FrameLayout
+            android:id="@+id/tabFrameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </LinearLayout>
 </FrameLayout>
