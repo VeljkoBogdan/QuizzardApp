@@ -5,8 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,11 +42,11 @@ public class FilesFragment extends Fragment {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getId() == R.id.tabNotes) {
+                if (tab.getPosition() == 0) {
                     replaceFragment(new FilesNotesFragment());
-                } else if (tab.getId() == R.id.tabFlashcards) {
+                } else if (tab.getPosition() == 1) {
                     replaceFragment(new FilesFlashcardsFragment());
-                } else if (tab.getId() == R.id.tabExams) {
+                } else if (tab.getPosition() == 2) {
                     replaceFragment(new FilesExamsFragment());
                 }
             }
@@ -63,14 +61,12 @@ public class FilesFragment extends Fragment {
 
             }
         });
-
-
     }
 
     private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getParentFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.tabFrameLayout, fragment);
-        fragmentTransaction.commit();
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.tabFrameLayout, fragment)
+                .commit();
     }
 }

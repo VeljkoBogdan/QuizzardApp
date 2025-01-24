@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             app:tabIndicatorFullWidth="true"
             app:tabIndicatorColor="@color/md_theme_primary"
-            app:tabIndicatorAnimationMode="fade"
+            app:tabIndicatorAnimationMode="linear"
             >
 
             <com.google.android.material.tabs.TabItem
