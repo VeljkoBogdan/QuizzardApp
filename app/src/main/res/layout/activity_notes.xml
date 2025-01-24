@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.25"
-        android:text="No Notes Found \n Press the add button to add one!"
+        android:text="@string/no_notes_found"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textColor="@color/md_theme_tertiary_mediumContrast"
