@@ -7,19 +7,19 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "flashcard")
 public class Flashcard {
     @PrimaryKey(autoGenerate = true)
-    public long id;
+    public long flashcardId;
 
     @ColumnInfo(name = "term")
     public String term;
     @ColumnInfo(name = "term")
     public String definition;
 
-    public long getId() {
-        return id;
+    public long getFlashcardId() {
+        return flashcardId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setFlashcardId(long flashcardId) {
+        this.flashcardId = flashcardId;
     }
 
     public String getTerm() {

@@ -6,8 +6,12 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.veljkobogdan.quizzardapp.data.database.dao.FlashcardDao;
+import com.veljkobogdan.quizzardapp.data.database.dao.FlashcardSetDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.NoteDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.TagDao;
+import com.veljkobogdan.quizzardapp.data.database.entities.Flashcard;
+import com.veljkobogdan.quizzardapp.data.database.entities.FlashcardSet;
 import com.veljkobogdan.quizzardapp.data.database.entities.Note;
 import com.veljkobogdan.quizzardapp.data.database.entities.NoteTagCrossRef;
 import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
@@ -15,8 +19,10 @@ import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
 @Database(entities = {
         Note.class,
         Tag.class,
-        NoteTagCrossRef.class
-}, version = 11)
+        NoteTagCrossRef.class,
+        Flashcard.class,
+        FlashcardSet.class
+}, version = 12)
 public abstract class AppDatabase extends RoomDatabase {
     public static AppDatabase db;
     public static String name = "quizzard";
@@ -33,4 +39,6 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract NoteDao noteDao();
     public abstract TagDao tagDao();
+    public abstract FlashcardDao flashcardDao();
+    public abstract FlashcardSetDao flashcardSetDao();
 }
