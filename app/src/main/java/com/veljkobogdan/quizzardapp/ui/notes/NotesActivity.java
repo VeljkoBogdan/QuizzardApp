@@ -58,6 +58,7 @@ public class NotesActivity extends AppCompatActivity {
                 StaggeredGridLayoutManager.VERTICAL));
 
         noteAdapter = new NoteAdapter(new NoteAdapter.OnNoteClickListener() {
+            // TODO: handle note clicks
             @Override
             public void onNoteClick(NoteWithTags note) {
                 Toast.makeText(getApplicationContext(), "Tap", Toast.LENGTH_LONG).show();
