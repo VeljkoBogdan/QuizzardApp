@@ -20,7 +20,7 @@ public interface FlashcardDao {
     void insertAll(Flashcard... flashcards);
 
     @Insert
-    void insert(Flashcard flashcard);
+    long insert(Flashcard flashcard);
 
     @Update
     void update(Flashcard flashcard);
