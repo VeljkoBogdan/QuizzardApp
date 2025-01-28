@@ -2,6 +2,7 @@ package com.veljkobogdan.quizzardapp.ui.flashcards;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.database.entities.FlashcardSet;
 import com.veljkobogdan.quizzardapp.data.models.FlashcardSetWithFlashcards;
@@ -25,6 +27,7 @@ public class FlashcardSetsActivity extends AppCompatActivity {
     RecyclerView recycler;
     FlashcardSetAdapter flashcardSetAdapter;
     FlashcardSetRepository flashcardSetRepository;
+    FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +44,8 @@ public class FlashcardSetsActivity extends AppCompatActivity {
         });
 
         Toolbar toolbar = binding.toolbarIncl.toolbar;
-        setSupportActionBar(toolbar);
         toolbar.setTitle("Flashcard Sets");
+        setSupportActionBar(toolbar);
 
         recycler = binding.recycler;
         recycler.setLayoutManager(new LinearLayoutManager(
@@ -61,19 +64,28 @@ public class FlashcardSetsActivity extends AppCompatActivity {
             }
         });
 
+        floatingActionButton = binding.addButton;
+        floatingActionButton.setOnClickListener(v -> {
+            // TODO: intent to a New Flashcard Set activity
+        });
+
         recycler.setAdapter(flashcardSetAdapter);
 
         loadFlashcards();
     }
 
     private void loadFlashcards() {
-        flashcardSetRepository.getFlashcardSetsWithFlashcards().observe(this, flashcardSets -> {
-            if (!flashcardSets.isEmpty()) {
-                flashcardSetAdapter.setFlashcardSets(flashcardSets);
-                binding.noFlashcardSetsText.setVisibility(View.GONE);
-            } else {
-                binding.noFlashcardSetsText.setVisibility(View.VISIBLE);
-            }
-        });
+        try {
+            flashcardSetRepository.getFlashcardSetsWithFlashcards().observe(this, flashcardSets -> {
+                if (!flashcardSets.isEmpty()) {
+                    flashcardSetAdapter.setFlashcardSets(flashcardSets);
+                    binding.noFlashcardSetsText.setVisibility(View.GONE);
+                } else {
+                    binding.noFlashcardSetsText.setVisibility(View.VISIBLE);
+                }
+            });
+        } catch (Exception e) {
+            Toast.makeText(this, "Nothing to show", Toast.LENGTH_SHORT).show();
+        }
     }
 }
