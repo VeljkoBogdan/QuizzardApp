@@ -21,7 +21,7 @@ public class FlashcardSetRepository {
     private final FlashcardDao flashcardDao;
     private final ExecutorService executor;
 
-    FlashcardSetRepository(Context context) {
+    public FlashcardSetRepository(Context context) {
         AppDatabase db = AppDatabase.getInstance(context);
         this.flashcardDao = db.flashcardDao();
         this.flashcardSetDao = db.flashcardSetDao();

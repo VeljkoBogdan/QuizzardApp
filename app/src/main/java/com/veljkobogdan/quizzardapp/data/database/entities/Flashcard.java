@@ -2,6 +2,7 @@ package com.veljkobogdan.quizzardapp.data.database.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "flashcard")
@@ -13,6 +14,14 @@ public class Flashcard {
     public String term;
     @ColumnInfo(name = "definition")
     public String definition;
+
+    public Flashcard() {}
+
+    @Ignore
+    public Flashcard(String term, String definition) {
+        this.term = term;
+        this.definition = definition;
+    }
 
     public long getFlashcardId() {
         return flashcardId;

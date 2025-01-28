@@ -12,6 +12,12 @@ public class FlashcardSet {
     @ColumnInfo
     public String name;
 
+    public FlashcardSet() {}
+
+    public FlashcardSet(String title) {
+        this.name = title;
+    }
+
     public long getFlashcardSetId() {
         return flashcardSetId;
     }
