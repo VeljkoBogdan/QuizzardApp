@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.veljkobogdan.quizzardapp.R;
+import com.veljkobogdan.quizzardapp.ui.flashcards.FlashcardSetsActivity;
 import com.veljkobogdan.quizzardapp.ui.notes.NotesActivity;
 
 public class HomeFragment extends Fragment {
@@ -40,7 +41,16 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent(requireContext(), NotesActivity.class);
                 startActivity(intent);
             } catch (Exception e) {
-                Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        view.findViewById(R.id.buttonFlashcardSets).setOnClickListener(item -> {
+            try {
+                Intent intent = new Intent(requireContext(), FlashcardSetsActivity.class);
+                startActivity(intent);
+            } catch (Exception e) {
+                Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

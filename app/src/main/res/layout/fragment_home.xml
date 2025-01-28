@@ -7,10 +7,25 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <Button
-        android:id="@+id/buttonNotes"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="All Notes" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <Button
+            android:id="@+id/buttonNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="All Notes" />
+
+        <Button
+            android:id="@+id/buttonFlashcardSets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="All Flashcard Sets" />
+
+    </LinearLayout>
+
 
 </FrameLayout>
