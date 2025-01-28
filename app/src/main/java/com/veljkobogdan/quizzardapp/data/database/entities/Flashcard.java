@@ -11,7 +11,7 @@ public class Flashcard {
 
     @ColumnInfo(name = "term")
     public String term;
-    @ColumnInfo(name = "term")
+    @ColumnInfo(name = "definition")
     public String definition;
 
     public long getFlashcardId() {

@@ -12,6 +12,7 @@ import com.veljkobogdan.quizzardapp.data.database.dao.NoteDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.TagDao;
 import com.veljkobogdan.quizzardapp.data.database.entities.Flashcard;
 import com.veljkobogdan.quizzardapp.data.database.entities.FlashcardSet;
+import com.veljkobogdan.quizzardapp.data.database.entities.FlashcardSetCrossRef;
 import com.veljkobogdan.quizzardapp.data.database.entities.Note;
 import com.veljkobogdan.quizzardapp.data.database.entities.NoteTagCrossRef;
 import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
@@ -21,8 +22,9 @@ import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
         Tag.class,
         NoteTagCrossRef.class,
         Flashcard.class,
-        FlashcardSet.class
-}, version = 12)
+        FlashcardSet.class,
+        FlashcardSetCrossRef.class
+}, version = 13)
 public abstract class AppDatabase extends RoomDatabase {
     public static AppDatabase db;
     public static String name = "quizzard";
