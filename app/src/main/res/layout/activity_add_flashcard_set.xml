@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.notes.NotesActivity"
+    android:orientation="vertical"
+    >
+
+    <include
+        android:id="@+id/toolbarIncl"
+        layout="@layout/common_toolbar"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/toolbarIncl"
+        app:cardCornerRadius="16dp"
+        android:layout_margin="8dp"
+        app:cardBackgroundColor="@color/md_theme_surfaceContainer"
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                >
+
+                <TextView
+                    android:text="@string/title"
+                    android:textColor="@color/md_theme_onSurfaceVariant"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+                <EditText
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="title"
+                    android:hint="@string/enter_title"
+                    android:inputType="text"
+                    android:backgroundTint="#00000000"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/flashcardLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    />
+
+                <Button
+                    android:id="@+id/newFlashcardButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/md_theme_tertiaryContainer_mediumContrast"
+                    android:textColor="@color/md_theme_onTertiary"
+                    android:text="@string/add"
+                    />
+
+                <Button
+                    android:id="@+id/addButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save"
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="@color/md_theme_tertiary"
+                    android:textColor="@color/md_theme_onTertiary"
+                    />
+            </LinearLayout>
+
+        </ScrollView>
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>

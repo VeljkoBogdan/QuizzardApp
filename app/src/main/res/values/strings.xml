@@ -21,4 +21,6 @@
     <string name="exams">Exams</string>
     <string name="no_notes_found">No Notes Found \n Press the add button to add one!</string>
     <string name="no_sets_found">No Flashcard Sets found \n Press the add button to add one!</string>
+    <string name="add">Add</string>
+    <string name="delete">Delete</string>
 </resources>

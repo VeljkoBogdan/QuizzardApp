@@ -1,8 +1,9 @@
 package com.veljkobogdan.quizzardapp.ui.flashcards;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,12 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.veljkobogdan.quizzardapp.R;
-import com.veljkobogdan.quizzardapp.data.database.entities.FlashcardSet;
 import com.veljkobogdan.quizzardapp.data.models.FlashcardSetWithFlashcards;
 import com.veljkobogdan.quizzardapp.data.repository.FlashcardSetRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityFlashcardSetsBinding;
-
-import java.util.List;
 
 public class FlashcardSetsActivity extends AppCompatActivity {
     ActivityFlashcardSetsBinding binding;
@@ -47,6 +45,8 @@ public class FlashcardSetsActivity extends AppCompatActivity {
         toolbar.setTitle("Flashcard Sets");
         setSupportActionBar(toolbar);
 
+        flashcardSetRepository = new FlashcardSetRepository(this);
+
         recycler = binding.recycler;
         recycler.setLayoutManager(new LinearLayoutManager(
                 this, LinearLayoutManager.VERTICAL, false));
@@ -66,7 +66,12 @@ public class FlashcardSetsActivity extends AppCompatActivity {
 
         floatingActionButton = binding.addButton;
         floatingActionButton.setOnClickListener(v -> {
-            // TODO: intent to a New Flashcard Set activity
+            try {
+                Intent intent = new Intent(this, AddFlashcardSetActivity.class);
+                startActivity(intent);
+            } catch (Exception e) {
+                Log.e("ERROR", e.getMessage());
+            }
         });
 
         recycler.setAdapter(flashcardSetAdapter);
@@ -85,7 +90,7 @@ public class FlashcardSetsActivity extends AppCompatActivity {
                 }
             });
         } catch (Exception e) {
-            Toast.makeText(this, "Nothing to show", Toast.LENGTH_SHORT).show();
+            Log.e("ERROR", e.getMessage());
         }
     }
 }
