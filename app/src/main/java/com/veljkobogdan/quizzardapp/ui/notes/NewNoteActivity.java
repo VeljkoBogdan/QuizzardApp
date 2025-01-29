@@ -1,6 +1,7 @@
 package com.veljkobogdan.quizzardapp.ui.notes;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -22,8 +23,13 @@ import com.veljkobogdan.quizzardapp.ui.tags.TagSelectionOverlay;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class NewNoteActivity extends AppCompatActivity {
+    public static final String TITLE = "title";
+    public static final String CONTENT = "content";
+    public static final String TAGS = "tags";
+
     ActivityNewNoteBinding binding;
     NoteRepository noteRepository;
     List<Tag> tags = new ArrayList<>();
@@ -47,6 +53,17 @@ public class NewNoteActivity extends AppCompatActivity {
         Toolbar toolbar = binding.toolbarIncl.toolbar;
         toolbar.setTitle("New Note"); // TODO: add a title in the action bar
         setSupportActionBar(toolbar);
+
+        try {
+            Bundle extras = getIntent().getExtras();
+            if (!(extras != null && extras.isEmpty())) {
+                binding.title.setText(extras.getString(TITLE));
+                binding.content.setText(extras.getString(CONTENT));
+                tags = (List<Tag>) extras.getSerializable(TAGS);
+            }
+        } catch (Exception e) {
+            Log.i("INTENT", Objects.requireNonNull(e.getMessage()));
+        }
 
         binding.addButton.setOnClickListener(view -> {
             String title = binding.title.getText().toString().trim();

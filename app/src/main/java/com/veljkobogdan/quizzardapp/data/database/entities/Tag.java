@@ -5,8 +5,10 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "tag")
-public class Tag {
+public class Tag implements Serializable {
     @PrimaryKey(autoGenerate = true)
     public long tagId;
     @ColumnInfo(name = "name")

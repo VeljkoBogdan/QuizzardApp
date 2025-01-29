@@ -16,9 +16,12 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.veljkobogdan.quizzardapp.R;
+import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
 import com.veljkobogdan.quizzardapp.data.models.NoteWithTags;
 import com.veljkobogdan.quizzardapp.data.repository.NoteRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityNotesBinding;
+
+import java.util.ArrayList;
 
 public class NotesActivity extends AppCompatActivity {
     ActivityNotesBinding binding;
@@ -58,10 +61,13 @@ public class NotesActivity extends AppCompatActivity {
                 StaggeredGridLayoutManager.VERTICAL));
 
         noteAdapter = new NoteAdapter(new NoteAdapter.OnNoteClickListener() {
-            // TODO: handle note clicks
             @Override
             public void onNoteClick(NoteWithTags note) {
-                Toast.makeText(getApplicationContext(), "Tap", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(NotesActivity.this, NewNoteActivity.class);
+                intent.putExtra(NewNoteActivity.TITLE, note.note.getTitle());
+                intent.putExtra(NewNoteActivity.CONTENT, note.note.getContent());
+                intent.putExtra(NewNoteActivity.TAGS, (ArrayList<Tag>) note.tags);
+                startActivity(intent);
             }
 
             @Override
