@@ -61,4 +61,19 @@ public class NoteRepository {
             }
         });
     }
+
+    public void updateNoteWithTags(Note note, List<Tag> tags) {
+        executor.execute(() -> {
+            noteDao.update(note);
+            noteDao.deleteNoteTagCrossRefs(note.getNoteId());
+            for (Tag tag : tags) {
+                Tag existingTag = tagDao.getTagByName(tag.getName());
+                if (existingTag == null) {
+                    long tagId = tagDao.insert(tag);
+                    existingTag = tag;
+                }
+                noteDao.insertNoteTagCrossRef(new NoteTagCrossRef(note.getNoteId(), existingTag.getTagId()));
+            }
+        });
+    }
 }

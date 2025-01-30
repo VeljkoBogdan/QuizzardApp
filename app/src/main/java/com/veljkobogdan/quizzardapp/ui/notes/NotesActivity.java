@@ -2,6 +2,7 @@ package com.veljkobogdan.quizzardapp.ui.notes;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,12 +17,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.veljkobogdan.quizzardapp.R;
-import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
 import com.veljkobogdan.quizzardapp.data.models.NoteWithTags;
 import com.veljkobogdan.quizzardapp.data.repository.NoteRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityNotesBinding;
-
-import java.util.ArrayList;
 
 public class NotesActivity extends AppCompatActivity {
     ActivityNotesBinding binding;
@@ -46,16 +44,18 @@ public class NotesActivity extends AppCompatActivity {
 
         noteRepository = new NoteRepository(this);
 
+        initToolbar();
+        initFloatingButton();
+        initNotesRecycler();
+    }
+
+    private void initToolbar() {
         Toolbar toolbar = binding.toolbarIncl.toolbar;
-        setSupportActionBar(toolbar);
         toolbar.setTitle("Notes");
+        setSupportActionBar(toolbar);
+    }
 
-        floatingActionButton = binding.addButton;
-        floatingActionButton.setOnClickListener(l -> {
-            Intent intent = new Intent(this, NewNoteActivity.class);
-            startActivity(intent);
-        });
-
+    private void initNotesRecycler() {
         recyclerView = binding.recycler;
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,
                 StaggeredGridLayoutManager.VERTICAL));
@@ -63,11 +63,13 @@ public class NotesActivity extends AppCompatActivity {
         noteAdapter = new NoteAdapter(new NoteAdapter.OnNoteClickListener() {
             @Override
             public void onNoteClick(NoteWithTags note) {
-                Intent intent = new Intent(NotesActivity.this, NewNoteActivity.class);
-                intent.putExtra(NewNoteActivity.TITLE, note.note.getTitle());
-                intent.putExtra(NewNoteActivity.CONTENT, note.note.getContent());
-                intent.putExtra(NewNoteActivity.TAGS, (ArrayList<Tag>) note.tags);
-                startActivity(intent);
+                try {
+                    Intent intent = new Intent(NotesActivity.this, NewNoteActivity.class);
+                    intent.putExtra(NewNoteActivity.NOTE, note);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Log.e("ERROR", e.getMessage());
+                }
             }
 
             @Override
@@ -79,6 +81,18 @@ public class NotesActivity extends AppCompatActivity {
         recyclerView.setAdapter(noteAdapter);
 
         loadNotes();
+    }
+
+    private void initFloatingButton() {
+        floatingActionButton = binding.addButton;
+        floatingActionButton.setOnClickListener(l -> {
+            try {
+                Intent intent = new Intent(this, NewNoteActivity.class);
+                startActivity(intent);
+            } catch (Exception e) {
+                Log.e("ERROR", e.getMessage());
+            }
+        });
     }
 
     private void loadNotes() {

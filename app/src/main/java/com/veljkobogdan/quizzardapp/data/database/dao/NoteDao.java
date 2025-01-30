@@ -37,4 +37,7 @@ public interface NoteDao {
 
     @Insert
     void insertNoteTagCrossRef(NoteTagCrossRef noteTagCrossRef);
+
+    @Query("DELETE FROM NoteTagCrossRef WHERE noteId = :noteId")
+    void deleteNoteTagCrossRefs(long noteId);
 }

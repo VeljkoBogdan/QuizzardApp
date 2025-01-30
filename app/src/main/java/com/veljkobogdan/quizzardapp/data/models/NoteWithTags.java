@@ -9,9 +9,10 @@ import com.veljkobogdan.quizzardapp.data.database.entities.Note;
 import com.veljkobogdan.quizzardapp.data.database.entities.NoteTagCrossRef;
 import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class NoteWithTags {
+public class NoteWithTags implements Serializable {
     @Embedded
     public Note note;
 

@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.database.entities.Note;
 import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
+import com.veljkobogdan.quizzardapp.data.models.NoteWithTags;
 import com.veljkobogdan.quizzardapp.data.repository.NoteRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityNewNoteBinding;
 import com.veljkobogdan.quizzardapp.ui.tags.TagSelectionOverlay;
@@ -26,13 +27,13 @@ import java.util.List;
 import java.util.Objects;
 
 public class NewNoteActivity extends AppCompatActivity {
-    public static final String TITLE = "title";
-    public static final String CONTENT = "content";
-    public static final String TAGS = "tags";
+    public static final String NOTE = "note";
 
+    TagSelectionOverlay tagSelectionOverlay;
     ActivityNewNoteBinding binding;
     NoteRepository noteRepository;
     List<Tag> tags = new ArrayList<>();
+    NoteWithTags note;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,36 +51,53 @@ public class NewNoteActivity extends AppCompatActivity {
 
         noteRepository = new NoteRepository(this);
 
-        Toolbar toolbar = binding.toolbarIncl.toolbar;
-        toolbar.setTitle("New Note"); // TODO: add a title in the action bar
-        setSupportActionBar(toolbar);
+        initToolbar();
+        getIntentExtras();
+        initSaveButton();
+    }
 
-        try {
-            Bundle extras = getIntent().getExtras();
-            if (!(extras != null && extras.isEmpty())) {
-                binding.title.setText(extras.getString(TITLE));
-                binding.content.setText(extras.getString(CONTENT));
-                tags = (List<Tag>) extras.getSerializable(TAGS);
-            }
-        } catch (Exception e) {
-            Log.i("INTENT", Objects.requireNonNull(e.getMessage()));
-        }
-
+    private void initSaveButton() {
         binding.addButton.setOnClickListener(view -> {
             String title = binding.title.getText().toString().trim();
             String content = binding.content.getText().toString().trim();
 
             if (title.isEmpty() || content.isEmpty()) return;
 
-            Note note = new Note();
-            note.setContent(content);
-            note.setTitle(title);
-            note.setCreatedAt(LocalDateTime.now().toString());
-
-            new NoteRepository(this).insertNoteWithTags(note, tags);
+            if (this.note != null) {
+                note.note.setContent(content);
+                note.note.setTitle(title);
+                note.note.setCreatedAt(LocalDateTime.now().toString());
+                noteRepository.updateNoteWithTags(note.note, tags);
+            } else {
+                Note newNote = new Note();
+                newNote.setTitle(title);
+                newNote.setContent(content);
+                noteRepository.insertNoteWithTags(newNote, tags);
+            }
 
             finish();
         });
+    }
+
+    private void getIntentExtras() {
+        try {
+            Bundle extras = getIntent().getExtras();
+            if (!(extras != null && extras.isEmpty())) {
+                this.note = (NoteWithTags) extras.getSerializable(NOTE);
+
+                binding.title.setText(this.note.note.getTitle());
+                binding.content.setText(this.note.note.getContent());
+                tags = this.note.tags;
+            }
+        } catch (Exception e) {
+            Log.i("INTENT", Objects.requireNonNull(e.getMessage()));
+        }
+    }
+
+    private void initToolbar() {
+        Toolbar toolbar = binding.toolbarIncl.toolbar;
+        toolbar.setTitle("New Note");
+        setSupportActionBar(toolbar);
     }
 
     @Override
@@ -91,7 +109,7 @@ public class NewNoteActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.tags) {
-            TagSelectionOverlay tagSelectionOverlay = new TagSelectionOverlay(this, tags);
+            tagSelectionOverlay = new TagSelectionOverlay(this, tags);
             tagSelectionOverlay.setOnSaveListener(selectedTags -> {
                 tags = selectedTags;
             });
