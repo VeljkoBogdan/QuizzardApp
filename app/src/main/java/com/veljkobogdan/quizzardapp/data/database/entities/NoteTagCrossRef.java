@@ -4,8 +4,10 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 
+import java.io.Serializable;
+
 @Entity(primaryKeys = {"noteId", "tagId"})
-public class NoteTagCrossRef {
+public class NoteTagCrossRef implements Serializable {
     @ColumnInfo
     public long noteId;
     @ColumnInfo

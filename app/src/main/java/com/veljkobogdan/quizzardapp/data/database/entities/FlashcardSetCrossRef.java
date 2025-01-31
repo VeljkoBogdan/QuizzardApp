@@ -4,8 +4,10 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 
+import java.io.Serializable;
+
 @Entity(primaryKeys = {"flashcardId", "flashcardSetId"})
-public class FlashcardSetCrossRef {
+public class FlashcardSetCrossRef implements Serializable {
     @ColumnInfo
     public long flashcardId;
     @ColumnInfo

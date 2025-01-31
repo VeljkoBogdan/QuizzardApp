@@ -9,9 +9,10 @@ import com.veljkobogdan.quizzardapp.data.database.entities.Flashcard;
 import com.veljkobogdan.quizzardapp.data.database.entities.FlashcardSet;
 import com.veljkobogdan.quizzardapp.data.database.entities.FlashcardSetCrossRef;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class FlashcardSetWithFlashcards {
+public class FlashcardSetWithFlashcards implements Serializable {
     @Embedded
     public FlashcardSet flashcardSet;
 
