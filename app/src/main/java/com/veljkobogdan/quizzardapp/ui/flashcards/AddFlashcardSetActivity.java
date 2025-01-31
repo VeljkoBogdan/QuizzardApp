@@ -58,6 +58,9 @@ public class AddFlashcardSetActivity extends AppCompatActivity {
 
         saveButton.setOnClickListener(view -> saveFlashcards());
         addFlashcardButton.setOnClickListener(view -> addFlashcard());
+
+        addFlashcard();
+        addFlashcard();
     }
 
     private void addFlashcard() {
