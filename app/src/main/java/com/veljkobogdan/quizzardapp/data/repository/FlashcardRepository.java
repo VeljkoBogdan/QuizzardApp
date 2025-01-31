@@ -17,7 +17,7 @@ public class FlashcardRepository {
     private final FlashcardDao flashcardDao;
     private final ExecutorService executor;
 
-    FlashcardRepository(Context context) {
+    public FlashcardRepository(Context context) {
         AppDatabase db = AppDatabase.getInstance(context);
         this.flashcardDao = db.flashcardDao();
         this.executor = Executors.newSingleThreadExecutor();
