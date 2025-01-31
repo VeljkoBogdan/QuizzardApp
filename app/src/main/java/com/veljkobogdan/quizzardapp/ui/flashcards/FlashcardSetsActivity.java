@@ -55,7 +55,9 @@ public class FlashcardSetsActivity extends AppCompatActivity {
             // TODO: handle fc set clicks
             @Override
             public void onClickListener(FlashcardSetWithFlashcards flashcardSetWithFlashcards) {
-
+                Intent intent = new Intent(FlashcardSetsActivity.this, ViewFlashcardSetActivity.class);
+                intent.putExtra(ViewFlashcardSetActivity.FLASHCARD_SET, flashcardSetWithFlashcards);
+                startActivity(intent);
             }
 
             @Override
