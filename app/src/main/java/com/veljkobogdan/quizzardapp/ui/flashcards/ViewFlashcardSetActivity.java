@@ -2,6 +2,8 @@ package com.veljkobogdan.quizzardapp.ui.flashcards;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +26,8 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
     private FlashcardAdapter flashcardAdapter;
     private FlashcardRepository flashcardRepository;
     private FlashcardSetWithFlashcards flashcardSet;
+    private Button learnButton, flashcardsButton;
+    private TextView titleTextView;
 
     public static final String FLASHCARD_SET = "flashcardSet";
 
@@ -42,6 +46,7 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
         });
 
         getIntentContent();
+        setLayoutContent();
 
         flashcardRepository = new FlashcardRepository(this);
 
@@ -68,6 +73,14 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
         recycler.setAdapter(flashcardAdapter);
 
         loadFlashcards();
+    }
+
+    private void setLayoutContent() {
+        titleTextView = binding.flashcardSetTitle;
+        learnButton = binding.learnButton;
+        flashcardsButton = binding.flashcardsButton;
+
+        titleTextView.setText(flashcardSet.flashcardSet.name);
     }
 
     private void getIntentContent() {
