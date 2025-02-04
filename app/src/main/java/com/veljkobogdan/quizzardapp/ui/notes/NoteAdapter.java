@@ -74,7 +74,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                 if (onNoteClickListener != null) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
-                        onNoteClickListener.onNoteLongClick(notes.get(position));
+                        onNoteClickListener.onNoteLongClick(notes.get(position), itemView);
                     }
                 }
 
@@ -102,6 +102,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
     public interface OnNoteClickListener {
         void onNoteClick(NoteWithTags note);
-        void onNoteLongClick(NoteWithTags note);
+        void onNoteLongClick(NoteWithTags note, View view);
     }
 }

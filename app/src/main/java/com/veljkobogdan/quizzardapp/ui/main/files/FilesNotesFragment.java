@@ -53,7 +53,7 @@ public class FilesNotesFragment extends Fragment {
             }
 
             @Override
-            public void onNoteLongClick(NoteWithTags note) {
+            public void onNoteLongClick(NoteWithTags note, View noteView) {
 
             }
         });

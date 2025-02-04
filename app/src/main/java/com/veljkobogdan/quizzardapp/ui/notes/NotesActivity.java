@@ -3,7 +3,9 @@ package com.veljkobogdan.quizzardapp.ui.notes;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -73,8 +75,19 @@ public class NotesActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNoteLongClick(NoteWithTags note) {
-                Toast.makeText(getApplicationContext(), "Long", Toast.LENGTH_LONG).show();
+            public void onNoteLongClick(NoteWithTags note, View view) {
+                PopupMenu menu = new PopupMenu(NotesActivity.this, view);
+
+                menu.getMenuInflater().inflate(R.menu.note_popup_menu, menu.getMenu());
+                menu.setOnMenuItemClickListener(menuItem -> {
+                    if (menuItem.getItemId() == R.id.delete) {
+                        Toast.makeText(NotesActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                    return false;
+                });
+
+                menu.show();
             }
         });
 
