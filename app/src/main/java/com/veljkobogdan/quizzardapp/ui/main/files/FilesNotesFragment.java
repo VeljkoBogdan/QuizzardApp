@@ -9,14 +9,19 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.models.NoteWithTags;
 import com.veljkobogdan.quizzardapp.data.repository.NoteRepository;
+import com.veljkobogdan.quizzardapp.ui.notes.NewNoteActivity;
 import com.veljkobogdan.quizzardapp.ui.notes.NoteAdapter;
+import com.veljkobogdan.quizzardapp.ui.notes.NotesActivity;
 
 public class FilesNotesFragment extends Fragment {
     private NoteRepository noteRepository;
@@ -49,12 +54,29 @@ public class FilesNotesFragment extends Fragment {
         noteAdapter = new NoteAdapter(new NoteAdapter.OnNoteClickListener() {
             @Override
             public void onNoteClick(NoteWithTags note) {
-
+                try {
+                    Intent intent = new Intent(requireContext(), NewNoteActivity.class);
+                    intent.putExtra(NewNoteActivity.NOTE, note);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Log.e("ERROR", e.getMessage());
+                }
             }
 
             @Override
             public void onNoteLongClick(NoteWithTags note, View noteView) {
+                PopupMenu menu = new PopupMenu(requireContext(), view);
 
+                menu.getMenuInflater().inflate(R.menu.note_popup_menu, menu.getMenu());
+                menu.setOnMenuItemClickListener(menuItem -> {
+                    if (menuItem.getItemId() == R.id.delete) {
+                        Toast.makeText(requireContext(), "Deleted", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                    return false;
+                });
+
+                menu.show();
             }
         });
 
