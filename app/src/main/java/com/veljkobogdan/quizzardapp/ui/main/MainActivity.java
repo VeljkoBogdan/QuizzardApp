@@ -17,6 +17,7 @@ import com.veljkobogdan.quizzardapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
+    private static Fragment lastLoadedFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +36,12 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Start with the home fragment loaded
-        replaceFragment(new HomeFragment());
+        // Start with the last fragment loaded, or home by default
+        if (lastLoadedFragment == null) {
+            replaceFragment(new HomeFragment());
+        } else {
+            replaceFragment(lastLoadedFragment);
+        }
 
         // BotNav on click listener
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -62,5 +67,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fTransaction = fm.beginTransaction();
         fTransaction.replace(binding.frameLayout.getId(), fragment);
         fTransaction.commit();
+
+        lastLoadedFragment = fragment;
     }
 }
