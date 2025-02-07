@@ -51,32 +51,13 @@ public class FilesNotesFragment extends Fragment {
                 StaggeredGridLayoutManager.VERTICAL));
 
         noteRepository = new NoteRepository(requireContext());
-        noteAdapter = new NoteAdapter(new NoteAdapter.OnNoteClickListener() {
-            @Override
-            public void onNoteClick(NoteWithTags note) {
-                try {
-                    Intent intent = new Intent(requireContext(), NewNoteActivity.class);
-                    intent.putExtra(NewNoteActivity.NOTE, note);
-                    startActivity(intent);
-                } catch (Exception e) {
-                    Log.e("ERROR", e.getMessage());
-                }
-            }
-
-            @Override
-            public void onNoteLongClick(NoteWithTags note, View noteView) {
-                PopupMenu menu = new PopupMenu(requireContext(), view);
-
-                menu.getMenuInflater().inflate(R.menu.note_popup_menu, menu.getMenu());
-                menu.setOnMenuItemClickListener(menuItem -> {
-                    if (menuItem.getItemId() == R.id.delete) {
-                        Toast.makeText(requireContext(), "Deleted", Toast.LENGTH_SHORT).show();
-                        return true;
-                    }
-                    return false;
-                });
-
-                menu.show();
+        noteAdapter = new NoteAdapter(requireContext(), note -> {
+            try {
+                Intent intent = new Intent(requireContext(), NewNoteActivity.class);
+                intent.putExtra(NewNoteActivity.NOTE, note);
+                startActivity(intent);
+            } catch (Exception e) {
+                Log.e("ERROR", e.getMessage());
             }
         });
 

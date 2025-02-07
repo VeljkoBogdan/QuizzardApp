@@ -62,32 +62,13 @@ public class NotesActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,
                 StaggeredGridLayoutManager.VERTICAL));
 
-        noteAdapter = new NoteAdapter(new NoteAdapter.OnNoteClickListener() {
-            @Override
-            public void onNoteClick(NoteWithTags note) {
-                try {
-                    Intent intent = new Intent(NotesActivity.this, NewNoteActivity.class);
-                    intent.putExtra(NewNoteActivity.NOTE, note);
-                    startActivity(intent);
-                } catch (Exception e) {
-                    Log.e("ERROR", e.getMessage());
-                }
-            }
-
-            @Override
-            public void onNoteLongClick(NoteWithTags note, View view) {
-                PopupMenu menu = new PopupMenu(NotesActivity.this, view);
-
-                menu.getMenuInflater().inflate(R.menu.note_popup_menu, menu.getMenu());
-                menu.setOnMenuItemClickListener(menuItem -> {
-                    if (menuItem.getItemId() == R.id.delete) {
-                        Toast.makeText(NotesActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
-                        return true;
-                    }
-                    return false;
-                });
-
-                menu.show();
+        noteAdapter = new NoteAdapter(this, note -> {
+            try {
+                Intent intent = new Intent(NotesActivity.this, NewNoteActivity.class);
+                intent.putExtra(NewNoteActivity.NOTE, note);
+                startActivity(intent);
+            } catch (Exception e) {
+                Log.e("ERROR", e.getMessage());
             }
         });
 

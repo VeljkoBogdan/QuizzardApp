@@ -1,10 +1,13 @@
 package com.veljkobogdan.quizzardapp.ui.notes;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,8 +23,10 @@ import java.util.List;
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder> {
     public List<NoteWithTags> notes = new ArrayList<>();
     public final OnNoteClickListener onNoteClickListener;
+    private final Context context;
 
-    public NoteAdapter(OnNoteClickListener onNoteClickListener) {
+    public NoteAdapter(Context context, OnNoteClickListener onNoteClickListener) {
+        this.context = context;
         this.onNoteClickListener = onNoteClickListener;
     }
 
@@ -71,15 +76,24 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
             // Handle long press
             itemView.setOnLongClickListener(view -> {
-                if (onNoteClickListener != null) {
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION) {
-                        onNoteClickListener.onNoteLongClick(notes.get(position), itemView);
-                    }
-                }
-
+                showPopupMenu(view, getAdapterPosition());
                 return true;
             });
+        }
+
+        private void showPopupMenu(View view, int position) {
+            PopupMenu menu = new PopupMenu(context, view);
+
+            menu.getMenuInflater().inflate(R.menu.note_popup_menu, menu.getMenu());
+            menu.setOnMenuItemClickListener(menuItem -> {
+                if (menuItem.getItemId() == R.id.delete) {
+                    // TODO: handle note deletion
+                    return true;
+                }
+                return false;
+            });
+
+            menu.show();
         }
 
         public void bind(NoteWithTags note) {
@@ -102,6 +116,5 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
     public interface OnNoteClickListener {
         void onNoteClick(NoteWithTags note);
-        void onNoteLongClick(NoteWithTags note, View view);
     }
 }
