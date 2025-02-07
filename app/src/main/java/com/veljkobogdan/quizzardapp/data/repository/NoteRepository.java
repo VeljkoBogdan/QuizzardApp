@@ -76,4 +76,11 @@ public class NoteRepository {
             }
         });
     }
+
+    public void deleteNoteWithTags(NoteWithTags note) {
+        executor.execute(() -> {
+            noteDao.deleteNoteTagCrossRefs(note.note.getNoteId());
+            noteDao.delete(note.note);
+        });
+    }
 }

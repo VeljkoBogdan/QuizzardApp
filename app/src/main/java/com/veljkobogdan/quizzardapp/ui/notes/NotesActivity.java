@@ -92,7 +92,7 @@ public class NotesActivity extends AppCompatActivity {
     private void loadNotes() {
         noteRepository.getAllNotesWithTags().observe(this, notes -> {
             if (!notes.isEmpty()) {
-                noteAdapter.setNotes(notes);
+                noteAdapter.updateNotes(notes);
                 binding.noNotesText.setVisibility(View.GONE);
             } else {
                 binding.noNotesText.setVisibility(View.VISIBLE);

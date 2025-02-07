@@ -13,15 +13,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupMenu;
-import android.widget.Toast;
 
 import com.veljkobogdan.quizzardapp.R;
-import com.veljkobogdan.quizzardapp.data.models.NoteWithTags;
 import com.veljkobogdan.quizzardapp.data.repository.NoteRepository;
 import com.veljkobogdan.quizzardapp.ui.notes.NewNoteActivity;
 import com.veljkobogdan.quizzardapp.ui.notes.NoteAdapter;
-import com.veljkobogdan.quizzardapp.ui.notes.NotesActivity;
 
 public class FilesNotesFragment extends Fragment {
     private NoteRepository noteRepository;
@@ -69,7 +65,7 @@ public class FilesNotesFragment extends Fragment {
     private void loadNotes() {
         noteRepository.getAllNotesWithTags().observe(requireActivity(), notes -> {
             if (!notes.isEmpty()) {
-                noteAdapter.setNotes(notes);
+                noteAdapter.updateNotes(notes);
                 this.requireView().findViewById(R.id.noNotesText).setVisibility(View.GONE);
             } else {
                 this.requireView().findViewById(R.id.noNotesText).setVisibility(View.VISIBLE);

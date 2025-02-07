@@ -7,14 +7,16 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
+import com.veljkobogdan.quizzardapp.data.models.FlashcardSetWithFlashcards;
 import com.veljkobogdan.quizzardapp.data.models.NoteWithTags;
+import com.veljkobogdan.quizzardapp.data.repository.NoteRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +26,13 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     public List<NoteWithTags> notes = new ArrayList<>();
     public final OnNoteClickListener onNoteClickListener;
     private final Context context;
+    private final NoteRepository noteRepository;
 
     public NoteAdapter(Context context, OnNoteClickListener onNoteClickListener) {
         this.context = context;
         this.onNoteClickListener = onNoteClickListener;
+
+        noteRepository = new NoteRepository(context);
     }
 
     public void setNotes(List<NoteWithTags> notes) {
@@ -51,6 +56,36 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     @Override
     public int getItemCount() {
         return notes.size();
+    }
+
+    public void updateNotes(List<NoteWithTags> newNotes) {
+        DiffUtil.Callback diffCallback = new DiffUtil.Callback() {
+            @Override
+            public int getOldListSize() {
+                return notes.size();
+            }
+
+            @Override
+            public int getNewListSize() {
+                return newNotes.size();
+            }
+
+            @Override
+            public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+                return notes.get(oldItemPosition).note.getNoteId() ==
+                        newNotes.get(newItemPosition).note.getNoteId();
+            }
+
+            @Override
+            public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                return notes.get(oldItemPosition).equals(newNotes.get(newItemPosition));
+            }
+        };
+
+        DiffUtil.DiffResult result = DiffUtil.calculateDiff(diffCallback);
+        notes.clear();
+        notes.addAll(newNotes);
+        result.dispatchUpdatesTo(this);
     }
 
     class NoteViewHolder extends RecyclerView.ViewHolder {
@@ -87,7 +122,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             menu.getMenuInflater().inflate(R.menu.note_popup_menu, menu.getMenu());
             menu.setOnMenuItemClickListener(menuItem -> {
                 if (menuItem.getItemId() == R.id.delete) {
-                    // TODO: handle note deletion
+                    NoteWithTags setToDelete = notes.get(position);
+                    noteRepository.deleteNoteWithTags(setToDelete);
+                    notes.remove(setToDelete);
+                    notifyItemRemoved(position);
                     return true;
                 }
                 return false;
