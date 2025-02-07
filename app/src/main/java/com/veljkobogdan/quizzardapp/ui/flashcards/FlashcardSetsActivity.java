@@ -52,39 +52,12 @@ public class FlashcardSetsActivity extends AppCompatActivity {
         recycler.setLayoutManager(new LinearLayoutManager(
                 this, LinearLayoutManager.VERTICAL, false));
 
-        flashcardSetAdapter = new FlashcardSetAdapter(new FlashcardSetAdapter.OnFlashcardSetClickListener() {
-            // TODO: handle fc set clicks
+        flashcardSetAdapter = new FlashcardSetAdapter(this, new FlashcardSetAdapter.OnFlashcardSetClickListener() {
             @Override
             public void onClickListener(FlashcardSetWithFlashcards flashcardSetWithFlashcards) {
                 Intent intent = new Intent(FlashcardSetsActivity.this, ViewFlashcardSetActivity.class);
                 intent.putExtra(ViewFlashcardSetActivity.FLASHCARD_SET, flashcardSetWithFlashcards);
                 startActivity(intent);
-            }
-
-            @Override
-            public void onLongClickListener(FlashcardSetWithFlashcards flashcardSetWithFlashcards, View setView) {
-                PopupMenu menu = new PopupMenu(FlashcardSetsActivity.this, setView);
-
-                menu.getMenuInflater().inflate(R.menu.set_popup_menu, menu.getMenu());
-                menu.setOnMenuItemClickListener(menuItem -> {
-                    try {
-                        if (menuItem.getItemId() == R.id.delete) {
-                            flashcardSetRepository.deleteFlashcardSetWithFlashcards(flashcardSetWithFlashcards);
-
-                            flashcardSetRepository.getFlashcardSetsWithFlashcards()
-                                    .observe(FlashcardSetsActivity.this, updatedSets -> {
-                                        flashcardSetAdapter.updateFlashcardSet(updatedSets);
-                            });
-
-                            return true;
-                        }
-                    } catch (Exception e) {
-                        Log.e("ERROR", e.getMessage());
-                    }
-                    return false;
-                });
-
-                menu.show();
             }
         });
 

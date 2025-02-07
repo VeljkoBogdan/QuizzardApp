@@ -1,16 +1,20 @@
 package com.veljkobogdan.quizzardapp.ui.flashcards;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.models.FlashcardSetWithFlashcards;
+import com.veljkobogdan.quizzardapp.data.repository.FlashcardSetRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +23,14 @@ import java.util.List;
 public class FlashcardSetAdapter extends RecyclerView.Adapter<FlashcardSetAdapter.FlashcardSetViewHolder> {
     public List<FlashcardSetWithFlashcards> flashcardSets = new ArrayList<>();
     public OnFlashcardSetClickListener onFlashcardSetClickListener;
+    private Context context;
+    private FlashcardSetRepository flashcardSetRepository;
 
-    public FlashcardSetAdapter(OnFlashcardSetClickListener onFlashcardSetClickListener) {
+    public FlashcardSetAdapter(Context context, OnFlashcardSetClickListener onFlashcardSetClickListener) {
+        this.context = context;
         this.onFlashcardSetClickListener = onFlashcardSetClickListener;
+
+        this.flashcardSetRepository = new FlashcardSetRepository(context);
     }
 
     @Deprecated
@@ -102,14 +111,31 @@ public class FlashcardSetAdapter extends RecyclerView.Adapter<FlashcardSetAdapte
 
             // Handle long press
             itemView.setOnLongClickListener(view -> {
-                if (onFlashcardSetClickListener != null) {
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION) {
-                        onFlashcardSetClickListener.onLongClickListener(flashcardSets.get(position), view);
-                    }
-                }
+                showPopupMenu(view, getAdapterPosition());
                 return true;
             });
+        }
+
+        private void showPopupMenu(View view, int position) {
+            PopupMenu menu = new PopupMenu(context, view);
+
+            menu.getMenuInflater().inflate(R.menu.set_popup_menu, menu.getMenu());
+            menu.setOnMenuItemClickListener(menuItem -> {
+                if (menuItem.getItemId() == R.id.delete) {
+                    try {
+                        FlashcardSetWithFlashcards setToDelete = flashcardSets.get(position);
+                        flashcardSetRepository.deleteFlashcardSetWithFlashcards(setToDelete);
+                        flashcardSets.remove(setToDelete);
+                        notifyItemRemoved(position);
+                    } catch (Exception e) {
+                        Log.e("ERROR", e.getMessage());
+                    }
+                    return true;
+                }
+                return false;
+            });
+
+            menu.show();
         }
 
         public void bind(FlashcardSetWithFlashcards flashcardSet) {
@@ -120,6 +146,5 @@ public class FlashcardSetAdapter extends RecyclerView.Adapter<FlashcardSetAdapte
 
     public interface OnFlashcardSetClickListener {
         void onClickListener(FlashcardSetWithFlashcards flashcardSetWithFlashcards);
-        void onLongClickListener(FlashcardSetWithFlashcards flashcardSetWithFlashcards, View setView);
     }
 }
