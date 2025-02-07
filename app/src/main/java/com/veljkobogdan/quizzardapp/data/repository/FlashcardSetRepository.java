@@ -61,4 +61,12 @@ public class FlashcardSetRepository {
             }
         });
     }
+
+    public void deleteFlashcardSetWithFlashcards(FlashcardSetWithFlashcards flashcardSetWithFlashcards) {
+        executor.execute(() -> {
+            flashcardSetDao.deleteFlashcardsInSet(flashcardSetWithFlashcards.flashcardSet.getFlashcardSetId());
+            flashcardSetDao.deleteFlashcardSetCrossRef(flashcardSetWithFlashcards.flashcardSet.getFlashcardSetId());
+            flashcardSetDao.delete(flashcardSetWithFlashcards.flashcardSet);
+        });
+    }
 }

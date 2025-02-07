@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.veljkobogdan.quizzardapp.R;
@@ -23,6 +24,7 @@ public class FlashcardSetAdapter extends RecyclerView.Adapter<FlashcardSetAdapte
         this.onFlashcardSetClickListener = onFlashcardSetClickListener;
     }
 
+    @Deprecated
     public void setFlashcardSets(List<FlashcardSetWithFlashcards> flashcardSets) {
         this.flashcardSets = flashcardSets;
         notifyItemChanged(R.id.recycler);
@@ -46,6 +48,36 @@ public class FlashcardSetAdapter extends RecyclerView.Adapter<FlashcardSetAdapte
     @Override
     public int getItemCount() {
         return flashcardSets.size();
+    }
+
+    public void updateFlashcardSet(List<FlashcardSetWithFlashcards> newFlashcardSets) {
+        DiffUtil.Callback diffCallback = new DiffUtil.Callback() {
+            @Override
+            public int getOldListSize() {
+                return flashcardSets.size();
+            }
+
+            @Override
+            public int getNewListSize() {
+                return newFlashcardSets.size();
+            }
+
+            @Override
+            public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+                return flashcardSets.get(oldItemPosition).flashcardSet.getFlashcardSetId() ==
+                        newFlashcardSets.get(newItemPosition).flashcardSet.getFlashcardSetId();
+            }
+
+            @Override
+            public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                return flashcardSets.get(oldItemPosition).equals(newFlashcardSets.get(newItemPosition));
+            }
+        };
+
+        DiffUtil.DiffResult result = DiffUtil.calculateDiff(diffCallback);
+        flashcardSets.clear();
+        flashcardSets.addAll(newFlashcardSets);
+        result.dispatchUpdatesTo(this);
     }
 
     class FlashcardSetViewHolder extends RecyclerView.ViewHolder {
@@ -73,10 +105,9 @@ public class FlashcardSetAdapter extends RecyclerView.Adapter<FlashcardSetAdapte
                 if (onFlashcardSetClickListener != null) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
-                        onFlashcardSetClickListener.onLongClickListener(flashcardSets.get(position));
+                        onFlashcardSetClickListener.onLongClickListener(flashcardSets.get(position), view);
                     }
                 }
-
                 return true;
             });
         }
@@ -89,6 +120,6 @@ public class FlashcardSetAdapter extends RecyclerView.Adapter<FlashcardSetAdapte
 
     public interface OnFlashcardSetClickListener {
         void onClickListener(FlashcardSetWithFlashcards flashcardSetWithFlashcards);
-        void onLongClickListener(FlashcardSetWithFlashcards flashcardSetWithFlashcards);
+        void onLongClickListener(FlashcardSetWithFlashcards flashcardSetWithFlashcards, View setView);
     }
 }

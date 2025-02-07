@@ -7,6 +7,7 @@ import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -61,8 +62,29 @@ public class FlashcardSetsActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onLongClickListener(FlashcardSetWithFlashcards flashcardSetWithFlashcards) {
+            public void onLongClickListener(FlashcardSetWithFlashcards flashcardSetWithFlashcards, View setView) {
+                PopupMenu menu = new PopupMenu(FlashcardSetsActivity.this, setView);
 
+                menu.getMenuInflater().inflate(R.menu.set_popup_menu, menu.getMenu());
+                menu.setOnMenuItemClickListener(menuItem -> {
+                    try {
+                        if (menuItem.getItemId() == R.id.delete) {
+                            flashcardSetRepository.deleteFlashcardSetWithFlashcards(flashcardSetWithFlashcards);
+
+                            flashcardSetRepository.getFlashcardSetsWithFlashcards()
+                                    .observe(FlashcardSetsActivity.this, updatedSets -> {
+                                        flashcardSetAdapter.updateFlashcardSet(updatedSets);
+                            });
+
+                            return true;
+                        }
+                    } catch (Exception e) {
+                        Log.e("ERROR", e.getMessage());
+                    }
+                    return false;
+                });
+
+                menu.show();
             }
         });
 
@@ -85,7 +107,7 @@ public class FlashcardSetsActivity extends AppCompatActivity {
         try {
             flashcardSetRepository.getFlashcardSetsWithFlashcards().observe(this, flashcardSets -> {
                 if (!flashcardSets.isEmpty()) {
-                    flashcardSetAdapter.setFlashcardSets(flashcardSets);
+                    flashcardSetAdapter.updateFlashcardSet(flashcardSets);
                     binding.noFlashcardSetsText.setVisibility(View.GONE);
                 } else {
                     binding.noFlashcardSetsText.setVisibility(View.VISIBLE);

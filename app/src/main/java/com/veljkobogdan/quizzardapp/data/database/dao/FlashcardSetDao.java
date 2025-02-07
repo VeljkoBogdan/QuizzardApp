@@ -37,4 +37,10 @@ public interface FlashcardSetDao {
 
     @Insert
     void insertFlashcardSetCrossRef(FlashcardSetCrossRef flashcardSetCrossRef);
+
+    @Query("DELETE FROM flashcardsetcrossref WHERE flashcardSetId = :flashcardSetId")
+    void deleteFlashcardSetCrossRef(long flashcardSetId);
+
+    @Query("DELETE FROM flashcard WHERE flashcardId IN (SELECT flashcardId FROM flashcardsetcrossref WHERE flashcardSetId = :flashcardSetId)")
+    void deleteFlashcardsInSet(long flashcardSetId);
 }
