@@ -2,6 +2,7 @@ package com.veljkobogdan.quizzardapp.ui.flashcards;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -60,8 +61,14 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
 
         flashcardAdapter = new FlashcardAdapter(new FlashcardAdapter.OnFlashcardClickListener() {
             @Override
-            public void onFlashcardClick(Flashcard flashcard) {
-                // TODO: Handle flashcard clicks
+            public void onFlashcardClick(Flashcard flashcard, View view) {
+                if (view.findViewById(R.id.flashcardTerm).getVisibility() == View.VISIBLE){
+                    view.findViewById(R.id.flashcardTerm).setVisibility(View.INVISIBLE);
+                    view.findViewById(R.id.flashcardDefinition).setVisibility(View.VISIBLE);
+                } else {
+                    view.findViewById(R.id.flashcardTerm).setVisibility(View.VISIBLE);
+                    view.findViewById(R.id.flashcardDefinition).setVisibility(View.INVISIBLE);
+                }
             }
 
             @Override
