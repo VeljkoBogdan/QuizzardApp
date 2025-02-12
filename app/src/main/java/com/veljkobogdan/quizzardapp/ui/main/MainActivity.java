@@ -1,9 +1,12 @@
 package com.veljkobogdan.quizzardapp.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -14,6 +17,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.databinding.ActivityMainBinding;
+import com.veljkobogdan.quizzardapp.ui.flashcards.AddFlashcardSetActivity;
+import com.veljkobogdan.quizzardapp.ui.notes.NewNoteActivity;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -58,7 +63,23 @@ public class MainActivity extends AppCompatActivity {
 
         // Add button on click listener
         binding.addButton.setOnClickListener(view -> {
-            // TODO: Add a popup menu
+            PopupMenu menu = new PopupMenu(this, binding.addButton);
+            menu.getMenuInflater().inflate(R.menu.main_add_popup_menu, menu.getMenu());
+            menu.setOnMenuItemClickListener(item -> {
+                if (item.getItemId() == R.id.addNoteButton) {
+                    Intent intent = new Intent(MainActivity.this, NewNoteActivity.class);
+                    startActivity(intent);
+                } else if (item.getItemId() == R.id.addSetButton) {
+                    Intent intent = new Intent(MainActivity.this, AddFlashcardSetActivity.class);
+                    startActivity(intent);
+                } else if (item.getItemId() == R.id.addExamButton) {
+                    // TODO: implement exam intent
+                }
+
+                return false;
+            });
+
+            menu.show();
         });
     }
 

@@ -24,4 +24,7 @@
     <string name="add">Add</string>
     <string name="delete">Delete</string>
     <string name="learn">Learn</string>
+    <string name="note">Note</string>
+    <string name="flashcard_set">Flashcard Set</string>
+    <string name="exam">Exam</string>
 </resources>

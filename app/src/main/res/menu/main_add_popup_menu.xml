@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/note"
+        android:id="@+id/addNoteButton"/>
+    <item android:title="@string/flashcard_set"
+        android:id="@+id/addSetButton"/>
+    <item android:title="@string/exam"
+        android:id="@+id/addExamButton"/>
+</menu>
