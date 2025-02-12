@@ -22,8 +22,9 @@ import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.models.NoteWithTags;
 import com.veljkobogdan.quizzardapp.data.repository.NoteRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityNotesBinding;
+import com.veljkobogdan.quizzardapp.util.INoteLoader;
 
-public class NotesActivity extends AppCompatActivity {
+public class NotesActivity extends AppCompatActivity implements INoteLoader {
     ActivityNotesBinding binding;
     RecyclerView recyclerView;
     NoteAdapter noteAdapter;
@@ -89,7 +90,8 @@ public class NotesActivity extends AppCompatActivity {
         });
     }
 
-    private void loadNotes() {
+    @Override
+    public void loadNotes() {
         noteRepository.getAllNotesWithTags().observe(this, notes -> {
             if (!notes.isEmpty()) {
                 noteAdapter.updateNotes(notes);

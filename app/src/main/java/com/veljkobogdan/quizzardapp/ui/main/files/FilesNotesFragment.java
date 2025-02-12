@@ -13,16 +13,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.repository.NoteRepository;
 import com.veljkobogdan.quizzardapp.ui.notes.NewNoteActivity;
 import com.veljkobogdan.quizzardapp.ui.notes.NoteAdapter;
+import com.veljkobogdan.quizzardapp.util.INoteLoader;
 
-public class FilesNotesFragment extends Fragment {
+public class FilesNotesFragment extends Fragment implements INoteLoader {
     private NoteRepository noteRepository;
     private NoteAdapter noteAdapter;
     private RecyclerView recyclerView;
+    private TextView noNotesText;
 
     public FilesNotesFragment() {}
 
@@ -41,6 +44,8 @@ public class FilesNotesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        noNotesText = requireView().findViewById(R.id.noNotesText);
 
         recyclerView = requireView().findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,
@@ -62,13 +67,14 @@ public class FilesNotesFragment extends Fragment {
         loadNotes();
     }
 
-    private void loadNotes() {
+    @Override
+    public void loadNotes() {
         noteRepository.getAllNotesWithTags().observe(requireActivity(), notes -> {
             if (!notes.isEmpty()) {
                 noteAdapter.updateNotes(notes);
-                this.requireView().findViewById(R.id.noNotesText).setVisibility(View.GONE);
+                noNotesText.setVisibility(View.GONE);
             } else {
-                this.requireView().findViewById(R.id.noNotesText).setVisibility(View.VISIBLE);
+                noNotesText.setVisibility(View.VISIBLE);
             }
         });
     }
