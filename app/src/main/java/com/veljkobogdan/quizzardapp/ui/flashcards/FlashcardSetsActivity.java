@@ -20,8 +20,9 @@ import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.models.FlashcardSetWithFlashcards;
 import com.veljkobogdan.quizzardapp.data.repository.FlashcardSetRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityFlashcardSetsBinding;
+import com.veljkobogdan.quizzardapp.util.IFlashcardSetLoader;
 
-public class FlashcardSetsActivity extends AppCompatActivity {
+public class FlashcardSetsActivity extends AppCompatActivity implements IFlashcardSetLoader {
     ActivityFlashcardSetsBinding binding;
     RecyclerView recycler;
     FlashcardSetAdapter flashcardSetAdapter;
@@ -73,10 +74,11 @@ public class FlashcardSetsActivity extends AppCompatActivity {
 
         recycler.setAdapter(flashcardSetAdapter);
 
-        loadFlashcards();
+        loadFlashcardSets();
     }
 
-    private void loadFlashcards() {
+    @Override
+    public void loadFlashcardSets() {
         try {
             flashcardSetRepository.getFlashcardSetsWithFlashcards().observe(this, flashcardSets -> {
                 if (!flashcardSets.isEmpty()) {

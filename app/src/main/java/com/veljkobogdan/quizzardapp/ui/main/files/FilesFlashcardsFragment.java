@@ -1,49 +1,39 @@
 package com.veljkobogdan.quizzardapp.ui.main.files;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.veljkobogdan.quizzardapp.R;
+import com.veljkobogdan.quizzardapp.data.models.FlashcardSetWithFlashcards;
+import com.veljkobogdan.quizzardapp.data.repository.FlashcardSetRepository;
+import com.veljkobogdan.quizzardapp.ui.flashcards.FlashcardSetAdapter;
+import com.veljkobogdan.quizzardapp.ui.flashcards.ViewFlashcardSetActivity;
+import com.veljkobogdan.quizzardapp.util.IFlashcardSetLoader;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FilesFlashcardsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FilesFlashcardsFragment extends Fragment {
+public class FilesFlashcardsFragment extends Fragment implements IFlashcardSetLoader {
+    private RecyclerView recyclerView;
+    private TextView noFlashcardsText;
+    private FlashcardSetRepository flashcardSetRepository;
+    private FlashcardSetAdapter flashcardSetAdapter;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    public FilesFlashcardsFragment() {}
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public FilesFlashcardsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FilesFlashcardsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FilesFlashcardsFragment newInstance(String param1, String param2) {
+    public static FilesFlashcardsFragment newInstance() {
         FilesFlashcardsFragment fragment = new FilesFlashcardsFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,10 +41,35 @@ public class FilesFlashcardsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        recyclerView = requireView().findViewById(R.id.recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(
+                requireContext(), LinearLayoutManager.VERTICAL, false));
+
+        noFlashcardsText = requireView().findViewById(R.id.noFlashcardSetsText);
+        flashcardSetRepository = new FlashcardSetRepository(requireContext());
+        flashcardSetAdapter = new FlashcardSetAdapter(requireContext(), new FlashcardSetAdapter.OnFlashcardSetClickListener() {
+            @Override
+            public void onClickListener(FlashcardSetWithFlashcards flashcardSetWithFlashcards) {
+                try {
+                    Intent intent = new Intent(requireContext(), ViewFlashcardSetActivity.class);
+                    intent.putExtra(ViewFlashcardSetActivity.FLASHCARD_SET, flashcardSetWithFlashcards);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Log.e("ERROR", e.getMessage());
+                }
+            }
+        });
+
+        recyclerView.setAdapter(flashcardSetAdapter);
+
+        loadFlashcardSets();
     }
 
     @Override
@@ -62,5 +77,21 @@ public class FilesFlashcardsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_files_flashcards, container, false);
+    }
+
+    @Override
+    public void loadFlashcardSets() {
+        try {
+            flashcardSetRepository.getFlashcardSetsWithFlashcards().observe(requireActivity(), flashcardSets -> {
+                if (!flashcardSets.isEmpty()) {
+                    flashcardSetAdapter.updateFlashcardSet(flashcardSets);
+                    noFlashcardsText.setVisibility(View.GONE);
+                } else {
+                    noFlashcardsText.setVisibility(View.VISIBLE);
+                }
+            });
+        } catch (Exception e) {
+            Log.e("ERROR", e.getMessage());
+        }
     }
 }
