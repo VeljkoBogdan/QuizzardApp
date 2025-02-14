@@ -190,7 +190,7 @@ public class LearnFlashcardsActivity extends AppCompatActivity {
     }
 
     private void showResults() {
-
+        // TODO: Handle results after finishing learning
     }
 
     private class FlashcardGestureListener extends GestureDetector.SimpleOnGestureListener {
