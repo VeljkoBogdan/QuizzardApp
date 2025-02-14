@@ -1,5 +1,7 @@
 package com.veljkobogdan.quizzardapp.util;
 
 public interface IntentGroup {
-    public static final String FLASHCARD_SET_WITH_FLASHCARDS = "flashcardSetWithFlashcards";
+    String FLASHCARD_SET_WITH_FLASHCARDS = "flashcardSetWithFlashcards";
+    String NOTE = "note";
+    String FLASHCARD_SET = "flashcardSet";
 }

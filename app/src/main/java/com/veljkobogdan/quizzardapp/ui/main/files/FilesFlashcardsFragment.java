@@ -21,6 +21,7 @@ import com.veljkobogdan.quizzardapp.data.repository.FlashcardSetRepository;
 import com.veljkobogdan.quizzardapp.ui.sets.FlashcardSetAdapter;
 import com.veljkobogdan.quizzardapp.ui.sets.ViewFlashcardSetActivity;
 import com.veljkobogdan.quizzardapp.util.IFlashcardSetLoader;
+import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
 public class FilesFlashcardsFragment extends Fragment implements IFlashcardSetLoader {
     private RecyclerView recyclerView;
@@ -59,7 +60,7 @@ public class FilesFlashcardsFragment extends Fragment implements IFlashcardSetLo
             public void onClickListener(FlashcardSetWithFlashcards flashcardSetWithFlashcards) {
                 try {
                     Intent intent = new Intent(requireContext(), ViewFlashcardSetActivity.class);
-                    intent.putExtra(ViewFlashcardSetActivity.FLASHCARD_SET, flashcardSetWithFlashcards);
+                    intent.putExtra(IntentGroup.FLASHCARD_SET, flashcardSetWithFlashcards);
                     startActivity(intent);
                 } catch (Exception e) {
                     Log.e("ERROR", e.getMessage());

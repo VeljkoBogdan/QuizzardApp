@@ -20,6 +20,7 @@ import com.veljkobogdan.quizzardapp.data.repository.NoteRepository;
 import com.veljkobogdan.quizzardapp.ui.notes.NewNoteActivity;
 import com.veljkobogdan.quizzardapp.ui.notes.NoteAdapter;
 import com.veljkobogdan.quizzardapp.util.INoteLoader;
+import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
 public class FilesNotesFragment extends Fragment implements INoteLoader {
     private NoteRepository noteRepository;
@@ -55,7 +56,7 @@ public class FilesNotesFragment extends Fragment implements INoteLoader {
         noteAdapter = new NoteAdapter(requireContext(), note -> {
             try {
                 Intent intent = new Intent(requireContext(), NewNoteActivity.class);
-                intent.putExtra(NewNoteActivity.NOTE, note);
+                intent.putExtra(IntentGroup.NOTE, note);
                 startActivity(intent);
             } catch (Exception e) {
                 Log.e("ERROR", e.getMessage());

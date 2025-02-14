@@ -41,8 +41,6 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
     private TextView titleTextView;
     private Map<Long, Boolean> flipStates = new HashMap<>();
 
-    public static final String FLASHCARD_SET = "flashcardSet";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -165,7 +163,7 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
     private void getIntentContent() {
         try {
             flashcardSet = (FlashcardSetWithFlashcards) getIntent()
-                    .getSerializableExtra(FLASHCARD_SET);
+                    .getSerializableExtra(IntentGroup.FLASHCARD_SET);
         } catch (Exception e) {
             Log.e("ERROR", e.getMessage());
             finish();

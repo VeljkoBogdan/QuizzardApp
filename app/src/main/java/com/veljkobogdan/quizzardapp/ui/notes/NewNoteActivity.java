@@ -20,6 +20,7 @@ import com.veljkobogdan.quizzardapp.data.models.NoteWithTags;
 import com.veljkobogdan.quizzardapp.data.repository.NoteRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityNewNoteBinding;
 import com.veljkobogdan.quizzardapp.ui.tags.TagSelectionOverlay;
+import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -27,8 +28,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class NewNoteActivity extends AppCompatActivity {
-    public static final String NOTE = "note";
-
     TagSelectionOverlay tagSelectionOverlay;
     ActivityNewNoteBinding binding;
     NoteRepository noteRepository;
@@ -83,7 +82,7 @@ public class NewNoteActivity extends AppCompatActivity {
         try {
             Bundle extras = getIntent().getExtras();
             if (!(extras != null && extras.isEmpty())) {
-                this.note = (NoteWithTags) extras.getSerializable(NOTE);
+                this.note = (NoteWithTags) extras.getSerializable(IntentGroup.NOTE);
 
                 binding.title.setText(this.note.note.getTitle());
                 binding.content.setText(this.note.note.getContent());

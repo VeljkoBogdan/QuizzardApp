@@ -20,6 +20,7 @@ import com.veljkobogdan.quizzardapp.data.models.FlashcardSetWithFlashcards;
 import com.veljkobogdan.quizzardapp.data.repository.FlashcardSetRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityFlashcardSetsBinding;
 import com.veljkobogdan.quizzardapp.util.IFlashcardSetLoader;
+import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
 public class FlashcardSetsActivity extends AppCompatActivity implements IFlashcardSetLoader {
     ActivityFlashcardSetsBinding binding;
@@ -56,7 +57,7 @@ public class FlashcardSetsActivity extends AppCompatActivity implements IFlashca
             @Override
             public void onClickListener(FlashcardSetWithFlashcards flashcardSetWithFlashcards) {
                 Intent intent = new Intent(FlashcardSetsActivity.this, ViewFlashcardSetActivity.class);
-                intent.putExtra(ViewFlashcardSetActivity.FLASHCARD_SET, flashcardSetWithFlashcards);
+                intent.putExtra(IntentGroup.FLASHCARD_SET, flashcardSetWithFlashcards);
                 startActivity(intent);
             }
         });

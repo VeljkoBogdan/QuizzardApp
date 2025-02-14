@@ -23,6 +23,7 @@ import com.veljkobogdan.quizzardapp.data.models.NoteWithTags;
 import com.veljkobogdan.quizzardapp.data.repository.NoteRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityNotesBinding;
 import com.veljkobogdan.quizzardapp.util.INoteLoader;
+import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
 public class NotesActivity extends AppCompatActivity implements INoteLoader {
     ActivityNotesBinding binding;
@@ -66,7 +67,7 @@ public class NotesActivity extends AppCompatActivity implements INoteLoader {
         noteAdapter = new NoteAdapter(this, note -> {
             try {
                 Intent intent = new Intent(NotesActivity.this, NewNoteActivity.class);
-                intent.putExtra(NewNoteActivity.NOTE, note);
+                intent.putExtra(IntentGroup.NOTE, note);
                 startActivity(intent);
             } catch (Exception e) {
                 Log.e("ERROR", e.getMessage());
