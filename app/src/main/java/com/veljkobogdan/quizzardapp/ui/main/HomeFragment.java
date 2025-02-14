@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.veljkobogdan.quizzardapp.R;
-import com.veljkobogdan.quizzardapp.ui.flashcards.FlashcardSetsActivity;
+import com.veljkobogdan.quizzardapp.ui.sets.FlashcardSetsActivity;
 import com.veljkobogdan.quizzardapp.ui.notes.NotesActivity;
 
 public class HomeFragment extends Fragment {

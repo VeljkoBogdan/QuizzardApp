@@ -18,8 +18,8 @@ import android.widget.TextView;
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.models.FlashcardSetWithFlashcards;
 import com.veljkobogdan.quizzardapp.data.repository.FlashcardSetRepository;
-import com.veljkobogdan.quizzardapp.ui.flashcards.FlashcardSetAdapter;
-import com.veljkobogdan.quizzardapp.ui.flashcards.ViewFlashcardSetActivity;
+import com.veljkobogdan.quizzardapp.ui.sets.FlashcardSetAdapter;
+import com.veljkobogdan.quizzardapp.ui.sets.ViewFlashcardSetActivity;
 import com.veljkobogdan.quizzardapp.util.IFlashcardSetLoader;
 
 public class FilesFlashcardsFragment extends Fragment implements IFlashcardSetLoader {

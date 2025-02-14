@@ -1,4 +1,4 @@
-package com.veljkobogdan.quizzardapp.ui.flashcards;
+package com.veljkobogdan.quizzardapp.ui.sets;
 
 import android.content.Context;
 import android.util.Log;

@@ -1,4 +1,4 @@
-package com.veljkobogdan.quizzardapp.ui.flashcards;
+package com.veljkobogdan.quizzardapp.ui.sets;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

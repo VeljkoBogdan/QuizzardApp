@@ -1,8 +1,9 @@
-package com.veljkobogdan.quizzardapp.ui.flashcards;
+package com.veljkobogdan.quizzardapp.ui.sets;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,9 @@ import com.veljkobogdan.quizzardapp.data.database.entities.Flashcard;
 import com.veljkobogdan.quizzardapp.data.models.FlashcardSetWithFlashcards;
 import com.veljkobogdan.quizzardapp.data.repository.FlashcardRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityViewFlashcardSetBinding;
+import com.veljkobogdan.quizzardapp.ui.flashcards.FlashcardAdapter;
+import com.veljkobogdan.quizzardapp.ui.learn.LearnFlashcardsActivity;
+import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,6 +59,12 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
 
         getIntentContent();
         setLayoutContent();
+
+        learnButton.setOnClickListener(view -> {
+            Intent i = new Intent(ViewFlashcardSetActivity.this, LearnFlashcardsActivity.class);
+            i.putExtra(IntentGroup.FLASHCARD_SET_WITH_FLASHCARDS, flashcardSet);
+            startActivity(i);
+        });
 
         flashcardRepository = new FlashcardRepository(this);
 

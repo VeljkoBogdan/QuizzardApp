@@ -2,7 +2,6 @@ package com.veljkobogdan.quizzardapp.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.databinding.ActivityMainBinding;
-import com.veljkobogdan.quizzardapp.ui.flashcards.AddFlashcardSetActivity;
+import com.veljkobogdan.quizzardapp.ui.sets.AddFlashcardSetActivity;
 import com.veljkobogdan.quizzardapp.ui.notes.NewNoteActivity;
 
 public class MainActivity extends AppCompatActivity {

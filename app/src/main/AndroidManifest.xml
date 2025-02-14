@@ -13,13 +13,19 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".ui.flashcards.ViewFlashcardSetActivity"
+            android:name=".ui.learn.LearnFlashcardsActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.sets.ViewFlashcardSetActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.flashcards.AddFlashcardSetActivity"
+            android:name=".ui.notes.ViewNoteActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.flashcards.FlashcardSetsActivity"
+            android:name=".ui.sets.AddFlashcardSetActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.sets.FlashcardSetsActivity"
             android:exported="false" />
         <activity
             android:name=".ui.notes.NewNoteActivity"
