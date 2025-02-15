@@ -23,8 +23,8 @@ import java.util.List;
 public class FlashcardSetAdapter extends RecyclerView.Adapter<FlashcardSetAdapter.FlashcardSetViewHolder> {
     public List<FlashcardSetWithFlashcards> flashcardSets = new ArrayList<>();
     public OnFlashcardSetClickListener onFlashcardSetClickListener;
-    private Context context;
-    private FlashcardSetRepository flashcardSetRepository;
+    private final Context context;
+    private final FlashcardSetRepository flashcardSetRepository;
 
     public FlashcardSetAdapter(Context context, OnFlashcardSetClickListener onFlashcardSetClickListener) {
         this.context = context;

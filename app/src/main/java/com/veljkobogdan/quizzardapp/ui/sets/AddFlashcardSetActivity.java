@@ -29,7 +29,7 @@ public class AddFlashcardSetActivity extends AppCompatActivity {
     private EditText title;
     private LinearLayout flashcardLayout;
     private Button saveButton, addFlashcardButton;
-    private List<Flashcard> flashcards = new ArrayList<>();
+    private final List<Flashcard> flashcards = new ArrayList<>();
     private FlashcardSetRepository setRepository;
 
     @Override

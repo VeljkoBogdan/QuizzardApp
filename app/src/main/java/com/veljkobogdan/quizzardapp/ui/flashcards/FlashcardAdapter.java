@@ -16,7 +16,7 @@ import java.util.List;
 /** @noinspection ClassEscapesDefinedScope*/
 public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.FlashcardAdapterViewHolder> {
     private List<Flashcard> flashcards;
-    private OnFlashcardClickListener onFlashcardClickListener;
+    private final OnFlashcardClickListener onFlashcardClickListener;
 
     public FlashcardAdapter(OnFlashcardClickListener onFlashcardClickListener) {
         this.onFlashcardClickListener = onFlashcardClickListener;
@@ -47,7 +47,8 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
     }
 
     class FlashcardAdapterViewHolder extends RecyclerView.ViewHolder {
-        private TextView flashcardTerm, flashcardDefinition;
+        private final TextView flashcardTerm;
+        private final TextView flashcardDefinition;
 
         public FlashcardAdapterViewHolder(@NonNull View itemView) {
             super(itemView);

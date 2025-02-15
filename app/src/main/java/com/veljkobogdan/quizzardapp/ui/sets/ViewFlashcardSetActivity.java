@@ -39,7 +39,7 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
     private FlashcardSetWithFlashcards flashcardSet;
     private Button learnButton, flashcardsButton;
     private TextView titleTextView;
-    private Map<Long, Boolean> flipStates = new HashMap<>();
+    private final Map<Long, Boolean> flipStates = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
