@@ -13,8 +13,11 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".ui.learn.LearnResultsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.learn.LearnFlashcardsActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ui.sets.ViewFlashcardSetActivity"
             android:exported="false" />

@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -28,6 +29,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.database.entities.Flashcard;
 import com.veljkobogdan.quizzardapp.data.models.FlashcardSetWithFlashcards;
+import com.veljkobogdan.quizzardapp.data.models.LearnResult;
 import com.veljkobogdan.quizzardapp.databinding.ActivityLearnFlashcardsBinding;
 import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
@@ -190,7 +192,11 @@ public class LearnFlashcardsActivity extends AppCompatActivity {
     }
 
     private void showResults() {
-        // TODO: Handle results after finishing learning
+        Intent intent = new Intent(LearnFlashcardsActivity.this, LearnResultsActivity.class);
+        float percentage = knownCount * 1.0f / flashcards.size() * 100;
+        intent.putExtra(IntentGroup.LEARN_RESULT, new LearnResult(knownCount, flashcards.size(), percentage));
+        startActivity(intent);
+        finish();
     }
 
     private class FlashcardGestureListener extends GestureDetector.SimpleOnGestureListener {
