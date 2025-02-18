@@ -40,4 +40,10 @@ public interface NoteDao {
 
     @Query("DELETE FROM NoteTagCrossRef WHERE noteId = :noteId")
     void deleteNoteTagCrossRefs(long noteId);
+
+    @Query("DELETE FROM note")
+    void deleteAll();
+
+    @Query("DELETE FROM notetagcrossref")
+    void deleteAllReferences();
 }

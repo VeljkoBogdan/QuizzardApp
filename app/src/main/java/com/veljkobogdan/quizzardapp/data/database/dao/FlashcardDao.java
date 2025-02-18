@@ -27,4 +27,7 @@ public interface FlashcardDao {
 
     @Delete
     void delete(Flashcard flashcard);
+
+    @Query("DELETE FROM flashcard")
+    void deleteAll();
 }

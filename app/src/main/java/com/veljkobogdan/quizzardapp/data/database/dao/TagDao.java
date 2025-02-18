@@ -30,4 +30,7 @@ public interface TagDao {
 
     @Update
     void update(Tag tag);
+
+    @Query("DELETE FROM tag")
+    void deleteAll();
 }
