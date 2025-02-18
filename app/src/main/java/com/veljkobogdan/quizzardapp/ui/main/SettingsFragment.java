@@ -1,5 +1,6 @@
 package com.veljkobogdan.quizzardapp.ui.main;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,14 +15,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.veljkobogdan.quizzardapp.R;
+import com.veljkobogdan.quizzardapp.data.database.AppDatabase;
 import com.veljkobogdan.quizzardapp.util.ThemeManager;
 
 public class SettingsFragment extends Fragment {
     private Spinner themeSpinner;
     private final String[] values = new String[]{"System Theme", "Night", "Day"};
+    private Button deleteAllButton;
 
     public SettingsFragment() {}
 
@@ -34,6 +39,30 @@ public class SettingsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        initThemeSpinner(view);
+
+        deleteAllButton = view.findViewById(R.id.deleteAllData);
+        deleteAllButton.setOnClickListener(v -> new AlertDialog.Builder(requireContext())
+                .setTitle("Confirm Deletion")
+                .setMessage("Are you sure you want to delete all data?\nThis CAN NOT be undone!")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    new Thread(() -> {
+                        AppDatabase db = AppDatabase.getInstance(requireContext());
+                        db.tagDao().deleteAll();
+                        db.noteDao().deleteAll();
+                        db.noteDao().deleteAllReferences();
+                        db.flashcardDao().deleteAll();
+                        db.flashcardSetDao().deleteAll();
+                        db.flashcardSetDao().deleteAllReferences();
+                    }).start();
+                    Toast.makeText(requireContext(), "Database has been cleared!", Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("No", null)
+                .show()
+        );
+    }
+
+    private void initThemeSpinner(@NonNull View view) {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(),
                 androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, values);
 
