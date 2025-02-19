@@ -1,5 +1,6 @@
 package com.veljkobogdan.quizzardapp.ui.main;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,13 +11,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.veljkobogdan.quizzardapp.R;
+import com.veljkobogdan.quizzardapp.service.StreakService;
 import com.veljkobogdan.quizzardapp.ui.sets.FlashcardSetsActivity;
 import com.veljkobogdan.quizzardapp.ui.notes.NotesActivity;
 
 public class HomeFragment extends Fragment {
+    private StreakService streakService;
+    private TextView streakText;
 
     public HomeFragment() {}
 
@@ -31,9 +36,17 @@ public class HomeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        streakService = new StreakService(requireContext());
+        streakService.updateStreak();
+        int streak = streakService.getCounterOfConsecutiveDays();
+
+        streakText = view.findViewById(R.id.streak);
+        streakText.setText(Integer.toString(streak));
 
         // TEMP
         view.findViewById(R.id.buttonNotes).setOnClickListener(item -> {

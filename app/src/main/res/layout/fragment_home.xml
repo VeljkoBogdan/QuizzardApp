@@ -3,9 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.HomeFragment">
-
-    <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,17 +12,64 @@
         android:orientation="vertical"
         >
 
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            app:cardCornerRadius="18dp"
+            android:backgroundTint="@color/md_theme_primary"
+            app:strokeWidth="3dp"
+            app:strokeColor="@color/md_theme_primaryContainer"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="8dp"
+                >
+
+                <TextView
+                    android:text="Your streak:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/md_theme_onPrimary"
+                    android:gravity="center"
+                    />
+
+                <TextView
+                    android:id="@+id/streak"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:text="0"
+                    />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
         <Button
             android:id="@+id/buttonNotes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="All Notes" />
+            android:text="All Notes"
+            android:backgroundTint="@color/md_theme_secondary"
+            android:textColor="@color/md_theme_onSecondary"
+            />
 
         <Button
             android:id="@+id/buttonFlashcardSets"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="All Flashcard Sets" />
+            android:text="All Flashcard Sets"
+            android:backgroundTint="@color/md_theme_secondary"
+            android:textColor="@color/md_theme_onSecondary"
+            />
 
     </LinearLayout>
 

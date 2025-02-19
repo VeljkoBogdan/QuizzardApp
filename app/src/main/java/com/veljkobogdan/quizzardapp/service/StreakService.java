@@ -22,11 +22,9 @@ public class StreakService {
         this.thisDay = calendar.get(Calendar.DAY_OF_YEAR);
         this.lastDay = sharedPreferences.getInt(DATE_KEY, 0);
         this.counterOfConsecutiveDays = sharedPreferences.getInt(COUNTER_KEY, 0);
-
-        updateStreak();
     }
 
-    private void updateStreak() {
+    public void updateStreak() {
         if (lastDay == thisDay - 1) {
             counterOfConsecutiveDays += 1;
             sharedPreferences
