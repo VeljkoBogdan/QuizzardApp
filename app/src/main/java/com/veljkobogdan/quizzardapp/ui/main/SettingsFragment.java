@@ -40,7 +40,10 @@ public class SettingsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initThemeSpinner(view);
+        initDataDeletionButton(view);
+    }
 
+    private void initDataDeletionButton(@NonNull View view) {
         deleteAllButton = view.findViewById(R.id.deleteAllData);
         deleteAllButton.setOnClickListener(v -> new AlertDialog.Builder(requireContext())
                 .setTitle("Confirm Deletion")
