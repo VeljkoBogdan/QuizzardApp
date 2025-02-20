@@ -25,6 +25,8 @@ public class StreakService {
     }
 
     public void updateStreak() {
+        if (lastDay == thisDay) return;
+
         if (lastDay == thisDay - 1) {
             counterOfConsecutiveDays += 1;
             sharedPreferences
@@ -32,7 +34,7 @@ public class StreakService {
                     .putInt(DATE_KEY, thisDay)
                     .putInt(COUNTER_KEY, counterOfConsecutiveDays)
                     .apply();
-        } else {
+        } else if (lastDay < thisDay -1) {
             sharedPreferences
                     .edit()
                     .putInt(DATE_KEY, thisDay)
