@@ -9,12 +9,14 @@ import androidx.room.RoomDatabase;
 import com.veljkobogdan.quizzardapp.data.database.dao.FlashcardDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.FlashcardSetDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.NoteDao;
+import com.veljkobogdan.quizzardapp.data.database.dao.QuestionDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.TagDao;
 import com.veljkobogdan.quizzardapp.data.database.entities.Flashcard;
 import com.veljkobogdan.quizzardapp.data.database.entities.FlashcardSet;
 import com.veljkobogdan.quizzardapp.data.database.entities.FlashcardSetCrossRef;
 import com.veljkobogdan.quizzardapp.data.database.entities.Note;
 import com.veljkobogdan.quizzardapp.data.database.entities.NoteTagCrossRef;
+import com.veljkobogdan.quizzardapp.data.database.entities.Question;
 import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
 
 @Database(entities = {
@@ -23,8 +25,9 @@ import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
         NoteTagCrossRef.class,
         Flashcard.class,
         FlashcardSet.class,
-        FlashcardSetCrossRef.class
-}, version = 15)
+        FlashcardSetCrossRef.class,
+        Question.class
+}, version = 16)
 public abstract class AppDatabase extends RoomDatabase {
     public static AppDatabase db;
     public static String name = "quizzard";
@@ -43,4 +46,5 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract TagDao tagDao();
     public abstract FlashcardDao flashcardDao();
     public abstract FlashcardSetDao flashcardSetDao();
+    public abstract QuestionDao questionDao();
 }

@@ -57,6 +57,7 @@ public class SettingsFragment extends Fragment {
                         db.flashcardDao().deleteAll();
                         db.flashcardSetDao().deleteAll();
                         db.flashcardSetDao().deleteAllReferences();
+                        db.questionDao().deleteAll();
                     }).start();
                     Toast.makeText(requireContext(), "Database has been cleared!", Toast.LENGTH_SHORT).show();
                 })
