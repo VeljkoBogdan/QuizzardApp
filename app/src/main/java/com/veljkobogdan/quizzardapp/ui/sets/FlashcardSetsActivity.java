@@ -53,13 +53,10 @@ public class FlashcardSetsActivity extends AppCompatActivity implements IFlashca
         recycler.setLayoutManager(new LinearLayoutManager(
                 this, LinearLayoutManager.VERTICAL, false));
 
-        flashcardSetAdapter = new FlashcardSetAdapter(this, new FlashcardSetAdapter.OnFlashcardSetClickListener() {
-            @Override
-            public void onClickListener(FlashcardSetWithFlashcards flashcardSetWithFlashcards) {
-                Intent intent = new Intent(FlashcardSetsActivity.this, ViewFlashcardSetActivity.class);
-                intent.putExtra(IntentGroup.FLASHCARD_SET, flashcardSetWithFlashcards);
-                startActivity(intent);
-            }
+        flashcardSetAdapter = new FlashcardSetAdapter(this, flashcardSetWithFlashcards -> {
+            Intent intent = new Intent(FlashcardSetsActivity.this, ViewFlashcardSetActivity.class);
+            intent.putExtra(IntentGroup.FLASHCARD_SET, flashcardSetWithFlashcards);
+            startActivity(intent);
         });
 
         floatingActionButton = binding.addButton;
