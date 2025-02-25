@@ -6,6 +6,7 @@ import androidx.room.Junction;
 import androidx.room.Relation;
 
 import com.veljkobogdan.quizzardapp.data.database.entities.Exam;
+import com.veljkobogdan.quizzardapp.data.database.entities.ExamQuestionsCrossRef;
 import com.veljkobogdan.quizzardapp.data.database.entities.Question;
 
 import java.io.Serializable;
@@ -18,7 +19,7 @@ public class ExamWithQuestions implements Serializable {
     @Relation(
             parentColumn = "examId",
             entityColumn = "questionId",
-            associateBy = @Junction(ExamWithQuestions.class)
+            associateBy = @Junction(ExamQuestionsCrossRef.class)
     )
     public List<Question> questionList;
 

@@ -32,7 +32,7 @@ import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
         Question.class,
         Exam.class,
         ExamQuestionsCrossRef.class
-}, version = 17)
+}, version = 18)
 public abstract class AppDatabase extends RoomDatabase {
     public static AppDatabase db;
     public static String name = "quizzard";

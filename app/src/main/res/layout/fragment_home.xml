@@ -71,6 +71,15 @@
             android:textColor="@color/md_theme_onSecondary"
             />
 
+        <Button
+            android:id="@+id/buttonExams"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="All Exams"
+            android:backgroundTint="@color/md_theme_secondary"
+            android:textColor="@color/md_theme_onSecondary"
+            />
+
     </LinearLayout>
 
 

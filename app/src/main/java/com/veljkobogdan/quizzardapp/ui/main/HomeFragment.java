@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.service.StreakService;
+import com.veljkobogdan.quizzardapp.ui.exam.ExamsActivity;
 import com.veljkobogdan.quizzardapp.ui.sets.FlashcardSetsActivity;
 import com.veljkobogdan.quizzardapp.ui.notes.NotesActivity;
 
@@ -64,6 +66,15 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             } catch (Exception e) {
                 Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        view.findViewById(R.id.buttonExams).setOnClickListener(item -> {
+            try {
+                Intent intent = new Intent(requireContext(), ExamsActivity.class);
+                startActivity(intent);
+            } catch (Exception e) {
+                Log.e("ERROR", e.getMessage());
             }
         });
     }
