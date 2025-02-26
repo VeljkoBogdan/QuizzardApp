@@ -1,5 +1,6 @@
 package com.veljkobogdan.quizzardapp.ui.exam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -46,7 +47,12 @@ public class ExamsActivity extends AppCompatActivity {
 
         addButton = binding.addButton;
         addButton.setOnClickListener(view -> {
-            // TODO: Handle on Add button click
+            try {
+                Intent intent = new Intent(this, AddExamActivity.class);
+                startActivity(intent);
+            } catch (Exception e) {
+                Log.e("ERROR", e.getMessage());
+            }
         });
 
         examAdapter = new ExamAdapter(this, examWithQuestions -> {
