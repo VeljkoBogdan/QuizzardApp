@@ -28,4 +28,8 @@
     <string name="exam">Exam</string>
     <string name="tap_the_card_to_flip_it">Tap the card to flip it</string>
     <string name="no_exams_found">No Exams found\nPress the add button to add one!</string>
+    <string name="question">Question</string>
+    <string name="enter_question">Enter Question</string>
+    <string name="answer">Answer</string>
+    <string name="enter_answer">Enter Answer</string>
 </resources>
