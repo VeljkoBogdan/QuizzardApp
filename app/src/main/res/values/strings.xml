@@ -32,4 +32,6 @@
     <string name="enter_question">Enter Question</string>
     <string name="answer">Answer</string>
     <string name="enter_answer">Enter Answer</string>
+    <string name="questions">Questions</string>
+    <string name="take_test">Take Exam</string>
 </resources>
