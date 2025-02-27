@@ -17,6 +17,7 @@ import com.veljkobogdan.quizzardapp.data.repository.ExamRepository;
 import java.util.ArrayList;
 import java.util.List;
 
+/** @noinspection ClassEscapesDefinedScope*/
 public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ExamViewHolder> {
     private final Context context;
     private final List<ExamWithQuestions> exams = new ArrayList<>();
