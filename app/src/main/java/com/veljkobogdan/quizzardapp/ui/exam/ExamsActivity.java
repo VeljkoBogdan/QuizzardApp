@@ -18,6 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.repository.ExamRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityExamsBinding;
+import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
 public class ExamsActivity extends AppCompatActivity {
     private ActivityExamsBinding binding;
@@ -56,7 +57,9 @@ public class ExamsActivity extends AppCompatActivity {
         });
 
         examAdapter = new ExamAdapter(this, examWithQuestions -> {
-           // TODO: Handle on Exam click
+           Intent intent = new Intent(this, ViewExamActivity.class);
+           intent.putExtra(IntentGroup.EXAM_WITH_QUESTIONS, examWithQuestions);
+           startActivity(intent);
         });
         recyclerView = binding.recycler;
         recyclerView.setLayoutManager(new LinearLayoutManager(this,
