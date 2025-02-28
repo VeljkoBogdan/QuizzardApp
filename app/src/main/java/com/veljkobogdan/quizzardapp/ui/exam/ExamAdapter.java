@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -98,6 +99,20 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ExamViewHolder
 
             // Handle long press
             itemView.setOnLongClickListener(view -> {
+                PopupMenu popupMenu = new PopupMenu(itemView.getContext(), itemView);
+                popupMenu.getMenuInflater().inflate(R.menu.exam_popup_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(menuItem -> {
+                    if (menuItem.getItemId() == R.id.delete) {
+                        int position = getAdapterPosition();
+                        ExamWithQuestions examToDelete = exams.get(position);
+                        examRepository.deleteExamWithQuestions(examToDelete);
+                        exams.remove(examToDelete);
+                        notifyItemRemoved(position);
+                        return true;
+                    }
+                    return false;
+                });
+                popupMenu.show();
                 return true;
             });
         }
