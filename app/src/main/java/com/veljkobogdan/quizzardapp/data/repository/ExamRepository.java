@@ -57,7 +57,7 @@ public class ExamRepository {
             long examId = examDao.insert(exam);
             for (Question question : questions) {
                 long questionId = questionDao.insert(question);
-                examDao.insertExamQuestionCrossRef(new ExamQuestionsCrossRef(examId, questionId));
+                examDao.insertExamQuestionCrossRef(new ExamQuestionsCrossRef(questionId, examId));
             }
         });
     }
