@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.databinding.ActivityMainBinding;
+import com.veljkobogdan.quizzardapp.ui.exam.AddExamActivity;
 import com.veljkobogdan.quizzardapp.ui.sets.AddFlashcardSetActivity;
 import com.veljkobogdan.quizzardapp.ui.notes.NewNoteActivity;
 import com.veljkobogdan.quizzardapp.util.ThemeManager;
@@ -74,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, AddFlashcardSetActivity.class);
                     startActivity(intent);
                 } else if (item.getItemId() == R.id.addExamButton) {
-                    // TODO: implement exam intent
+                    Intent intent = new Intent(MainActivity.this, AddExamActivity.class);
+                    startActivity(intent);
                 }
 
                 return false;
