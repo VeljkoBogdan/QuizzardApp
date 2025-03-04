@@ -2,7 +2,10 @@ package com.veljkobogdan.quizzardapp.ui.exam;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -11,9 +14,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.veljkobogdan.quizzardapp.R;
+import com.veljkobogdan.quizzardapp.data.database.entities.Question;
 import com.veljkobogdan.quizzardapp.data.models.ExamWithQuestions;
 import com.veljkobogdan.quizzardapp.databinding.ActivityViewExamBinding;
 import com.veljkobogdan.quizzardapp.util.IntentGroup;
@@ -21,7 +24,7 @@ import com.veljkobogdan.quizzardapp.util.IntentGroup;
 public class ViewExamActivity extends AppCompatActivity {
     private ActivityViewExamBinding binding;
     private ExamWithQuestions exam;
-    private RecyclerView recyclerView;
+    private LinearLayout linearLayout;
     private TextView title;
     private Button questionsButton, takeExamButton;
 
@@ -49,11 +52,34 @@ public class ViewExamActivity extends AppCompatActivity {
             finish();
         }
 
-        recyclerView = binding.recycler;
+        linearLayout = binding.questionLayout;
         title = binding.examTitle;
         questionsButton = binding.questionsButton;
         takeExamButton = binding.takeExamButton;
 
         title.setText(exam.exam.getTitle());
+
+        setupQuestionRecycler();
+    }
+
+    private void setupQuestionRecycler() {
+        for (Question question : exam.questionList) {
+            String questionText = question.getQuestion();
+            String answerText = question.getAnswer();
+
+            View item = LayoutInflater.from(this)
+                    .inflate(R.layout.item_question, linearLayout, false);
+
+            TextView questionView = item.findViewById(R.id.questionQuestion);
+            TextView answerView = item.findViewById(R.id.questionAnswer);
+
+            questionView.setText(questionText);
+            answerView.setText(answerText);
+
+            item.setOnClickListener(view -> {
+                // TODO: Add an on click listener to the questions inside exam
+            });
+            linearLayout.addView(item);
+        }
     }
 }
