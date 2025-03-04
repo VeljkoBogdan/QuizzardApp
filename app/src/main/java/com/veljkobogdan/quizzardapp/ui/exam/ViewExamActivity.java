@@ -43,7 +43,7 @@ public class ViewExamActivity extends AppCompatActivity {
         toolbar.setTitle("Exam");
         setSupportActionBar(toolbar);
 
-        exam = getIntent().getParcelableExtra(IntentGroup.EXAM_WITH_QUESTIONS);
+        exam = (ExamWithQuestions) getIntent().getSerializableExtra(IntentGroup.EXAM_WITH_QUESTIONS);
         if (exam == null) {
             Log.e("ERROR", "Exam cannot be null");
             finish();

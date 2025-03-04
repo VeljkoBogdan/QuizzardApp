@@ -111,7 +111,8 @@ public class AddExamActivity extends AppCompatActivity {
             return;
         }
 
-        examRepository.insertExamWithQuestions(new Exam(titleText), questions);
+        Exam exam = new Exam(titleText);
+        examRepository.insertExamWithQuestions(exam, questions);
 
         finish();
     }
