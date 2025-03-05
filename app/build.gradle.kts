@@ -46,6 +46,12 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation(libs.flexbox)
 
+    // The view calendar library for Android
+    implementation("com.kizitonwose.calendar:view:2.6.2")
+
+    // The compose calendar library for Android
+    implementation("com.kizitonwose.calendar:compose:2.6.2")
+
     implementation(libs.room.runtime)
     annotationProcessor(libs.room.compiler)
 }
