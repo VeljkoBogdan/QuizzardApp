@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(new FilesFragment());
             } else if (item.getItemId() == R.id.settings) {
                 replaceFragment(new SettingsFragment());
+            } else if (item.getItemId() == R.id.calendar) {
+                replaceFragment(new CalendarFragment());
             }
 
             return true;
