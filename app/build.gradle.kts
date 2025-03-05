@@ -47,10 +47,10 @@ dependencies {
     implementation(libs.flexbox)
 
     // The view calendar library for Android
-    implementation("com.kizitonwose.calendar:view:2.6.2")
+    implementation("com.kizitonwose.calendar:view:2.6.1")
 
     // The compose calendar library for Android
-    implementation("com.kizitonwose.calendar:compose:2.6.2")
+    implementation("com.kizitonwose.calendar:compose:2.6.1")
 
     implementation(libs.room.runtime)
     annotationProcessor(libs.room.compiler)
