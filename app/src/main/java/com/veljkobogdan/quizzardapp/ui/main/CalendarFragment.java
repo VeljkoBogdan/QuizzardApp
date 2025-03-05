@@ -11,16 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.kizitonwose.calendar.core.CalendarDay;
+import com.kizitonwose.calendar.core.DayPosition;
 import com.kizitonwose.calendar.view.CalendarView;
 import com.kizitonwose.calendar.view.MonthDayBinder;
 import com.kizitonwose.calendar.view.ViewContainer;
 import com.veljkobogdan.quizzardapp.R;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.temporal.WeekFields;
-import java.util.Calendar;
 import java.util.Locale;
 
 public class CalendarFragment extends Fragment {
@@ -31,7 +33,6 @@ public class CalendarFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -43,6 +44,22 @@ public class CalendarFragment extends Fragment {
             @Override
             public void bind(@NonNull DayViewContainer container, CalendarDay calendarDay) {
                 container.calendarDayText.setText(String.valueOf(calendarDay.getDate().getDayOfMonth()));
+                if (calendarDay.getPosition() == DayPosition.MonthDate) {
+                    container.calendarDayText.setTextColor(getResources()
+                            .getColor(R.color.md_theme_onSurface, requireActivity().getTheme()));
+                } else {
+                    container.calendarDayText.setTextColor(getResources()
+                            .getColor(R.color.md_theme_inverseOnSurface, requireActivity().getTheme()));
+                    container.calendarDayCard.setStrokeColor(getResources()
+                            .getColor(R.color.md_theme_inverseOnSurface, requireActivity().getTheme()));
+                }
+
+                if (calendarDay.getDate().isEqual(LocalDate.now())) {
+                    container.calendarDayText.setTextColor(getResources()
+                            .getColor(R.color.md_theme_onSurface, requireActivity().getTheme()));
+                    container.calendarDayCard.setStrokeColor(getResources()
+                            .getColor(R.color.md_theme_onSurface, requireActivity().getTheme()));
+                }
             }
 
             @NonNull
@@ -54,8 +71,8 @@ public class CalendarFragment extends Fragment {
         });
 
         YearMonth currentMonth = YearMonth.now();
-        YearMonth startMonth = currentMonth.minusMonths(1);
-        YearMonth endMonth = currentMonth.plusMonths(1);
+        YearMonth startMonth = currentMonth.minusMonths(32);
+        YearMonth endMonth = currentMonth.plusMonths(32);
         DayOfWeek firstDayOfWeek = WeekFields.of(Locale.getDefault()).getFirstDayOfWeek();
         calendarView.setup(startMonth, endMonth, firstDayOfWeek);
         calendarView.scrollToMonth(currentMonth);
@@ -68,12 +85,14 @@ public class CalendarFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_calendar, container, false);
     }
 
-    class DayViewContainer extends ViewContainer {
+    static class DayViewContainer extends ViewContainer {
         TextView calendarDayText;
+        MaterialCardView calendarDayCard;
 
         public DayViewContainer(View view) {
             super(view);
             calendarDayText = view.findViewById(R.id.calendarDayText);
+            calendarDayCard = view.findViewById(R.id.calendarDayCard);
         }
     }
 }
