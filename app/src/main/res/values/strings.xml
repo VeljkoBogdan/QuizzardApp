@@ -34,4 +34,5 @@
     <string name="enter_answer">Enter Answer</string>
     <string name="questions">Questions</string>
     <string name="take_test">Take Exam</string>
+    <string name="calendar">Calendar</string>
 </resources>
