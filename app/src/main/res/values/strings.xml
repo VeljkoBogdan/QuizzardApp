@@ -35,4 +35,11 @@
     <string name="questions">Questions</string>
     <string name="take_test">Take Exam</string>
     <string name="calendar">Calendar</string>
+    <string name="sun">Sun</string>
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
 </resources>
