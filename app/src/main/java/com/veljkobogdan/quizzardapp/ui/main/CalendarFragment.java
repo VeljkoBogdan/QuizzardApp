@@ -1,6 +1,5 @@
 package com.veljkobogdan.quizzardapp.ui.main;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,8 +23,6 @@ import com.veljkobogdan.quizzardapp.R;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
-import java.time.temporal.WeekFields;
-import java.util.Locale;
 
 public class CalendarFragment extends Fragment {
     private CalendarView calendarView;
@@ -48,7 +45,14 @@ public class CalendarFragment extends Fragment {
         calendarView.setDayBinder(new MonthDayBinder<DayViewContainer>() {
             @Override
             public void bind(@NonNull DayViewContainer container, CalendarDay calendarDay) {
-                container.calendarDayText.setText(String.valueOf(calendarDay.getDate().getDayOfMonth()));
+                LocalDate date = calendarDay.getDate();
+                container.calendarDayText.setText(String.valueOf(date.getDayOfMonth()));
+
+                // Reset color
+                container.calendarDayText.setTextColor(getResources()
+                        .getColor(R.color.md_theme_onSurface, requireActivity().getTheme()));
+                container.calendarDayCard.setStrokeColor(getResources()
+                        .getColor(R.color.md_theme_surfaceVariant, requireActivity().getTheme()));
 
                 // Get out and in dates, and dim their cards
                 if (calendarDay.getPosition() == DayPosition.MonthDate) {
@@ -56,13 +60,14 @@ public class CalendarFragment extends Fragment {
                             .getColor(R.color.md_theme_onSurface, requireActivity().getTheme()));
                 } else {
                     container.calendarDayText.setTextColor(getResources()
-                            .getColor(R.color.md_theme_inverseOnSurface, requireActivity().getTheme()));
+                            .getColor(R.color.md_theme_surfaceContainerHigh, requireActivity().getTheme()));
                     container.calendarDayCard.setStrokeColor(getResources()
-                            .getColor(R.color.md_theme_inverseOnSurface, requireActivity().getTheme()));
+                            .getColor(R.color.md_theme_surfaceContainerHigh, requireActivity().getTheme()));
                 }
 
+
                 // Highlight the current day
-                if (calendarDay.getDate().isEqual(LocalDate.now())) {
+                if (date.isEqual(LocalDate.now())) {
                     container.calendarDayText.setTextColor(getResources()
                             .getColor(R.color.md_theme_onSurface, requireActivity().getTheme()));
                     container.calendarDayCard.setStrokeColor(getResources()
