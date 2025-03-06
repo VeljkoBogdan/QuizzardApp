@@ -14,9 +14,11 @@ import android.widget.TextView;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.material.card.MaterialCardView;
 import com.kizitonwose.calendar.core.CalendarDay;
+import com.kizitonwose.calendar.core.CalendarMonth;
 import com.kizitonwose.calendar.core.DayPosition;
 import com.kizitonwose.calendar.view.CalendarView;
 import com.kizitonwose.calendar.view.MonthDayBinder;
+import com.kizitonwose.calendar.view.MonthHeaderFooterBinder;
 import com.kizitonwose.calendar.view.ViewContainer;
 import com.veljkobogdan.quizzardapp.R;
 
@@ -83,6 +85,20 @@ public class CalendarFragment extends Fragment {
 
         });
 
+        calendarView.setMonthHeaderBinder(new MonthHeaderFooterBinder<MonthHeaderContainer>() {
+            @Override
+            public void bind(@NonNull MonthHeaderContainer container, CalendarMonth calendarMonth) {
+                container.calendarMonthText
+                        .setText(String.valueOf(calendarMonth.getYearMonth().getMonth()));
+            }
+
+            @NonNull
+            @Override
+            public MonthHeaderContainer create(@NonNull View view) {
+                return new MonthHeaderContainer(view);
+            }
+        });
+
         YearMonth currentMonth = YearMonth.now();
         YearMonth startMonth = currentMonth.minusMonths(32);
         YearMonth endMonth = currentMonth.plusMonths(32);
@@ -106,6 +122,15 @@ public class CalendarFragment extends Fragment {
             super(view);
             calendarDayText = view.findViewById(R.id.calendarDayText);
             calendarDayCard = view.findViewById(R.id.calendarDayCard);
+        }
+    }
+
+    static class MonthHeaderContainer extends ViewContainer {
+        TextView calendarMonthText;
+
+        public MonthHeaderContainer(@NonNull View view) {
+            super(view);
+            calendarMonthText = view.findViewById(R.id.calendarMonthHeaderText);
         }
     }
 }
