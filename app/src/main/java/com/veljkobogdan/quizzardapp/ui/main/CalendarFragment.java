@@ -1,5 +1,6 @@
 package com.veljkobogdan.quizzardapp.ui.main;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.material.card.MaterialCardView;
 import com.kizitonwose.calendar.core.CalendarDay;
 import com.kizitonwose.calendar.core.DayPosition;
@@ -27,6 +29,7 @@ import java.util.Locale;
 
 public class CalendarFragment extends Fragment {
     private CalendarView calendarView;
+    private FlexboxLayout monthGrid;
 
     public CalendarFragment() {}
 
@@ -40,10 +43,14 @@ public class CalendarFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         calendarView = requireView().findViewById(R.id.calendarView);
+        monthGrid = requireView().findViewById(R.id.monthGrid);
+
         calendarView.setDayBinder(new MonthDayBinder<DayViewContainer>() {
             @Override
             public void bind(@NonNull DayViewContainer container, CalendarDay calendarDay) {
                 container.calendarDayText.setText(String.valueOf(calendarDay.getDate().getDayOfMonth()));
+
+                // Get out and in dates, and dim their cards
                 if (calendarDay.getPosition() == DayPosition.MonthDate) {
                     container.calendarDayText.setTextColor(getResources()
                             .getColor(R.color.md_theme_onSurface, requireActivity().getTheme()));
@@ -54,6 +61,7 @@ public class CalendarFragment extends Fragment {
                             .getColor(R.color.md_theme_inverseOnSurface, requireActivity().getTheme()));
                 }
 
+                // Highlight the current day
                 if (calendarDay.getDate().isEqual(LocalDate.now())) {
                     container.calendarDayText.setTextColor(getResources()
                             .getColor(R.color.md_theme_onSurface, requireActivity().getTheme()));
