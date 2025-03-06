@@ -81,7 +81,7 @@ public class CalendarFragment extends Fragment {
         YearMonth currentMonth = YearMonth.now();
         YearMonth startMonth = currentMonth.minusMonths(32);
         YearMonth endMonth = currentMonth.plusMonths(32);
-        DayOfWeek firstDayOfWeek = WeekFields.of(Locale.getDefault()).getFirstDayOfWeek();
+        DayOfWeek firstDayOfWeek = DayOfWeek.MONDAY;
         calendarView.setup(startMonth, endMonth, firstDayOfWeek);
         calendarView.scrollToMonth(currentMonth);
     }
