@@ -28,7 +28,6 @@ import java.time.YearMonth;
 
 public class CalendarFragment extends Fragment {
     private CalendarView calendarView;
-    private FlexboxLayout monthGrid;
 
     public CalendarFragment() {}
 
@@ -42,7 +41,6 @@ public class CalendarFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         calendarView = requireView().findViewById(R.id.calendarView);
-        monthGrid = requireView().findViewById(R.id.monthGrid);
 
         calendarView.setDayBinder(new MonthDayBinder<DayViewContainer>() {
             @Override
@@ -127,10 +125,12 @@ public class CalendarFragment extends Fragment {
 
     static class MonthHeaderContainer extends ViewContainer {
         TextView calendarMonthText;
+        FlexboxLayout monthGrid;
 
         public MonthHeaderContainer(@NonNull View view) {
             super(view);
             calendarMonthText = view.findViewById(R.id.calendarMonthHeaderText);
+            monthGrid = view.findViewById(R.id.monthGrid);
         }
     }
 }
