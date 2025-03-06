@@ -41,7 +41,6 @@ public class CalendarFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         calendarView = requireView().findViewById(R.id.calendarView);
-
         calendarView.setDayBinder(new MonthDayBinder<DayViewContainer>() {
             @Override
             public void bind(@NonNull DayViewContainer container, CalendarDay calendarDay) {
@@ -98,8 +97,8 @@ public class CalendarFragment extends Fragment {
         });
 
         YearMonth currentMonth = YearMonth.now();
-        YearMonth startMonth = currentMonth.minusMonths(32);
-        YearMonth endMonth = currentMonth.plusMonths(32);
+        YearMonth startMonth = currentMonth.minusMonths(12 * 10);
+        YearMonth endMonth = currentMonth.plusMonths(12 * 10);
         DayOfWeek firstDayOfWeek = DayOfWeek.MONDAY;
         calendarView.setup(startMonth, endMonth, firstDayOfWeek);
         calendarView.scrollToMonth(currentMonth);
