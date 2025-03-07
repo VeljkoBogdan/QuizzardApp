@@ -5,7 +5,10 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
+import com.veljkobogdan.quizzardapp.data.database.converter.LocalDateConverter;
+import com.veljkobogdan.quizzardapp.data.database.converter.LocalDateTimeConverter;
 import com.veljkobogdan.quizzardapp.data.database.dao.ExamDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.FlashcardDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.FlashcardSetDao;
@@ -32,7 +35,11 @@ import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
         Question.class,
         Exam.class,
         ExamQuestionsCrossRef.class
-}, version = 18)
+}, version = 19)
+@TypeConverters({
+        LocalDateConverter.class,
+        LocalDateTimeConverter.class
+})
 public abstract class AppDatabase extends RoomDatabase {
     public static AppDatabase db;
     public static String name = "quizzard";
