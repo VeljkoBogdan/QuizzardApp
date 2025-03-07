@@ -9,12 +9,14 @@ import androidx.room.TypeConverters;
 
 import com.veljkobogdan.quizzardapp.data.database.converter.LocalDateConverter;
 import com.veljkobogdan.quizzardapp.data.database.converter.LocalDateTimeConverter;
+import com.veljkobogdan.quizzardapp.data.database.dao.CalendarEntryDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.ExamDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.FlashcardDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.FlashcardSetDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.NoteDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.QuestionDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.TagDao;
+import com.veljkobogdan.quizzardapp.data.database.entities.CalendarEntry;
 import com.veljkobogdan.quizzardapp.data.database.entities.Exam;
 import com.veljkobogdan.quizzardapp.data.database.entities.ExamQuestionsCrossRef;
 import com.veljkobogdan.quizzardapp.data.database.entities.Flashcard;
@@ -34,7 +36,8 @@ import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
         FlashcardSetCrossRef.class,
         Question.class,
         Exam.class,
-        ExamQuestionsCrossRef.class
+        ExamQuestionsCrossRef.class,
+        CalendarEntry.class
 }, version = 19)
 @TypeConverters({
         LocalDateConverter.class,
@@ -60,4 +63,5 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract FlashcardSetDao flashcardSetDao();
     public abstract QuestionDao questionDao();
     public abstract ExamDao examDao();
+    public abstract CalendarEntryDao calendarEntryDao();
 }
