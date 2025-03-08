@@ -22,6 +22,7 @@ import com.kizitonwose.calendar.view.MonthDayBinder;
 import com.kizitonwose.calendar.view.MonthHeaderFooterBinder;
 import com.kizitonwose.calendar.view.ViewContainer;
 import com.veljkobogdan.quizzardapp.R;
+import com.veljkobogdan.quizzardapp.ui.calendar.DayViewContainer;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -46,36 +47,6 @@ public class CalendarFragment extends Fragment {
             @Override
             public void bind(@NonNull DayViewContainer container, CalendarDay calendarDay) {
                 container.bind(calendarDay);
-                shadeDays(container, calendarDay);
-            }
-
-            private void shadeDays(@NonNull DayViewContainer container, CalendarDay calendarDay) {
-                LocalDate date = calendarDay.getDate();
-
-                // Reset color
-                container.calendarDayText.setTextColor(getResources()
-                        .getColor(R.color.md_theme_onSurface, requireActivity().getTheme()));
-                container.calendarDayCard.setStrokeColor(getResources()
-                        .getColor(R.color.md_theme_surfaceVariant, requireActivity().getTheme()));
-
-                // Get out and in dates, and dim their cards
-                if (calendarDay.getPosition() == DayPosition.MonthDate) {
-                    container.calendarDayText.setTextColor(getResources()
-                            .getColor(R.color.md_theme_onSurface, requireActivity().getTheme()));
-                } else {
-                    container.calendarDayText.setTextColor(getResources()
-                            .getColor(R.color.md_theme_surfaceContainerHigh, requireActivity().getTheme()));
-                    container.calendarDayCard.setStrokeColor(getResources()
-                            .getColor(R.color.md_theme_surfaceContainerHigh, requireActivity().getTheme()));
-                }
-
-                // Highlight the current day
-                if (date.isEqual(LocalDate.now())) {
-                    container.calendarDayText.setTextColor(getResources()
-                            .getColor(R.color.md_theme_onSurface, requireActivity().getTheme()));
-                    container.calendarDayCard.setStrokeColor(getResources()
-                            .getColor(R.color.md_theme_onSurface, requireActivity().getTheme()));
-                }
             }
 
             @NonNull
@@ -83,7 +54,6 @@ public class CalendarFragment extends Fragment {
             public DayViewContainer create(@NonNull View view) {
                 return new DayViewContainer(view);
             }
-
         });
 
         calendarView.setMonthHeaderBinder(new MonthHeaderFooterBinder<MonthHeaderContainer>() {
@@ -113,27 +83,6 @@ public class CalendarFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_calendar, container, false);
-    }
-
-    static class DayViewContainer extends ViewContainer {
-        public CalendarDay day;
-        TextView calendarDayText;
-        MaterialCardView calendarDayCard;
-
-        public DayViewContainer(View view) {
-            super(view);
-            calendarDayText = view.findViewById(R.id.calendarDayText);
-            calendarDayCard = view.findViewById(R.id.calendarDayCard);
-            view.setOnClickListener(v -> {
-                // TODO: Add an on click listener to a calendar entry
-            });
-        }
-
-        public void bind(CalendarDay calendarDay) {
-            LocalDate date = calendarDay.getDate();
-            this.calendarDayText.setText(String.valueOf(date.getDayOfMonth()));
-            this.day = calendarDay;
-        }
     }
 
     static class MonthHeaderContainer extends ViewContainer {
