@@ -45,18 +45,13 @@ public class CalendarFragment extends Fragment {
         calendarView.setDayBinder(new MonthDayBinder<DayViewContainer>() {
             @Override
             public void bind(@NonNull DayViewContainer container, CalendarDay calendarDay) {
-                LocalDate date = calendarDay.getDate();
-
-                // Set the text of the view
-                container.calendarDayText.setText(String.valueOf(date.getDayOfMonth()));
-
-                // Set the day of the view
-                container.day = calendarDay;
-
-                shadeDays(container, calendarDay, date);
+                container.bind(calendarDay);
+                shadeDays(container, calendarDay);
             }
 
-            private void shadeDays(@NonNull DayViewContainer container, CalendarDay calendarDay, LocalDate date) {
+            private void shadeDays(@NonNull DayViewContainer container, CalendarDay calendarDay) {
+                LocalDate date = calendarDay.getDate();
+
                 // Reset color
                 container.calendarDayText.setTextColor(getResources()
                         .getColor(R.color.md_theme_onSurface, requireActivity().getTheme()));
@@ -132,6 +127,12 @@ public class CalendarFragment extends Fragment {
             view.setOnClickListener(v -> {
                 // TODO: Add an on click listener to a calendar entry
             });
+        }
+
+        public void bind(CalendarDay calendarDay) {
+            LocalDate date = calendarDay.getDate();
+            this.calendarDayText.setText(String.valueOf(date.getDayOfMonth()));
+            this.day = calendarDay;
         }
     }
 
