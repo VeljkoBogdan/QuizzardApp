@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.material.card.MaterialCardView;
@@ -45,7 +46,12 @@ public class CalendarFragment extends Fragment {
             @Override
             public void bind(@NonNull DayViewContainer container, CalendarDay calendarDay) {
                 LocalDate date = calendarDay.getDate();
+
+                // Set the text of the view
                 container.calendarDayText.setText(String.valueOf(date.getDayOfMonth()));
+
+                // Set the day of the view
+                container.day = calendarDay;
 
                 // Reset color
                 container.calendarDayText.setTextColor(getResources()
@@ -63,7 +69,6 @@ public class CalendarFragment extends Fragment {
                     container.calendarDayCard.setStrokeColor(getResources()
                             .getColor(R.color.md_theme_surfaceContainerHigh, requireActivity().getTheme()));
                 }
-
 
                 // Highlight the current day
                 if (date.isEqual(LocalDate.now())) {
@@ -112,6 +117,7 @@ public class CalendarFragment extends Fragment {
     }
 
     static class DayViewContainer extends ViewContainer {
+        public CalendarDay day;
         TextView calendarDayText;
         MaterialCardView calendarDayCard;
 
@@ -119,6 +125,9 @@ public class CalendarFragment extends Fragment {
             super(view);
             calendarDayText = view.findViewById(R.id.calendarDayText);
             calendarDayCard = view.findViewById(R.id.calendarDayCard);
+            view.setOnClickListener(v -> {
+                // TODO: Add an on click listener to a calendar entry
+            });
         }
     }
 
