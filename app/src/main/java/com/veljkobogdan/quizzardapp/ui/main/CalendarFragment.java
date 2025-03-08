@@ -53,6 +53,10 @@ public class CalendarFragment extends Fragment {
                 // Set the day of the view
                 container.day = calendarDay;
 
+                shadeDays(container, calendarDay, date);
+            }
+
+            private void shadeDays(@NonNull DayViewContainer container, CalendarDay calendarDay, LocalDate date) {
                 // Reset color
                 container.calendarDayText.setTextColor(getResources()
                         .getColor(R.color.md_theme_onSurface, requireActivity().getTheme()));
