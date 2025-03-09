@@ -10,13 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.flexbox.FlexboxLayout;
-import com.google.android.material.card.MaterialCardView;
 import com.kizitonwose.calendar.core.CalendarDay;
 import com.kizitonwose.calendar.core.CalendarMonth;
-import com.kizitonwose.calendar.core.DayPosition;
 import com.kizitonwose.calendar.view.CalendarView;
 import com.kizitonwose.calendar.view.MonthDayBinder;
 import com.kizitonwose.calendar.view.MonthHeaderFooterBinder;
@@ -25,7 +22,6 @@ import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.ui.calendar.DayViewContainer;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.YearMonth;
 
 public class CalendarFragment extends Fragment {

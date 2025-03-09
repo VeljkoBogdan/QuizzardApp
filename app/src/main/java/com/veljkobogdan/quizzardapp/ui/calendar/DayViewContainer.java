@@ -2,6 +2,7 @@ package com.veljkobogdan.quizzardapp.ui.calendar;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ public class DayViewContainer extends ViewContainer {
     private MaterialCardView calendarDayCard;
     private Context context;
     private View view;
+    private LinearLayout dayCardLayout;
 
     public DayViewContainer(View view) {
         super(view);
@@ -27,6 +29,7 @@ public class DayViewContainer extends ViewContainer {
         this.context = view.getContext();
         this.calendarDayText = view.findViewById(R.id.calendarDayText);
         this.calendarDayCard = view.findViewById(R.id.calendarDayCard);
+        this.dayCardLayout = view.findViewById(R.id.dayCardLayout);
 
         view.setOnClickListener(v -> {
             // TODO: Add an on click listener to a calendar entry
