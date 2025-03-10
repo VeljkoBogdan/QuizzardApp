@@ -48,7 +48,7 @@ public class CalendarFragment extends Fragment {
             @NonNull
             @Override
             public DayViewContainer create(@NonNull View view) {
-                return new DayViewContainer(view);
+                return new DayViewContainer(view, requireActivity());
             }
         });
 
