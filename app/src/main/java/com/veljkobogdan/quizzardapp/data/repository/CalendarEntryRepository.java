@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
+import com.kizitonwose.calendar.core.CalendarDay;
 import com.veljkobogdan.quizzardapp.data.database.AppDatabase;
 import com.veljkobogdan.quizzardapp.data.database.dao.CalendarEntryDao;
 import com.veljkobogdan.quizzardapp.data.database.entities.CalendarEntry;
@@ -48,5 +49,9 @@ public class CalendarEntryRepository {
         executor.execute(() -> {
             calendarEntryDao.delete(entry);
         });
+    }
+
+    public LiveData<List<CalendarEntry>> getCalendarEntriesForDay(CalendarDay day) {
+        return calendarEntryDao.getEntriesForDay(day.getDate());
     }
 }

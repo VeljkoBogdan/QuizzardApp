@@ -38,7 +38,7 @@ import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
         Exam.class,
         ExamQuestionsCrossRef.class,
         CalendarEntry.class
-}, version = 19)
+}, version = 20)
 @TypeConverters({
         LocalDateConverter.class,
         LocalDateTimeConverter.class
