@@ -1,5 +1,6 @@
 package com.veljkobogdan.quizzardapp.ui.exam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,6 +60,12 @@ public class ViewExamActivity extends AppCompatActivity {
 
         title.setText(exam.exam.getTitle());
 
+        takeExamButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ViewExamActivity.this, LearnExamActivity.class);
+            intent.putExtra(IntentGroup.EXAM_WITH_QUESTIONS, exam);
+            startActivity(intent);
+        });
+
         setupQuestionRecycler();
     }
 
@@ -77,7 +84,7 @@ public class ViewExamActivity extends AppCompatActivity {
             answerView.setText(answerText);
 
             item.setOnClickListener(view -> {
-                // TODO: Add an on click listener to the questions inside exam
+                // TODO: add a click listener to questions
             });
             linearLayout.addView(item);
         }
