@@ -24,6 +24,8 @@ public class QuestionAnswerItem {
     private final List<String> allAnswers;
     private final int numOfItems;
     private final Random random = new Random();
+    private String correctAnswer;
+    private final List<SelectableAnswer> selectableAnswers;
 
     public QuestionAnswerItem(Context context, Question question, List<String> allAnswers, ViewGroup root) {
         this.view = LayoutInflater.from(context)
@@ -32,19 +34,26 @@ public class QuestionAnswerItem {
         this.answersFlexbox = view.findViewById(R.id.answersFlexbox);
         this.allAnswers = allAnswers;
         this.numOfItems = Math.min(allAnswers.size(), 4);
+        selectableAnswers = new ArrayList<>();
 
         setupQuestion(question);
     }
 
+    public String getCorrectAnswer() {
+        return this.correctAnswer;
+    }
+
+    public List<SelectableAnswer> getSelectableAnswers() {
+        return selectableAnswers;
+    }
+
     private void setupQuestion(Question question) {
         questionTitle.setText(question.getQuestion());
-        String correctAnswer = question.getAnswer();
+        correctAnswer = question.getAnswer();
 
         int correctAnswerPosition = random.nextInt(numOfItems);
         List<String> usedAnswers = new ArrayList<>();
         usedAnswers.add(correctAnswer);
-
-        List<SelectableAnswer> selectableAnswers = new ArrayList<>();
 
         for (int i = 0; i < numOfItems; i++) {
             SelectableAnswer selectableAnswer = new SelectableAnswer(view.getContext(), answersFlexbox);

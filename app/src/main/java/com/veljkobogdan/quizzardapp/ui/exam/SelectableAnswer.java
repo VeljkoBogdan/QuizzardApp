@@ -12,15 +12,27 @@ import com.veljkobogdan.quizzardapp.R;
 public class SelectableAnswer {
     private final View view;
     private final TextView answerTitle;
+    private String answerText;
+    private boolean selected;
 
     public SelectableAnswer(Context context, ViewGroup root) {
+        selected = false;
         this.view = LayoutInflater.from(context)
                 .inflate(R.layout.item_answer_checkbox, root, false);
         this.answerTitle = view.findViewById(R.id.answerTitle);
     }
 
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public String getAnswer() {
+        return answerText;
+    }
+
     public void setAnswerText(String text) {
         answerTitle.setText(text);
+        answerText = text;
     }
 
     public View getView() {
@@ -28,6 +40,7 @@ public class SelectableAnswer {
     }
 
     public void setSelected(boolean selected) {
+        this.selected = selected;
         view.setSelected(selected);
         MaterialCardView cardView = view.findViewById(R.id.answerCard);
 
