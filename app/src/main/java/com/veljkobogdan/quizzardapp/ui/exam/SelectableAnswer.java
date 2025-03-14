@@ -1,6 +1,7 @@
 package com.veljkobogdan.quizzardapp.ui.exam;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,5 +53,25 @@ public class SelectableAnswer {
 
     public void setOnClickListener(View.OnClickListener listener) {
         view.setOnClickListener(listener);
+    }
+
+    public void highlightCorrect() {
+        MaterialCardView cardView = view.findViewById(R.id.answerCard);
+
+        cardView.setStrokeColor(Color.GREEN);
+    }
+
+    public void highlightIncorrect() {
+        MaterialCardView cardView = view.findViewById(R.id.answerCard);
+
+        cardView.setStrokeColor(Color.RED);
+    }
+
+    public void clearHighlight() {
+        MaterialCardView cardView = view.findViewById(R.id.answerCard);
+
+        cardView.setStrokeColor(view.getResources()
+                .getColor(R.color.md_theme_surfaceVariant,
+                        view.getContext().getTheme()));
     }
 }

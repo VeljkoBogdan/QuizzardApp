@@ -77,7 +77,6 @@ public class LearnExamActivity extends AppCompatActivity {
             questionAnswerItems.add(questionAnswerItem);
         }
 
-        // TODO: create evaluation and result calculation
         getExamResultsButton.setOnClickListener(v -> calculateResults());
     }
 
@@ -92,10 +91,14 @@ public class LearnExamActivity extends AppCompatActivity {
 
         for (QuestionAnswerItem questionAnswerItem : questionAnswerItems) {
             for (SelectableAnswer selectableAnswer : questionAnswerItem.getSelectableAnswers()) {
-                if (selectableAnswer.isSelected() && Objects.equals(selectableAnswer.getAnswer(), questionAnswerItem.getCorrectAnswer())) {
-                    correctAnswers++;
-
-                    // TODO: Tell where the user answered wrong
+                selectableAnswer.clearHighlight();
+                if (selectableAnswer.isSelected()) {
+                    if (Objects.equals(selectableAnswer.getAnswer(), questionAnswerItem.getCorrectAnswer())) {
+                        correctAnswers++;
+                        selectableAnswer.highlightCorrect();
+                    } else {
+                        selectableAnswer.highlightIncorrect();
+                    }
                 }
             }
         }
