@@ -2,6 +2,7 @@ package com.veljkobogdan.quizzardapp.ui.calendar;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,19 +16,20 @@ import com.kizitonwose.calendar.core.DayPosition;
 import com.kizitonwose.calendar.view.ViewContainer;
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.repository.CalendarEntryRepository;
+import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
 import java.time.LocalDate;
 
 public class DayViewContainer extends ViewContainer {
     private final Activity activity;
     public CalendarDay day;
-    private TextView calendarDayText;
-    private MaterialCardView calendarDayCard;
-    private Context context;
-    private View view;
-    private RecyclerView dayCardLayout;
-    private DayCardAdapter dayCardAdapter;
-    private CalendarEntryRepository entryRepository;
+    private final TextView calendarDayText;
+    private final MaterialCardView calendarDayCard;
+    private final Context context;
+    private final View view;
+    private final RecyclerView dayCardLayout;
+    private final DayCardAdapter dayCardAdapter;
+    private final CalendarEntryRepository entryRepository;
 
     public DayViewContainer(View view, Activity activity) {
         super(view);
@@ -39,7 +41,9 @@ public class DayViewContainer extends ViewContainer {
         this.entryRepository = new CalendarEntryRepository(view.getContext());
 
         view.setOnClickListener(v -> {
-            // TODO: Add an on click listener to a calendar entry
+            Intent intent = new Intent(this.activity, DayViewActivity.class);
+            intent.putExtra(IntentGroup.DAY, this.day);
+            activity.startActivity(intent);
         });
 
         dayCardAdapter = new DayCardAdapter(view.getContext());

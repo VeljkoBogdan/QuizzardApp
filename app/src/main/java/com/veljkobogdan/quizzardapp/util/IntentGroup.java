@@ -6,4 +6,5 @@ public interface IntentGroup {
     String FLASHCARD_SET = "flashcardSet";
     String LEARN_RESULT = "learnResult";
     String EXAM_WITH_QUESTIONS = "examWithQuestions";
+    String DAY = "day";
 }
