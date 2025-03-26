@@ -17,6 +17,8 @@ import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.databinding.ActivityDayViewBinding;
 import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
+import java.time.format.DateTimeFormatter;
+
 public class DayViewActivity extends AppCompatActivity {
     private ActivityDayViewBinding binding;
     private CalendarDay day;
@@ -40,7 +42,7 @@ public class DayViewActivity extends AppCompatActivity {
         getIntentContent();
 
         Toolbar toolbar = binding.toolbarIncl.toolbar;
-        toolbar.setTitle(day.getDate().toString());
+        toolbar.setTitle(day.getDate().format(DateTimeFormatter.ofPattern("MMMM d yyyy")));
         setSupportActionBar(toolbar);
 
         this.addEventButton = binding.addEventButton;
