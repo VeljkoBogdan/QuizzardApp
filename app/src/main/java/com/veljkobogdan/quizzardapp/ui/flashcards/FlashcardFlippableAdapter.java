@@ -14,11 +14,11 @@ import com.veljkobogdan.quizzardapp.data.database.entities.Flashcard;
 import java.util.List;
 
 /** @noinspection ClassEscapesDefinedScope*/
-public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.FlashcardAdapterViewHolder> {
+public class FlashcardFlippableAdapter extends RecyclerView.Adapter<FlashcardFlippableAdapter.FlashcardAdapterViewHolder> {
     private List<Flashcard> flashcards;
-    private final FlashcardAdapter.OnFlashcardClickListener onFlashcardClickListener;
+    private final OnFlashcardClickListener onFlashcardClickListener;
 
-    public FlashcardAdapter(FlashcardAdapter.OnFlashcardClickListener onFlashcardClickListener) {
+    public FlashcardFlippableAdapter(OnFlashcardClickListener onFlashcardClickListener) {
         this.onFlashcardClickListener = onFlashcardClickListener;
     }
 
@@ -29,14 +29,14 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
 
     @NonNull
     @Override
-    public FlashcardAdapter.FlashcardAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FlashcardAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_flashcard, parent, false);
-        return new FlashcardAdapter.FlashcardAdapterViewHolder(view);
+                .inflate(R.layout.item_flashcard_flippable, parent, false);
+        return new FlashcardAdapterViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FlashcardAdapter.FlashcardAdapterViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FlashcardAdapterViewHolder holder, int position) {
         Flashcard flashcard = flashcards.get(position);
         holder.bind(flashcard);
     }

@@ -24,7 +24,8 @@ import com.veljkobogdan.quizzardapp.data.database.entities.Flashcard;
 import com.veljkobogdan.quizzardapp.data.models.FlashcardSetWithFlashcards;
 import com.veljkobogdan.quizzardapp.data.repository.FlashcardRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityViewFlashcardSetBinding;
-import com.veljkobogdan.quizzardapp.ui.flashcards.FlashcardAdapter;
+import com.veljkobogdan.quizzardapp.ui.flashcards.FlashcardFlippableAdapter;
+import com.veljkobogdan.quizzardapp.ui.flashcards.ViewFlashcardsActivity;
 import com.veljkobogdan.quizzardapp.ui.learn.LearnFlashcardsActivity;
 import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
@@ -34,7 +35,7 @@ import java.util.Map;
 public class ViewFlashcardSetActivity extends AppCompatActivity {
     private ActivityViewFlashcardSetBinding binding;
     private RecyclerView recycler;
-    private FlashcardAdapter flashcardAdapter;
+    private FlashcardFlippableAdapter flashcardFlippableAdapter;
     private FlashcardRepository flashcardRepository;
     private FlashcardSetWithFlashcards flashcardSet;
     private Button learnButton, flashcardsButton;
@@ -64,6 +65,12 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
             startActivity(i);
         });
 
+        flashcardsButton.setOnClickListener(view -> {
+            Intent i = new Intent(ViewFlashcardSetActivity.this, ViewFlashcardsActivity.class);
+            i.putExtra(IntentGroup.FLASHCARD_SET_WITH_FLASHCARDS, flashcardSet);
+            startActivity(i);
+        });
+
         flashcardRepository = new FlashcardRepository(this);
 
         Toolbar toolbar = binding.toolbarIncl.toolbar;
@@ -74,7 +81,7 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
         recycler.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false));
 
-        flashcardAdapter = new FlashcardAdapter(new FlashcardAdapter.OnFlashcardClickListener() {
+        flashcardFlippableAdapter = new FlashcardFlippableAdapter(new FlashcardFlippableAdapter.OnFlashcardClickListener() {
 
             @Override
             public void onFlashcardClick(Flashcard flashcard, View view) {
@@ -92,7 +99,7 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
             }
         });
 
-        recycler.setAdapter(flashcardAdapter);
+        recycler.setAdapter(flashcardFlippableAdapter);
 
         loadFlashcards();
     }
@@ -171,6 +178,6 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
     }
 
     private void loadFlashcards() {
-        flashcardAdapter.setFlashcards(flashcardSet.flashcards);
+        flashcardFlippableAdapter.setFlashcards(flashcardSet.flashcards);
     }
 }
