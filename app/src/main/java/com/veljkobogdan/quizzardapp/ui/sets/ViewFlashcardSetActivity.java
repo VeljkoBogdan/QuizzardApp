@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -94,8 +95,24 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFlashcardLongClick(Flashcard flashcard) {
+            public void onFlashcardLongClick(Flashcard flashcard, View view) {
+                PopupMenu menu = new PopupMenu(ViewFlashcardSetActivity.this, view);
 
+                menu.getMenuInflater().inflate(R.menu.flashcard_popup_menu, menu.getMenu());
+                menu.setOnMenuItemClickListener(menuItem -> {
+                    if (menuItem.getItemId() == R.id.edit) {
+                        // TODO: Intent to edit the flashcard
+                        return true;
+                    }
+                    if (menuItem.getItemId() == R.id.delete) {
+                        flashcardRepository.deleteFlashcard(flashcard);
+                        // TODO: Uddate recycler after deletion
+                        return true;
+                    }
+                    return false;
+                });
+
+                menu.show();
             }
         });
 
