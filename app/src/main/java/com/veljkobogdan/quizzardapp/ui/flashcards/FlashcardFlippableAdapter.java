@@ -71,7 +71,7 @@ public class FlashcardFlippableAdapter extends RecyclerView.Adapter<FlashcardFli
                 if (onFlashcardClickListener != null) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
-                        onFlashcardClickListener.onFlashcardLongClick(flashcards.get(position));
+                        onFlashcardClickListener.onFlashcardLongClick(flashcards.get(position), itemView);
                     }
                 }
 
@@ -87,6 +87,6 @@ public class FlashcardFlippableAdapter extends RecyclerView.Adapter<FlashcardFli
 
     public interface OnFlashcardClickListener {
         void onFlashcardClick(Flashcard flashcard, View flaschardView);
-        void onFlashcardLongClick(Flashcard flashcard);
+        void onFlashcardLongClick(Flashcard flashcard, View flashcardView);
     }
 }
