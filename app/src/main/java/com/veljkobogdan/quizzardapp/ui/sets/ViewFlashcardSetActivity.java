@@ -78,7 +78,7 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
         flashcardSetRepository = new FlashcardSetRepository(this);
 
         Toolbar toolbar = binding.toolbarIncl.toolbar;
-        toolbar.setTitle("Flashcard Set");
+        toolbar.setTitle(flashcardSet.flashcardSet.name);
         setSupportActionBar(toolbar);
 
         recycler = binding.recycler;
