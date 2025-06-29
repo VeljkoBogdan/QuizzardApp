@@ -24,6 +24,7 @@ import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.database.entities.Flashcard;
 import com.veljkobogdan.quizzardapp.data.models.FlashcardSetWithFlashcards;
 import com.veljkobogdan.quizzardapp.data.repository.FlashcardRepository;
+import com.veljkobogdan.quizzardapp.data.repository.FlashcardSetRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityViewFlashcardSetBinding;
 import com.veljkobogdan.quizzardapp.ui.flashcards.FlashcardFlippableAdapter;
 import com.veljkobogdan.quizzardapp.ui.flashcards.ViewFlashcardsActivity;
@@ -38,6 +39,7 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
     private RecyclerView recycler;
     private FlashcardFlippableAdapter flashcardFlippableAdapter;
     private FlashcardRepository flashcardRepository;
+    private FlashcardSetRepository flashcardSetRepository;
     private FlashcardSetWithFlashcards flashcardSet;
     private Button learnButton, flashcardsButton;
     private TextView titleTextView;
@@ -73,6 +75,7 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
         });
 
         flashcardRepository = new FlashcardRepository(this);
+        flashcardSetRepository = new FlashcardSetRepository(this);
 
         Toolbar toolbar = binding.toolbarIncl.toolbar;
         toolbar.setTitle("Flashcard Set");
@@ -106,7 +109,7 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
                     }
                     if (menuItem.getItemId() == R.id.delete) {
                         flashcardRepository.deleteFlashcard(flashcard);
-                        // TODO: Uddate recycler after deletion
+                        loadFlashcards(flashcardSet.flashcardSet.flashcardSetId);
                         return true;
                     }
                     return false;
@@ -118,7 +121,7 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
 
         recycler.setAdapter(flashcardFlippableAdapter);
 
-        loadFlashcards();
+        loadFlashcards(flashcardSet.flashcardSet.flashcardSetId);
     }
 
     private void flipCard(View view, View frontTextView, View backTextView, boolean isFlipped) {
@@ -194,7 +197,12 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
         }
     }
 
-    private void loadFlashcards() {
-        flashcardFlippableAdapter.setFlashcards(flashcardSet.flashcards);
+    private void loadFlashcards(long setId) {
+        flashcardSetRepository.getFlashcardSetWithFlashcards(setId)
+                .observe(this, updatedSet -> {
+                    if (updatedSet != null) {
+                        flashcardFlippableAdapter.setFlashcards(updatedSet.flashcards);
+                    }
+        });
     }
 }

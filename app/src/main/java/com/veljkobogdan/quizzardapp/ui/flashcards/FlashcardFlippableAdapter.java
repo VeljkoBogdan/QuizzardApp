@@ -24,7 +24,7 @@ public class FlashcardFlippableAdapter extends RecyclerView.Adapter<FlashcardFli
 
     public void setFlashcards(List<Flashcard> flashcards) {
         this.flashcards = flashcards;
-        notifyItemChanged(R.id.recycler);
+        notifyDataSetChanged();
     }
 
     @NonNull
