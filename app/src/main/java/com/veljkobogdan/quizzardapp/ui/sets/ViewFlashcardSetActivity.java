@@ -26,6 +26,7 @@ import com.veljkobogdan.quizzardapp.data.models.FlashcardSetWithFlashcards;
 import com.veljkobogdan.quizzardapp.data.repository.FlashcardRepository;
 import com.veljkobogdan.quizzardapp.data.repository.FlashcardSetRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityViewFlashcardSetBinding;
+import com.veljkobogdan.quizzardapp.ui.flashcards.EditFlashcardActivity;
 import com.veljkobogdan.quizzardapp.ui.flashcards.FlashcardFlippableAdapter;
 import com.veljkobogdan.quizzardapp.ui.flashcards.ViewFlashcardsActivity;
 import com.veljkobogdan.quizzardapp.ui.learn.LearnFlashcardsActivity;
@@ -104,7 +105,9 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
                 menu.getMenuInflater().inflate(R.menu.flashcard_popup_menu, menu.getMenu());
                 menu.setOnMenuItemClickListener(menuItem -> {
                     if (menuItem.getItemId() == R.id.edit) {
-                        // TODO: Intent to edit the flashcard
+                        Intent i = new Intent(ViewFlashcardSetActivity.this, EditFlashcardActivity.class);
+                        i.putExtra(IntentGroup.FLASHCARD, flashcard);
+                        startActivity(i);
                         return true;
                     }
                     if (menuItem.getItemId() == R.id.delete) {
