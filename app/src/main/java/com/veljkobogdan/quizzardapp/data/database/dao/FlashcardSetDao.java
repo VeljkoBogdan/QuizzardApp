@@ -35,6 +35,10 @@ public interface FlashcardSetDao {
     @Query("SELECT * FROM flashcardset")
     LiveData<List<FlashcardSetWithFlashcards>> getFlashcardSetWithFlashcards();
 
+    @Transaction
+    @Query("SELECT * FROM flashcardset WHERE flashcardSetId = :setId")
+    LiveData<FlashcardSetWithFlashcards> getFlashcardSetWithFlashcards(long setId);
+
     @Insert
     void insertFlashcardSetCrossRef(FlashcardSetCrossRef flashcardSetCrossRef);
 

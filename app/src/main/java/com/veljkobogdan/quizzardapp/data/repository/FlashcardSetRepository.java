@@ -69,4 +69,8 @@ public class FlashcardSetRepository {
             flashcardSetDao.delete(flashcardSetWithFlashcards.flashcardSet);
         });
     }
+
+    public LiveData<FlashcardSetWithFlashcards> getFlashcardSetWithFlashcards(long setId) {
+        return flashcardSetDao.getFlashcardSetWithFlashcards(setId);
+    }
 }
