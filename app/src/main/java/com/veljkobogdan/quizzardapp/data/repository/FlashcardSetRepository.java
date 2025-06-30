@@ -70,6 +70,16 @@ public class FlashcardSetRepository {
         });
     }
 
+    public void addFlashcardToSet(Flashcard flashcard, long flashcardSetId) {
+        executor.execute(() -> {
+            long flashcardId = flashcardDao.insert(flashcard);
+            flashcardSetDao.insertFlashcardSetCrossRef(
+                    new FlashcardSetCrossRef(flashcardId, flashcardSetId)
+            );
+        });
+    }
+
+
     public LiveData<FlashcardSetWithFlashcards> getFlashcardSetWithFlashcards(long setId) {
         return flashcardSetDao.getFlashcardSetWithFlashcards(setId);
     }

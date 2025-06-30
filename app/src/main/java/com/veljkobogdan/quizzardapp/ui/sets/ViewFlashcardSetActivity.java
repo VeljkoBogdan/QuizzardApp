@@ -26,6 +26,7 @@ import com.veljkobogdan.quizzardapp.data.models.FlashcardSetWithFlashcards;
 import com.veljkobogdan.quizzardapp.data.repository.FlashcardRepository;
 import com.veljkobogdan.quizzardapp.data.repository.FlashcardSetRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityViewFlashcardSetBinding;
+import com.veljkobogdan.quizzardapp.ui.flashcards.AddFlashcardActivity;
 import com.veljkobogdan.quizzardapp.ui.flashcards.EditFlashcardActivity;
 import com.veljkobogdan.quizzardapp.ui.flashcards.FlashcardFlippableAdapter;
 import com.veljkobogdan.quizzardapp.ui.flashcards.ViewFlashcardsActivity;
@@ -42,7 +43,7 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
     private FlashcardRepository flashcardRepository;
     private FlashcardSetRepository flashcardSetRepository;
     private FlashcardSetWithFlashcards flashcardSet;
-    private Button learnButton, flashcardsButton;
+    private Button learnButton, flashcardsButton, addFlashcardButton;
     private TextView titleTextView;
     private final Map<Long, Boolean> flipStates = new HashMap<>();
 
@@ -71,6 +72,12 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
 
         flashcardsButton.setOnClickListener(view -> {
             Intent i = new Intent(ViewFlashcardSetActivity.this, ViewFlashcardsActivity.class);
+            i.putExtra(IntentGroup.FLASHCARD_SET_WITH_FLASHCARDS, flashcardSet);
+            startActivity(i);
+        });
+
+        addFlashcardButton.setOnClickListener(view -> {
+            Intent i = new Intent(ViewFlashcardSetActivity.this, AddFlashcardActivity.class);
             i.putExtra(IntentGroup.FLASHCARD_SET_WITH_FLASHCARDS, flashcardSet);
             startActivity(i);
         });
@@ -186,6 +193,7 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
         titleTextView = binding.flashcardSetTitle;
         learnButton = binding.learnButton;
         flashcardsButton = binding.flashcardsButton;
+        addFlashcardButton = binding.addButton;
 
         titleTextView.setText(flashcardSet.flashcardSet.name);
     }
