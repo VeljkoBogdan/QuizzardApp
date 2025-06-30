@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -17,6 +18,7 @@ import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.database.entities.Question;
 import com.veljkobogdan.quizzardapp.data.models.ExamWithQuestions;
 import com.veljkobogdan.quizzardapp.data.repository.ExamRepository;
+import com.veljkobogdan.quizzardapp.data.repository.QuestionRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityViewQuestionsBinding;
 import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
@@ -28,6 +30,7 @@ public class ViewQuestionsActivity extends AppCompatActivity {
     LinearLayout questionLayout;
     ExamWithQuestions exam;
     ExamRepository examRepository;
+    QuestionRepository questionRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,19 +55,31 @@ public class ViewQuestionsActivity extends AppCompatActivity {
         questionLayout = binding.questionLayout;
 
         examRepository = new ExamRepository(this);
+        questionRepository = new QuestionRepository(this);
 
         loadQuestions(exam.exam.examId);
     }
 
     private void loadQuestions(long examId) {
         examRepository.getExamWithQuestions(examId).observe(this, updatedExam -> {
-            if (updatedExam != null && !updatedExam.questionList.isEmpty()) {
+            if (updatedExam != null) {
                 setupQuestionRecycler(updatedExam.questionList);
             }
         });
     }
 
     private void setupQuestionRecycler(List<Question> questionList) {
+        questionLayout.removeAllViews();
+
+        if (questionList.isEmpty()) {
+            TextView emptyMessage = new TextView(this);
+            emptyMessage.setText("No questions in this exam yet.");
+            emptyMessage.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_BodyLarge);
+            emptyMessage.setPadding(32, 32, 32, 32);
+            questionLayout.addView(emptyMessage);
+            return;
+        }
+
         for (Question question : questionList) {
             String questionText = question.getQuestion();
             String answerText = question.getAnswer();
@@ -79,8 +94,21 @@ public class ViewQuestionsActivity extends AppCompatActivity {
             answerView.setText(answerText);
 
             item.setOnLongClickListener(view -> {
-
-                return false;
+                PopupMenu popupMenu = new PopupMenu(ViewQuestionsActivity.this, view);
+                popupMenu.getMenuInflater().inflate(R.menu.flashcard_popup_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(menuItem -> {
+                    if (menuItem.getItemId() == R.id.delete) {
+                        questionRepository.delete(question);
+                        return true;
+                    }
+                    if (menuItem.getItemId() == R.id.edit) {
+                        // TODO: go to edit activity
+                        return true;
+                    }
+                    return false;
+                });
+                popupMenu.show();
+                return true;
             });
             questionLayout.addView(item);
         }
