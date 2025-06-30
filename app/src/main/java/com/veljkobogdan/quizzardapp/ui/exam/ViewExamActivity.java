@@ -21,9 +21,12 @@ import androidx.core.view.WindowInsetsCompat;
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.database.entities.Question;
 import com.veljkobogdan.quizzardapp.data.models.ExamWithQuestions;
+import com.veljkobogdan.quizzardapp.data.repository.ExamRepository;
 import com.veljkobogdan.quizzardapp.data.repository.QuestionRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityViewExamBinding;
 import com.veljkobogdan.quizzardapp.util.IntentGroup;
+
+import java.util.List;
 
 public class ViewExamActivity extends AppCompatActivity {
     private ActivityViewExamBinding binding;
@@ -32,6 +35,7 @@ public class ViewExamActivity extends AppCompatActivity {
     private TextView title;
     private Button questionsButton, takeExamButton;
     private QuestionRepository questionRepository;
+    private ExamRepository examRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,8 @@ public class ViewExamActivity extends AppCompatActivity {
         title = binding.examTitle;
         questionsButton = binding.questionsButton;
         takeExamButton = binding.takeExamButton;
+
+        examRepository = new ExamRepository(this);
         questionRepository = new QuestionRepository(this);
 
         title.setText(exam.exam.getTitle());
@@ -82,11 +88,30 @@ public class ViewExamActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        setupQuestionRecycler();
+        loadQuestions(exam.exam.examId);
     }
 
-    private void setupQuestionRecycler() {
-        for (Question question : exam.questionList) {
+    private void loadQuestions(long examId) {
+        examRepository.getExamWithQuestions(examId).observe(this, updatedExam -> {
+            if (updatedExam != null) {
+                setupQuestionRecycler(updatedExam.questionList);
+            }
+        });
+    }
+
+    private void setupQuestionRecycler(List<Question> questionList) {
+        linearLayout.removeAllViews();
+
+        if (questionList.isEmpty()) {
+            TextView emptyMessage = new TextView(this);
+            emptyMessage.setText("No questions in this exam yet.");
+            emptyMessage.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_BodyLarge);
+            emptyMessage.setPadding(32, 32, 32, 32);
+            linearLayout.addView(emptyMessage);
+            return;
+        }
+
+        for (Question question : questionList) {
             String questionText = question.getQuestion();
             String answerText = question.getAnswer();
 
