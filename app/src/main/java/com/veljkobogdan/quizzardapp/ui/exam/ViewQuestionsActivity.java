@@ -1,5 +1,6 @@
 package com.veljkobogdan.quizzardapp.ui.exam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -102,7 +103,9 @@ public class ViewQuestionsActivity extends AppCompatActivity {
                         return true;
                     }
                     if (menuItem.getItemId() == R.id.edit) {
-                        // TODO: go to edit activity
+                        Intent i = new Intent(ViewQuestionsActivity.this, EditQuestionActivity.class);
+                        i.putExtra(IntentGroup.QUESTION, question);
+                        startActivity(i);
                         return true;
                     }
                     return false;

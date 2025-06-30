@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.database.entities.Question;
 import com.veljkobogdan.quizzardapp.data.models.ExamWithQuestions;
+import com.veljkobogdan.quizzardapp.data.repository.QuestionRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityViewExamBinding;
 import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
@@ -29,6 +31,7 @@ public class ViewExamActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
     private TextView title;
     private Button questionsButton, takeExamButton;
+    private QuestionRepository questionRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,7 @@ public class ViewExamActivity extends AppCompatActivity {
         title = binding.examTitle;
         questionsButton = binding.questionsButton;
         takeExamButton = binding.takeExamButton;
+        questionRepository = new QuestionRepository(this);
 
         title.setText(exam.exam.getTitle());
 
@@ -95,8 +99,24 @@ public class ViewExamActivity extends AppCompatActivity {
             questionView.setText(questionText);
             answerView.setText(answerText);
 
-            item.setOnClickListener(view -> {
-                // TODO: add a click listener to questions
+            item.setOnLongClickListener(view -> {
+                PopupMenu popupMenu = new PopupMenu(ViewExamActivity.this, view);
+                popupMenu.getMenuInflater().inflate(R.menu.flashcard_popup_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(menuItem -> {
+                    if (menuItem.getItemId() == R.id.delete) {
+                        questionRepository.delete(question);
+                        return true;
+                    }
+                    if (menuItem.getItemId() == R.id.edit) {
+                        Intent i = new Intent(ViewExamActivity.this, EditQuestionActivity.class);
+                        i.putExtra(IntentGroup.QUESTION, question);
+                        startActivity(i);
+                        return true;
+                    }
+                    return false;
+                });
+                popupMenu.show();
+                return true;
             });
             linearLayout.addView(item);
         }

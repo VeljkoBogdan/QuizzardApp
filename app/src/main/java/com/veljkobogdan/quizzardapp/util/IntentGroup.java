@@ -8,4 +8,5 @@ public interface IntentGroup {
     String EXAM_WITH_QUESTIONS = "examWithQuestions";
     String DAY = "day";
     String FLASHCARD = "flashcard";
+    String QUESTION = "question";
 }
