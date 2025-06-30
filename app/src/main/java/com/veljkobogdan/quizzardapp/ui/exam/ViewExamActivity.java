@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -61,6 +62,11 @@ public class ViewExamActivity extends AppCompatActivity {
         title.setText(exam.exam.getTitle());
 
         takeExamButton.setOnClickListener(v -> {
+            if (exam.questionList.size() < 2) {
+                Toast.makeText(ViewExamActivity.this, "Less than 2 questions in exam",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
             Intent intent = new Intent(ViewExamActivity.this, LearnExamActivity.class);
             intent.putExtra(IntentGroup.EXAM_WITH_QUESTIONS, exam);
             startActivity(intent);
