@@ -35,6 +35,10 @@ public interface ExamDao {
     @Query("SELECT * FROM exam")
     LiveData<List<ExamWithQuestions>> getExamsWithQuestions();
 
+    @Transaction
+    @Query("SELECT * FROM exam WHERE examId = :examId")
+    LiveData<ExamWithQuestions> getExamWithQuestions(long examId);
+
     @Insert
     void insertExamQuestionCrossRef(ExamQuestionsCrossRef examQuestionsCrossRef);
 
@@ -49,4 +53,6 @@ public interface ExamDao {
 
     @Query("DELETE FROM examquestionscrossref")
     void deleteAllReferences();
+
+
 }

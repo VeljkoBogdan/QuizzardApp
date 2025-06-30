@@ -66,6 +66,12 @@ public class ViewExamActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        questionsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ViewExamActivity.this, ViewQuestionsActivity.class);
+            intent.putExtra(IntentGroup.EXAM_WITH_QUESTIONS, exam);
+            startActivity(intent);
+        });
+
         setupQuestionRecycler();
     }
 

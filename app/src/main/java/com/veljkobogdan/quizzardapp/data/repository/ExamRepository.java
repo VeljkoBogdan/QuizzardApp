@@ -36,6 +36,10 @@ public class ExamRepository {
         return examDao.getExamsWithQuestions();
     }
 
+    public LiveData<ExamWithQuestions> getExamWithQuestions(long examId) {
+        return examDao.getExamWithQuestions(examId);
+    }
+
     public void insertExams(Exam... exams) {
         executor.execute(() -> examDao.insertAll(exams));
     }
