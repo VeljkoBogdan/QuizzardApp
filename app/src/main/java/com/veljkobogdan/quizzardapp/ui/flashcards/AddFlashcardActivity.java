@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -44,6 +45,10 @@ public class AddFlashcardActivity extends AppCompatActivity {
         });
 
         getIntentContent();
+
+        Toolbar toolbar = binding.layoutIncl.toolbar;
+        toolbar.setTitle("Add a Flashcard");
+        setSupportActionBar(toolbar);
 
         termEditText = binding.flashcardTerm;
         definitionEditText = binding.flashcardDefinition;
