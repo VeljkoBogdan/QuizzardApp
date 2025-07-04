@@ -33,7 +33,7 @@ public class ViewExamActivity extends AppCompatActivity {
     private ExamWithQuestions exam;
     private LinearLayout linearLayout;
     private TextView title;
-    private Button questionsButton, takeExamButton;
+    private Button questionsButton, takeExamButton, addQuestionButton;
     private QuestionRepository questionRepository;
     private ExamRepository examRepository;
 
@@ -65,6 +65,7 @@ public class ViewExamActivity extends AppCompatActivity {
         title = binding.examTitle;
         questionsButton = binding.questionsButton;
         takeExamButton = binding.takeExamButton;
+        addQuestionButton = binding.addQuestionButton;
 
         examRepository = new ExamRepository(this);
         questionRepository = new QuestionRepository(this);
@@ -88,12 +89,19 @@ public class ViewExamActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        addQuestionButton.setOnClickListener(view -> {
+            Intent intent = new Intent(ViewExamActivity.this, AddQuestionActivity.class);
+            intent.putExtra(IntentGroup.EXAM_WITH_QUESTIONS, exam);
+            startActivity(intent);
+        });
+
         loadQuestions(exam.exam.examId);
     }
 
     private void loadQuestions(long examId) {
         examRepository.getExamWithQuestions(examId).observe(this, updatedExam -> {
             if (updatedExam != null) {
+                exam = updatedExam;
                 setupQuestionRecycler(updatedExam.questionList);
             }
         });

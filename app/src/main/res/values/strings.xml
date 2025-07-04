@@ -46,4 +46,5 @@
     <string name="back">Back</string>
     <string name="edit">Edit</string>
     <string name="add_flashcard">Add Flashcard</string>
+    <string name="add_question">Add Question</string>
 </resources>

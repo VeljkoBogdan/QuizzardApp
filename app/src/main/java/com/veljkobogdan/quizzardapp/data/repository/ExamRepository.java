@@ -9,6 +9,8 @@ import com.veljkobogdan.quizzardapp.data.database.dao.ExamDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.QuestionDao;
 import com.veljkobogdan.quizzardapp.data.database.entities.Exam;
 import com.veljkobogdan.quizzardapp.data.database.entities.ExamQuestionsCrossRef;
+import com.veljkobogdan.quizzardapp.data.database.entities.Flashcard;
+import com.veljkobogdan.quizzardapp.data.database.entities.FlashcardSetCrossRef;
 import com.veljkobogdan.quizzardapp.data.database.entities.Question;
 import com.veljkobogdan.quizzardapp.data.models.ExamWithQuestions;
 
@@ -71,6 +73,13 @@ public class ExamRepository {
             examDao.deleteQuestionsInExam(examWithQuestions.exam.getExamId());
             examDao.deleteExamQuestionCrossRef(examWithQuestions.exam.getExamId());
             examDao.delete(examWithQuestions.exam);
+        });
+    }
+
+    public void addQuestionToExam(Question question, long examId) {
+        executor.execute(() -> {
+            long questionId = questionDao.insert(question);
+            examDao.insertExamQuestionCrossRef(new ExamQuestionsCrossRef(questionId, examId));
         });
     }
 }

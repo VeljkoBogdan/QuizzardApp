@@ -46,6 +46,14 @@
             android:layout_marginBottom="4dp"
             />
 
+        <Button
+            android:id="@+id/addQuestionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_question"
+            android:layout_marginBottom="4dp"
+            />
+
     </LinearLayout>
 
     <LinearLayout
