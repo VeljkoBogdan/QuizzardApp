@@ -47,4 +47,6 @@
     <string name="edit">Edit</string>
     <string name="add_flashcard">Add Flashcard</string>
     <string name="add_question">Add Question</string>
+    <string name="event_name">Event Name</string>
+    <string name="event_time">Event Time</string>
 </resources>
