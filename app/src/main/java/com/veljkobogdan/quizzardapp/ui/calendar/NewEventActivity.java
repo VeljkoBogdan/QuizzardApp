@@ -1,7 +1,13 @@
 package com.veljkobogdan.quizzardapp.ui.calendar;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -21,11 +27,13 @@ import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.database.entities.CalendarEntry;
 import com.veljkobogdan.quizzardapp.data.repository.CalendarEntryRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityNewEventBinding;
+import com.veljkobogdan.quizzardapp.service.EventReminderReceiver;
 import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 
 public class NewEventActivity extends AppCompatActivity {
 
@@ -113,6 +121,43 @@ public class NewEventActivity extends AppCompatActivity {
 
             calendarEntryRepository.insertCalendarEntry(calendarEntry);
 
+            if (shouldNotify && !isWholeDay) {
+                LocalDateTime dateTime = calendarEntry.localDateTime;
+
+                // Convert to millis
+                long triggerAtMillis = dateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+
+                Intent intent = new Intent(this, EventReminderReceiver.class);
+                intent.putExtra("EVENT_TITLE", calendarEntry.title);
+
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                        this,
+                        (int) System.currentTimeMillis(), // unique ID
+                        intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+                );
+
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    if (alarmManager.canScheduleExactAlarms()) {
+                        alarmManager.setExactAndAllowWhileIdle(
+                                AlarmManager.RTC_WAKEUP,
+                                triggerAtMillis,
+                                pendingIntent
+                        );
+                    } else {
+                        requestExactAlarmPermission();
+                    }
+                } else {
+                    alarmManager.setExactAndAllowWhileIdle(
+                            AlarmManager.RTC_WAKEUP,
+                            triggerAtMillis,
+                            pendingIntent
+                    );
+                }
+            }
+
             finish();
         });
     }
@@ -120,4 +165,12 @@ public class NewEventActivity extends AppCompatActivity {
     private void getIntentContent() {
         calendarDay = (CalendarDay) getIntent().getSerializableExtra(IntentGroup.DAY);
     }
+
+    private void requestExactAlarmPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            Intent intent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+            startActivity(intent);
+        }
+    }
+
 }

@@ -1,10 +1,14 @@
 package com.veljkobogdan.quizzardapp.ui.main;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,12 +50,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // ask for notification permission if not added
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 100);
-            }
-        }
+        askForPermissions();
 
         // Start with the last fragment loaded, or home by default
         if (lastLoadedFragment == null) {
@@ -97,6 +96,44 @@ public class MainActivity extends AppCompatActivity {
             menu.show();
         });
     }
+
+    private void askForPermissions() {
+        boolean needsNotificationPermission = false;
+        boolean needsExactAlarmPermission = false;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            needsNotificationPermission = checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED;
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            needsExactAlarmPermission = !alarmManager.canScheduleExactAlarms();
+        }
+
+        if (needsNotificationPermission || needsExactAlarmPermission) {
+            showPermissionExplanationDialog(needsNotificationPermission, needsExactAlarmPermission);
+        }
+    }
+
+    private void showPermissionExplanationDialog(boolean askNotification, boolean askExactAlarm) {
+        new AlertDialog.Builder(this)
+                .setTitle("Permission Required")
+                .setMessage("This app needs notification and alarm permissions to remind you of your events. Please allow them to ensure the app works properly.")
+                .setPositiveButton("Allow", (dialog, which) -> {
+                    if (askNotification && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 100);
+                    }
+
+                    if (askExactAlarm && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        Intent intent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Deny", null)
+                .show();
+    }
+
+
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();
