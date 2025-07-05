@@ -1,5 +1,6 @@
 package com.veljkobogdan.quizzardapp.ui.calendar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,11 +61,12 @@ public class DayViewActivity extends AppCompatActivity {
         this.calendarEntryLayout = binding.calendarEntryLayout;
 
         this.addEventButton.setOnClickListener(view -> {
-            // TODO: Open a new activity to create an entry
+            Intent i = new Intent(DayViewActivity.this, NewEventActivity.class);
+            i.putExtra(IntentGroup.DAY, day);
+            startActivity(i);
         });
 
         getEntries();
-        populateEntryLayout();
     }
 
     private void getIntentContent() {
@@ -75,6 +77,7 @@ public class DayViewActivity extends AppCompatActivity {
         calendarEntryRepository.getCalendarEntriesForDay(day).observe(this, updatedEntries -> {
             if (!updatedEntries.isEmpty()) {
                 entries = updatedEntries;
+                populateEntryLayout();
             }
         });
     }
@@ -82,6 +85,7 @@ public class DayViewActivity extends AppCompatActivity {
     private void populateEntryLayout() {
         TextView eventTitle, eventTime;
 
+        calendarEntryLayout.removeAllViews();
         for (CalendarEntry calendarEntry : entries) {
             View card = LayoutInflater.from(this).inflate(R.layout.item_event, binding.getRoot(), false);
             eventTitle = card.findViewById(R.id.eventName);
