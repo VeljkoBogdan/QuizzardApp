@@ -62,9 +62,6 @@
             android:name=".ui.sets.ViewFlashcardSetActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.notes.ViewNoteActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.sets.AddFlashcardSetActivity"
             android:exported="false" />
         <activity
