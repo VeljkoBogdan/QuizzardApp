@@ -69,7 +69,7 @@ public class NewEventActivity extends AppCompatActivity {
         timeTextView = binding.timeTextView;
         addEventButton = binding.addEventButton;
 
-        Toolbar toolbar = binding.toolbarIncl.toolbar;;
+        Toolbar toolbar = binding.toolbarIncl.toolbar;
         toolbar.setTitle("Add Event");
         setSupportActionBar(toolbar);
 
@@ -122,7 +122,7 @@ public class NewEventActivity extends AppCompatActivity {
             calendarEntryRepository.insertCalendarEntry(calendarEntry);
 
             if (shouldNotify && !isWholeDay) {
-                LocalDateTime dateTime = calendarEntry.localDateTime;
+                LocalDateTime dateTime = calendarEntry.localDateTime.minusMinutes(30);
 
                 // Convert to millis
                 long triggerAtMillis = dateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
@@ -158,6 +158,8 @@ public class NewEventActivity extends AppCompatActivity {
                 }
             }
 
+            Toast.makeText(this, "You'll be notified 30 minutes before the event",
+                    Toast.LENGTH_SHORT).show();
             finish();
         });
     }
