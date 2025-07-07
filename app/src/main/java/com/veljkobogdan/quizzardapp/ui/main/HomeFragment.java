@@ -12,10 +12,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.veljkobogdan.quizzardapp.R;
+import com.veljkobogdan.quizzardapp.service.GoalsService;
 import com.veljkobogdan.quizzardapp.service.StreakService;
 import com.veljkobogdan.quizzardapp.ui.exam.ExamsActivity;
 import com.veljkobogdan.quizzardapp.ui.sets.FlashcardSetsActivity;
@@ -24,6 +26,7 @@ import com.veljkobogdan.quizzardapp.ui.notes.NotesActivity;
 public class HomeFragment extends Fragment {
     private StreakService streakService;
     private TextView streakText;
+    private GoalsService goalsService;
 
     public HomeFragment() {}
 
@@ -43,14 +46,9 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        streakService = new StreakService(requireContext());
-        streakService.updateStreak();
-        int streak = streakService.getCounterOfConsecutiveDays();
+        updateStreaks(view);
+        updateGoals(view);
 
-        streakText = view.findViewById(R.id.streak);
-        streakText.setText(Integer.toString(streak));
-
-        // TEMP
         view.findViewById(R.id.buttonNotes).setOnClickListener(item -> {
             try {
                 Intent intent = new Intent(requireContext(), NotesActivity.class);
@@ -77,5 +75,37 @@ public class HomeFragment extends Fragment {
                 Log.e("ERROR", e.getMessage());
             }
         });
+    }
+
+    private void updateStreaks(@NonNull View view) {
+        streakService = new StreakService(requireContext());
+        streakService.updateStreak();
+        int streak = streakService.getCounterOfConsecutiveDays();
+
+        streakText = view.findViewById(R.id.streak);
+        streakText.setText(Integer.toString(streak));
+    }
+
+    private void updateGoals(@NonNull View view) {
+        goalsService = new GoalsService(requireContext());
+
+        CheckBox flashcardsCheckBox, examCheckBox, noteCheckBox;
+        flashcardsCheckBox = view.findViewById(R.id.flashcardCheckBox);
+        examCheckBox = view.findViewById(R.id.examCheckBox);
+        noteCheckBox = view.findViewById(R.id.noteCheckBox);
+
+        TextView goalsToday = view.findViewById(R.id.goalsToday);
+        int goals = goalsService.getCompletedGoalCount();
+        goalsToday.setText(goals + "/3");
+        flashcardsCheckBox.setChecked(goalsService.isGoalCompleted(GoalsService.DailyGoalType.REVIEW_FLASHCARDS));
+        examCheckBox.setChecked(goalsService.isGoalCompleted(GoalsService.DailyGoalType.PRACTICE_EXAM));
+        noteCheckBox.setChecked(goalsService.isGoalCompleted(GoalsService.DailyGoalType.WRITE_NOTE));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateGoals(requireView());
+        updateStreaks(requireView());
     }
 }

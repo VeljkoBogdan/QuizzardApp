@@ -19,6 +19,7 @@ import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
 import com.veljkobogdan.quizzardapp.data.models.NoteWithTags;
 import com.veljkobogdan.quizzardapp.data.repository.NoteRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityNewNoteBinding;
+import com.veljkobogdan.quizzardapp.service.GoalsService;
 import com.veljkobogdan.quizzardapp.ui.tags.TagSelectionOverlay;
 import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
@@ -33,6 +34,7 @@ public class NewNoteActivity extends AppCompatActivity {
     NoteRepository noteRepository;
     List<Tag> tags = new ArrayList<>();
     NoteWithTags note;
+    GoalsService goalsService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class NewNoteActivity extends AppCompatActivity {
         });
 
         noteRepository = new NoteRepository(this);
+        goalsService = new GoalsService(this);
 
         initToolbar();
         getIntentExtras();
@@ -73,6 +76,8 @@ public class NewNoteActivity extends AppCompatActivity {
                 newNote.setContent(content);
                 noteRepository.insertNoteWithTags(newNote, tags);
             }
+
+            goalsService.markGoalCompleted(GoalsService.DailyGoalType.WRITE_NOTE);
 
             finish();
         });

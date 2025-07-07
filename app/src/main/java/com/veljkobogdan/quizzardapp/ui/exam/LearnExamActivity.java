@@ -19,6 +19,7 @@ import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.database.entities.Question;
 import com.veljkobogdan.quizzardapp.data.models.ExamWithQuestions;
 import com.veljkobogdan.quizzardapp.databinding.ActivityLearnExamBinding;
+import com.veljkobogdan.quizzardapp.service.GoalsService;
 import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
 import java.text.Format;
@@ -36,6 +37,8 @@ public class LearnExamActivity extends AppCompatActivity {
     private List<QuestionAnswerItem> questionAnswerItems;
     private Button getExamResultsButton;
 
+    private GoalsService goalsService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,8 @@ public class LearnExamActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        goalsService = new GoalsService(this);
 
         questionLayout = binding.questionLayout;
         getExamResultsButton = binding.getExamResults;
@@ -86,6 +91,8 @@ public class LearnExamActivity extends AppCompatActivity {
     }
 
     private void calculateResults() {
+        goalsService.markGoalCompleted(GoalsService.DailyGoalType.PRACTICE_EXAM);
+
         int totalQuestions = questionAnswerItems.size();
         int correctAnswers = 0;
 
