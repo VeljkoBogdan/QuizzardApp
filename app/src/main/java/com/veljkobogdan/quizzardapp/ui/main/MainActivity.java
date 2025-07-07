@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(new SettingsFragment());
             } else if (item.getItemId() == R.id.calendar) {
                 replaceFragment(new CalendarFragment());
+            } else if (item.getItemId() == R.id.schedule) {
+                // TODO: Add Schedule Fragment
             }
 
             return true;

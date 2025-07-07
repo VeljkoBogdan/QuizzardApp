@@ -9,12 +9,16 @@
         android:icon="@drawable/icon_folder"
         android:id="@+id/files"
         />
-    <item android:title="@string/settings"
-        android:icon="@drawable/icon_settings"
-        android:id="@+id/settings"
-        />
     <item android:title="@string/calendar"
         android:icon="@drawable/icon_calendar"
         android:id="@+id/calendar"
+        />
+    <item android:title="@string/schedule"
+        android:icon="@drawable/icon_schedule"
+        android:id="@+id/schedule"
+        />
+    <item android:title="@string/settings"
+        android:icon="@drawable/icon_settings"
+        android:id="@+id/settings"
         />
 </menu>
