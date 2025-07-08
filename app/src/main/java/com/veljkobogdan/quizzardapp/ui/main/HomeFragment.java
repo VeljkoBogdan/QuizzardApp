@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.veljkobogdan.quizzardapp.R;
+import com.veljkobogdan.quizzardapp.service.FlashcardsLearnedService;
 import com.veljkobogdan.quizzardapp.service.GoalsService;
 import com.veljkobogdan.quizzardapp.service.StreakService;
 import com.veljkobogdan.quizzardapp.ui.exam.ExamsActivity;
@@ -27,6 +28,7 @@ public class HomeFragment extends Fragment {
     private StreakService streakService;
     private TextView streakText;
     private GoalsService goalsService;
+    private FlashcardsLearnedService flashcardsLearnedService;
 
     public HomeFragment() {}
 
@@ -46,8 +48,13 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        flashcardsLearnedService = new FlashcardsLearnedService(requireContext());
+        streakService = new StreakService(requireContext());
+        goalsService = new GoalsService(requireContext());
+
         updateStreaks(view);
         updateGoals(view);
+        updateFlashcardsLearnedCount(view);
 
         view.findViewById(R.id.buttonNotes).setOnClickListener(item -> {
             try {
@@ -77,8 +84,13 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    private void updateFlashcardsLearnedCount(@NonNull View view) {
+        TextView flashcardCount = view.findViewById(R.id.flashcardsLearned);
+        int count = flashcardsLearnedService.getCount();
+        flashcardCount.setText(String.valueOf(count));
+    }
+
     private void updateStreaks(@NonNull View view) {
-        streakService = new StreakService(requireContext());
         streakService.updateStreak();
         int streak = streakService.getCounterOfConsecutiveDays();
 
@@ -87,8 +99,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void updateGoals(@NonNull View view) {
-        goalsService = new GoalsService(requireContext());
-
         CheckBox flashcardsCheckBox, examCheckBox, noteCheckBox;
         flashcardsCheckBox = view.findViewById(R.id.flashcardCheckBox);
         examCheckBox = view.findViewById(R.id.examCheckBox);
@@ -107,5 +117,6 @@ public class HomeFragment extends Fragment {
         super.onResume();
         updateGoals(requireView());
         updateStreaks(requireView());
+        updateFlashcardsLearnedCount(requireView());
     }
 }

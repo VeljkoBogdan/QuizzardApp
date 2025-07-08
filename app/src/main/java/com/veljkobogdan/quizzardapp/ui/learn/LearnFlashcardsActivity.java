@@ -31,6 +31,7 @@ import com.veljkobogdan.quizzardapp.data.database.entities.Flashcard;
 import com.veljkobogdan.quizzardapp.data.models.FlashcardSetWithFlashcards;
 import com.veljkobogdan.quizzardapp.data.models.LearnResult;
 import com.veljkobogdan.quizzardapp.databinding.ActivityLearnFlashcardsBinding;
+import com.veljkobogdan.quizzardapp.service.FlashcardsLearnedService;
 import com.veljkobogdan.quizzardapp.service.GoalsService;
 import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
@@ -199,6 +200,9 @@ public class LearnFlashcardsActivity extends AppCompatActivity {
 
         GoalsService goalsService = new GoalsService(this);
         goalsService.markGoalCompleted(GoalsService.DailyGoalType.REVIEW_FLASHCARDS);
+
+        FlashcardsLearnedService flashcardsLearnedService = new FlashcardsLearnedService(this);
+        flashcardsLearnedService.addCount(knownCount);
 
         startActivity(intent);
         finish();
