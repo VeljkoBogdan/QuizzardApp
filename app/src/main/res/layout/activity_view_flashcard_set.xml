@@ -27,30 +27,34 @@
         android:layout_margin="8dp"
         android:orientation="vertical"
         >
-
-        <TextView
-            android:id="@+id/flashcardSetTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="12dp"
-            android:text="@string/title"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            />
-
-        <Button
-            android:id="@+id/flashcardsButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/flashcards"
-            android:layout_marginBottom="4dp"
-            />
+<!--        -->
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Your best:"-->
+<!--            android:textSize="18sp"-->
+<!--            />-->
+<!--        -->
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="0%"-->
+<!--            android:textSize="16sp"-->
+<!--            />-->
 
         <Button
             android:id="@+id/learnButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/learn"
+            android:layout_marginBottom="4dp"
+            />
+
+        <Button
+            android:id="@+id/flashcardsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="See Flashcards"
             android:layout_marginBottom="4dp"
             />
 

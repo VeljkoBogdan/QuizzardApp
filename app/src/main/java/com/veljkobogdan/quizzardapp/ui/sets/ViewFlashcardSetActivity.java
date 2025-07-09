@@ -44,7 +44,6 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
     private FlashcardSetRepository flashcardSetRepository;
     private FlashcardSetWithFlashcards flashcardSet;
     private Button learnButton, flashcardsButton, addFlashcardButton;
-    private TextView titleTextView;
     private final Map<Long, Boolean> flipStates = new HashMap<>();
 
     @Override
@@ -190,12 +189,9 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
     }
 
     private void setLayoutContent() {
-        titleTextView = binding.flashcardSetTitle;
         learnButton = binding.learnButton;
         flashcardsButton = binding.flashcardsButton;
         addFlashcardButton = binding.addButton;
-
-        titleTextView.setText(flashcardSet.flashcardSet.name);
     }
 
     private void getIntentContent() {
