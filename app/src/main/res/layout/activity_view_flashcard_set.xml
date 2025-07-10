@@ -12,6 +12,14 @@
     <include layout="@layout/common_toolbar"
         android:id="@+id/toolbarIncl" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Flashcards in this set:"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
@@ -42,28 +50,34 @@
 <!--            android:textSize="16sp"-->
 <!--            />-->
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/learnButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/learn"
-            android:layout_marginBottom="4dp"
+            app:icon="@drawable/icon_book"
+            android:layout_marginTop="12dp"
+            android:textAlignment="viewStart"
             />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/flashcardsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="See Flashcards"
-            android:layout_marginBottom="4dp"
+            android:layout_marginTop="12dp"
+            android:textAlignment="viewStart"
+            app:icon="@drawable/icon_card"
             />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/addButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/add_flashcard"
-            android:layout_marginBottom="4dp"
+            android:layout_marginTop="12dp"
+            android:textAlignment="viewStart"
+            app:icon="@drawable/icon_add"
             />
 
     </LinearLayout>
