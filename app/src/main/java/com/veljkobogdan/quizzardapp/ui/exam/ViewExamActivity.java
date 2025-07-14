@@ -32,7 +32,6 @@ public class ViewExamActivity extends AppCompatActivity {
     private ActivityViewExamBinding binding;
     private ExamWithQuestions exam;
     private LinearLayout linearLayout;
-    private TextView title;
     private Button questionsButton, takeExamButton, addQuestionButton;
     private QuestionRepository questionRepository;
     private ExamRepository examRepository;
@@ -51,26 +50,23 @@ public class ViewExamActivity extends AppCompatActivity {
             return insets;
         });
 
-        Toolbar toolbar = binding.toolbarIncl.toolbar;
-        toolbar.setTitle("Exam");
-        setSupportActionBar(toolbar);
-
         exam = (ExamWithQuestions) getIntent().getSerializableExtra(IntentGroup.EXAM_WITH_QUESTIONS);
         if (exam == null) {
             Log.e("ERROR", "Exam cannot be null");
             finish();
         }
 
+        Toolbar toolbar = binding.toolbarIncl.toolbar;
+        toolbar.setTitle(exam.exam.getTitle());
+        setSupportActionBar(toolbar);
+
         linearLayout = binding.questionLayout;
-        title = binding.examTitle;
         questionsButton = binding.questionsButton;
         takeExamButton = binding.takeExamButton;
         addQuestionButton = binding.addQuestionButton;
 
         examRepository = new ExamRepository(this);
         questionRepository = new QuestionRepository(this);
-
-        title.setText(exam.exam.getTitle());
 
         takeExamButton.setOnClickListener(v -> {
             if (exam.questionList.size() < 2) {
