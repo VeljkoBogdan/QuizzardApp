@@ -31,5 +31,40 @@
             android:text="Delete All Data"
             />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/quizzardapp"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_marginTop="32dp"
+            />
+
+        <TextView
+            android:id="@+id/appVersion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:text="v0.0.0"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:text="Developed by Veljko Bogdan"
+            android:layout_marginTop="8dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:text="vtsveljkobogdan@gmail.com"
+            />
+
     </LinearLayout>
 </FrameLayout>

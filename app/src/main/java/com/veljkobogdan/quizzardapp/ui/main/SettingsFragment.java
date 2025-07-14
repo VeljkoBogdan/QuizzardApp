@@ -1,8 +1,12 @@
 package com.veljkobogdan.quizzardapp.ui.main;
 
 import android.app.AlertDialog;
+import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
+import android.util.Config;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,16 +23,20 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.database.AppDatabase;
 import com.veljkobogdan.quizzardapp.util.ThemeManager;
 
+import java.io.Console;
+
 public class SettingsFragment extends Fragment {
     private Spinner themeSpinner;
     private final String[] values = new String[]{"System Theme", "Night", "Day"};
     private Button deleteAllButton;
+    private TextView versionText;
 
     public SettingsFragment() {}
 
@@ -41,6 +51,22 @@ public class SettingsFragment extends Fragment {
 
         initThemeSpinner(view);
         initDataDeletionButton(view);
+        setVersion(view);
+    }
+
+    private void setVersion(View view) {
+        versionText = view.findViewById(R.id.appVersion);
+
+        try {
+            PackageInfo packageInfo = requireActivity().getPackageManager()
+                    .getPackageInfo(requireActivity().getPackageName(), 0);
+            String versionName = packageInfo.versionName;
+
+            versionText.setText("v" + versionName);
+
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e("ERROR", e.getMessage());
+        }
     }
 
     private void initDataDeletionButton(@NonNull View view) {
