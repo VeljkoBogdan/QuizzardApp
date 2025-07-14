@@ -9,12 +9,14 @@ import androidx.room.TypeConverters;
 
 import com.veljkobogdan.quizzardapp.data.database.converter.LocalDateConverter;
 import com.veljkobogdan.quizzardapp.data.database.converter.LocalDateTimeConverter;
+import com.veljkobogdan.quizzardapp.data.database.converter.ScheduleConverters;
 import com.veljkobogdan.quizzardapp.data.database.dao.CalendarEntryDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.ExamDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.FlashcardDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.FlashcardSetDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.NoteDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.QuestionDao;
+import com.veljkobogdan.quizzardapp.data.database.dao.ScheduleDao;
 import com.veljkobogdan.quizzardapp.data.database.dao.TagDao;
 import com.veljkobogdan.quizzardapp.data.database.entities.CalendarEntry;
 import com.veljkobogdan.quizzardapp.data.database.entities.Exam;
@@ -25,6 +27,9 @@ import com.veljkobogdan.quizzardapp.data.database.entities.FlashcardSetCrossRef;
 import com.veljkobogdan.quizzardapp.data.database.entities.Note;
 import com.veljkobogdan.quizzardapp.data.database.entities.NoteTagCrossRef;
 import com.veljkobogdan.quizzardapp.data.database.entities.Question;
+import com.veljkobogdan.quizzardapp.data.database.entities.Schedule;
+import com.veljkobogdan.quizzardapp.data.database.entities.ScheduleWithSubjectsCrossRef;
+import com.veljkobogdan.quizzardapp.data.database.entities.Subject;
 import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
 
 @Database(entities = {
@@ -37,11 +42,15 @@ import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
         Question.class,
         Exam.class,
         ExamQuestionsCrossRef.class,
-        CalendarEntry.class
-}, version = 20)
+        CalendarEntry.class,
+        Schedule.class,
+        Subject.class,
+        ScheduleWithSubjectsCrossRef.class
+}, version = 21)
 @TypeConverters({
         LocalDateConverter.class,
-        LocalDateTimeConverter.class
+        LocalDateTimeConverter.class,
+        ScheduleConverters.class
 })
 public abstract class AppDatabase extends RoomDatabase {
     public static AppDatabase db;
@@ -64,4 +73,5 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract QuestionDao questionDao();
     public abstract ExamDao examDao();
     public abstract CalendarEntryDao calendarEntryDao();
+    public abstract ScheduleDao scheduleDao();
 }

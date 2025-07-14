@@ -1,0 +1,53 @@
+package com.veljkobogdan.quizzardapp.data.database.dao;
+
+import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.Query;
+import androidx.room.Transaction;
+import androidx.room.Update;
+
+import com.veljkobogdan.quizzardapp.data.database.entities.Schedule;
+import com.veljkobogdan.quizzardapp.data.database.entities.ScheduleWithSubjectsCrossRef;
+import com.veljkobogdan.quizzardapp.data.database.entities.Subject;
+import com.veljkobogdan.quizzardapp.data.models.ScheduleWithSubjects;
+
+import java.time.DayOfWeek;
+import java.util.List;
+
+@Dao
+public interface ScheduleDao {
+
+    @Query("SELECT * FROM schedule WHERE dayOfWeek = :day ORDER BY startTime")
+    LiveData<List<ScheduleWithSubjects>> getScheduleForDay(DayOfWeek day);
+
+    @Insert
+    long insertSchedule(Schedule entry);
+
+    @Insert
+    long insertSubject(Subject subject);
+
+    @Delete
+    void deleteScheduleEntry(Schedule entry);
+
+    @Delete
+    void deleteSubject(Subject subject);
+
+    @Query("SELECT * FROM subjects")
+    LiveData<List<Subject>> getAllSubjects();
+
+    @Transaction
+    @Query("SELECT * FROM schedule WHERE dayOfWeek = :day ORDER BY startTime")
+    LiveData<List<ScheduleWithSubjects>> getEntriesWithSubjects(DayOfWeek day);
+
+    @Insert
+    void insertScheduleWithSubjectCrossRef(ScheduleWithSubjectsCrossRef scheduleWithSubjectsCrossRef);
+
+    @Query("DELETE FROM schedulewithsubjectscrossref WHERE scheduleId = :scheduleId")
+    void deleteScheduleWithSubjectsCrossRef(long scheduleId);
+
+    @Query("DELETE FROM subjects WHERE subjectId IN (SELECT subjectId FROM schedulewithsubjectscrossref WHERE scheduleId = :scheduleId)")
+    void deleteSubjectsInSchedule(long scheduleId);
+}
+
