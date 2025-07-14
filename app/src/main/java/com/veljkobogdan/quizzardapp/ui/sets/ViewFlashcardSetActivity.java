@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -64,12 +65,24 @@ public class ViewFlashcardSetActivity extends AppCompatActivity {
         setLayoutContent();
 
         learnButton.setOnClickListener(view -> {
+            if (flashcardSet.flashcards.isEmpty()) {
+                Toast.makeText(ViewFlashcardSetActivity.this, "At least one flashcard required", Toast.LENGTH_SHORT)
+                        .show();
+                return;
+            }
+
             Intent i = new Intent(ViewFlashcardSetActivity.this, LearnFlashcardsActivity.class);
             i.putExtra(IntentGroup.FLASHCARD_SET_WITH_FLASHCARDS, flashcardSet);
             startActivity(i);
         });
 
         flashcardsButton.setOnClickListener(view -> {
+            if (flashcardSet.flashcards.isEmpty()) {
+                Toast.makeText(ViewFlashcardSetActivity.this, "There are no flashcards", Toast.LENGTH_SHORT)
+                        .show();
+                return;
+            }
+
             Intent i = new Intent(ViewFlashcardSetActivity.this, ViewFlashcardsActivity.class);
             i.putExtra(IntentGroup.FLASHCARD_SET_WITH_FLASHCARDS, flashcardSet);
             startActivity(i);
