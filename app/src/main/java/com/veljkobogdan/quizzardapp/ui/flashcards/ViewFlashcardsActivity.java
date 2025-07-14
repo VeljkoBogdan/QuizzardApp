@@ -2,10 +2,12 @@ package com.veljkobogdan.quizzardapp.ui.flashcards;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -16,7 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.database.entities.Flashcard;
 import com.veljkobogdan.quizzardapp.data.models.FlashcardSetWithFlashcards;
+import com.veljkobogdan.quizzardapp.data.repository.FlashcardRepository;
+import com.veljkobogdan.quizzardapp.data.repository.FlashcardSetRepository;
 import com.veljkobogdan.quizzardapp.databinding.ActivityViewFlashcardsBinding;
+import com.veljkobogdan.quizzardapp.ui.sets.FlashcardSetAdapter;
 import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
 public class ViewFlashcardsActivity extends AppCompatActivity {
@@ -25,6 +30,8 @@ public class ViewFlashcardsActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     FlashcardSetWithFlashcards flashcardSetWithFlashcards;
     FlashcardAdapter flashcardAdapter;
+    FlashcardRepository flashcardRepository;
+    FlashcardSetRepository flashcardSetRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +47,9 @@ public class ViewFlashcardsActivity extends AppCompatActivity {
             return insets;
         });
 
+        flashcardRepository = new FlashcardRepository(this);
+        flashcardSetRepository = new FlashcardSetRepository(this);
+
         Toolbar toolbar = binding.toolbarIncl.toolbar;
         toolbar.setTitle("Flashcards");
         setSupportActionBar(toolbar);
@@ -47,12 +57,29 @@ public class ViewFlashcardsActivity extends AppCompatActivity {
         flashcardAdapter = new FlashcardAdapter(new FlashcardAdapter.OnFlashcardClickListener() {
             @Override
             public void onFlashcardClick(Flashcard flashcard, View flaschardView) {
-                // TODO: Click to edit the flashcard
+                Intent i = new Intent(ViewFlashcardsActivity.this, EditFlashcardActivity.class);
+                i.putExtra(IntentGroup.FLASHCARD, flashcard);
+                startActivity(i);
             }
 
             @Override
-            public void onFlashcardLongClick(Flashcard flashcard) {
-                // TODO: Delete or edit flashcard
+            public void onFlashcardLongClick(Flashcard flashcard, View flashcardView) {
+                PopupMenu menu = new PopupMenu(ViewFlashcardsActivity.this, flashcardView);
+
+                menu.getMenuInflater().inflate(R.menu.set_popup_menu, menu.getMenu());
+                menu.setOnMenuItemClickListener(menuItem -> {
+                    if (menuItem.getItemId() == R.id.delete) {
+                        try {
+                            flashcardRepository.deleteFlashcard(flashcard);
+                        } catch (Exception e) {
+                            Log.e("ERROR", e.getMessage());
+                        }
+                        return true;
+                    }
+                    return false;
+                });
+
+                menu.show();
             }
         });
         recyclerView = binding.recycler;
@@ -70,6 +97,12 @@ public class ViewFlashcardsActivity extends AppCompatActivity {
     }
 
     private void loadFlashcards() {
-        flashcardAdapter.setFlashcards(flashcardSetWithFlashcards.flashcards);
+        flashcardSetRepository
+                .getFlashcardSetWithFlashcards(flashcardSetWithFlashcards.flashcardSet.flashcardSetId)
+                .observe(ViewFlashcardsActivity.this, newFlashcardSet -> {
+                    if (!newFlashcardSet.flashcards.isEmpty()) {
+                        flashcardAdapter.setFlashcards(newFlashcardSet.flashcards);
+                    }
+                });
     }
 }

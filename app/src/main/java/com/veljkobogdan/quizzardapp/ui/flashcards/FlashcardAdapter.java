@@ -1,5 +1,6 @@
 package com.veljkobogdan.quizzardapp.ui.flashcards;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +12,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.database.entities.Flashcard;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /** @noinspection ClassEscapesDefinedScope*/
 public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.FlashcardAdapterViewHolder> {
-    private List<Flashcard> flashcards;
+    private List<Flashcard> flashcards = new ArrayList<>();
     private final FlashcardAdapter.OnFlashcardClickListener onFlashcardClickListener;
 
     public FlashcardAdapter(FlashcardAdapter.OnFlashcardClickListener onFlashcardClickListener) {
         this.onFlashcardClickListener = onFlashcardClickListener;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setFlashcards(List<Flashcard> flashcards) {
+        this.flashcards.clear();
         this.flashcards = flashcards;
-        notifyItemChanged(R.id.recycler);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -71,7 +75,7 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
                 if (onFlashcardClickListener != null) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
-                        onFlashcardClickListener.onFlashcardLongClick(flashcards.get(position));
+                        onFlashcardClickListener.onFlashcardLongClick(flashcards.get(position), itemView);
                     }
                 }
 
@@ -87,6 +91,6 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
 
     public interface OnFlashcardClickListener {
         void onFlashcardClick(Flashcard flashcard, View flaschardView);
-        void onFlashcardLongClick(Flashcard flashcard);
+        void onFlashcardLongClick(Flashcard flashcard, View flashcardView);
     }
 }
