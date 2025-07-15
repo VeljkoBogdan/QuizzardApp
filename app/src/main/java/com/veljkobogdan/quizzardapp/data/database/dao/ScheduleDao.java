@@ -19,9 +19,6 @@ import java.util.List;
 @Dao
 public interface ScheduleDao {
 
-    @Query("SELECT * FROM schedule WHERE dayOfWeek = :day ORDER BY startTime")
-    LiveData<List<ScheduleWithSubjects>> getScheduleForDay(DayOfWeek day);
-
     @Insert
     long insertSchedule(Schedule entry);
 
@@ -37,10 +34,6 @@ public interface ScheduleDao {
     @Query("SELECT * FROM subjects")
     LiveData<List<Subject>> getAllSubjects();
 
-    @Transaction
-    @Query("SELECT * FROM schedule WHERE dayOfWeek = :day ORDER BY startTime")
-    LiveData<List<ScheduleWithSubjects>> getEntriesWithSubjects(DayOfWeek day);
-
     @Insert
     void insertScheduleWithSubjectCrossRef(ScheduleWithSubjectsCrossRef scheduleWithSubjectsCrossRef);
 
@@ -49,5 +42,9 @@ public interface ScheduleDao {
 
     @Query("DELETE FROM subjects WHERE subjectId IN (SELECT subjectId FROM schedulewithsubjectscrossref WHERE scheduleId = :scheduleId)")
     void deleteSubjectsInSchedule(long scheduleId);
+
+    @Transaction
+    @Query("SELECT * FROM schedule")
+    LiveData<List<ScheduleWithSubjects>> getAllSchedulesWithSubjects();
 }
 

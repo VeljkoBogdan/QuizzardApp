@@ -14,7 +14,7 @@ public class ScheduleWithSubjects {
     public Schedule entry;
 
     @Relation(
-            parentColumn = "subjectId",
+            parentColumn = "scheduleId",
             entityColumn = "subjectId"
     )
     public List<Subject> subjectList;

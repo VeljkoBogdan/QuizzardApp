@@ -1,23 +1,41 @@
 package com.veljkobogdan.quizzardapp.ui.main;
 
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.veljkobogdan.quizzardapp.R;
-import com.veljkobogdan.quizzardapp.util.DottedLineBackgroundDrawable;
+import com.veljkobogdan.quizzardapp.data.database.entities.Schedule;
+import com.veljkobogdan.quizzardapp.data.database.entities.Subject;
+import com.veljkobogdan.quizzardapp.data.models.ScheduleWithSubjects;
+import com.veljkobogdan.quizzardapp.data.repository.ScheduleRepository;
+import com.veljkobogdan.quizzardapp.ui.schedule.AddScheduleActivity;
+import com.veljkobogdan.quizzardapp.util.DisplayUtil;
+
+import java.time.DayOfWeek;
+import java.util.List;
 
 
 public class ScheduleFragment extends Fragment {
 
-    private RecyclerView subjectRecycler;
+    private ScheduleRepository scheduleRepository;
+    private List<ScheduleWithSubjects> scheduleWithSubjects;
+    private ImageButton addButton, menuButton;
+    private Spinner scheduleSelectSpinner;
 
     public ScheduleFragment() {}
 
@@ -37,8 +55,93 @@ public class ScheduleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        subjectRecycler = view.findViewById(R.id.subjectRecycler);
-        DottedLineBackgroundDrawable backgroundDrawable = new DottedLineBackgroundDrawable();
-        subjectRecycler.setBackground(backgroundDrawable);
+        addButton = view.findViewById(R.id.addButton);
+        menuButton = view.findViewById(R.id.menuButton);
+        scheduleSelectSpinner = view.findViewById(R.id.scheduleSpinner);
+
+        addButton.setOnClickListener(v -> {
+            Intent i = new Intent(requireContext(), AddScheduleActivity.class);
+            startActivity(i);
+        });
+
+        scheduleRepository = new ScheduleRepository(requireContext());
+        loadSchedulesWithSubjects();
     }
+
+    private void setupSchedule(List<ScheduleWithSubjects> updatedSchedulesWithSubjects) {
+        clearFrameLayouts();
+
+        for (ScheduleWithSubjects scheduleWithSubjects : updatedSchedulesWithSubjects) {
+            List<Subject> subjects = scheduleWithSubjects.subjectList;
+
+            for (Subject subject : subjects) {
+                FrameLayout targetDayColumn = getDayColumn(subject.dayOfWeek);
+
+                if (targetDayColumn == null) continue;
+
+                MaterialCardView subjectCard = (MaterialCardView) LayoutInflater
+                        .from(requireContext())
+                        .inflate(R.layout.item_subject_card, targetDayColumn, false);
+
+                int hourHeight = DisplayUtil.dpToPx(requireContext(), 60);
+                int startHour = subject.startTime.getHour();
+                int endHour = subject.endTime.getHour();
+                int topMargin = (startHour - 6) * hourHeight;
+                int height = (endHour - startHour) * hourHeight;
+
+                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        height
+                );
+                params.topMargin = topMargin;
+                subjectCard.setLayoutParams(params);
+
+                TextView title = subjectCard.findViewById(R.id.subjectCardTitle);
+                title.setText(subject.name);
+
+                targetDayColumn.addView(subjectCard);
+            }
+        }
+    }
+
+    private void clearFrameLayouts() {
+        ((FrameLayout) requireView().findViewById(R.id.day_mon)).removeAllViews();
+        ((FrameLayout) requireView().findViewById(R.id.day_tue)).removeAllViews();
+        ((FrameLayout) requireView().findViewById(R.id.day_wed)).removeAllViews();
+        ((FrameLayout) requireView().findViewById(R.id.day_thu)).removeAllViews();
+        ((FrameLayout) requireView().findViewById(R.id.day_fri)).removeAllViews();
+        ((FrameLayout) requireView().findViewById(R.id.day_sat)).removeAllViews();
+        ((FrameLayout) requireView().findViewById(R.id.day_sun)).removeAllViews();
+    }
+
+    public void loadSchedulesWithSubjects() {
+        scheduleRepository.getAllSchedulesWithSubjects().observe(requireActivity(),
+                updatedSchedulesWithSubjects -> {
+            if (!updatedSchedulesWithSubjects.isEmpty()) {
+                setupSchedule(updatedSchedulesWithSubjects);
+            }
+        });
+    }
+
+    private FrameLayout getDayColumn(DayOfWeek dayOfWeek) {
+        switch (dayOfWeek) {
+            case MONDAY:
+                return requireView().findViewById(R.id.day_mon);
+            case TUESDAY:
+                return requireView().findViewById(R.id.day_tue);
+            case WEDNESDAY:
+                return requireView().findViewById(R.id.day_wed);
+            case THURSDAY:
+                return requireView().findViewById(R.id.day_thu);
+            case FRIDAY:
+                return requireView().findViewById(R.id.day_fri);
+            case SATURDAY:
+                return requireView().findViewById(R.id.day_sat);
+            case SUNDAY:
+                return requireView().findViewById(R.id.day_sun);
+            default:
+                return null;
+        }
+    }
+
 }

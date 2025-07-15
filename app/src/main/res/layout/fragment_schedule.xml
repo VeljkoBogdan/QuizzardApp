@@ -56,157 +56,65 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <LinearLayout
+        <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/scheduleScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_margin="8dp"
+            android:fillViewport="true"
             >
-            
-            <!-- Days -->
-            <com.google.android.flexbox.FlexboxLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:flexDirection="row"
-                >
-
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" />
-                <TextView android:text="Mon" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAlignment="center"/>
-                <TextView android:text="Tue" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAlignment="center"/>
-                <TextView android:text="Wed" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAlignment="center"/>
-                <TextView android:text="Thu" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAlignment="center"/>
-                <TextView android:text="Fri" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAlignment="center"/>
-                <TextView android:text="Sat" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAlignment="center"/>
-                <TextView android:text="Sun" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAlignment="center"/>
-
-            </com.google.android.flexbox.FlexboxLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/scheduleRoot"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
-                <!-- Time -->
-                <com.google.android.flexbox.FlexboxLayout
-                    android:layout_width="50dp"
+                <!-- Time Column -->
+                <LinearLayout
+                    android:id="@+id/timeColumn"
+                    android:layout_width="60dp"
                     android:layout_height="match_parent"
-                    app:flexDirection="column">
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="06:00"
-                        android:gravity="bottom"
-                        />
+                    <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="06:00" android:gravity="end" android:paddingEnd="4dp"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="07:00" android:gravity="end" android:paddingEnd="4dp"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="08:00" android:gravity="end" android:paddingEnd="4dp"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="09:00" android:gravity="end" android:paddingEnd="4dp"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="10:00" android:gravity="end" android:paddingEnd="4dp"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="11:00" android:gravity="end" android:paddingEnd="4dp"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="12:00" android:gravity="end" android:paddingEnd="4dp"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="13:00" android:gravity="end" android:paddingEnd="4dp"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="14:00" android:gravity="end" android:paddingEnd="4dp"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="15:00" android:gravity="end" android:paddingEnd="4dp"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="16:00" android:gravity="end" android:paddingEnd="4dp"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="17:00" android:gravity="end" android:paddingEnd="4dp"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="18:00" android:gravity="end" android:paddingEnd="4dp"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="19:00" android:gravity="end" android:paddingEnd="4dp"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="20:00" android:gravity="end" android:paddingEnd="4dp"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="21:00" android:gravity="end" android:paddingEnd="4dp"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="22:00" android:gravity="end" android:paddingEnd="4dp"/>
 
-                    <TextView
-                        android:gravity="bottom"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="07:00"/>
+                </LinearLayout>
 
-                    <TextView
-                        android:gravity="bottom"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="08:00"/>
-
-                    <TextView
-                        android:gravity="bottom"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="09:00"/>
-
-                    <TextView
-                        android:gravity="bottom"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="10:00"/>
-
-                    <TextView
-                        android:gravity="bottom"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="11:00"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="12:00"
-                        android:gravity="bottom"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="13:00"
-                        android:gravity="bottom" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="14:00"
-                        android:gravity="bottom" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="15:00"
-                        android:gravity="bottom" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="16:00"
-                        android:gravity="bottom" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="17:00"
-                        android:gravity="bottom" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="18:00"
-                        android:gravity="bottom" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="19:00"
-                        android:gravity="bottom" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="20:00"
-                        android:gravity="bottom" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="21:00"
-                        android:gravity="bottom" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="22:00"
-                        android:gravity="bottom" />
-
-                </com.google.android.flexbox.FlexboxLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/subjectRecycler"
-                    android:layout_width="match_parent"
+                <!-- 7 Day Columns -->
+                <LinearLayout
+                    android:id="@+id/dayColumns"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    />
+                    android:orientation="horizontal">
+
+                    <FrameLayout android:id="@+id/day_mon" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" />
+                    <FrameLayout android:id="@+id/day_tue" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background"/>
+                    <FrameLayout android:id="@+id/day_wed" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background"/>
+                    <FrameLayout android:id="@+id/day_thu" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background"/>
+                    <FrameLayout android:id="@+id/day_fri" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background"/>
+                    <FrameLayout android:id="@+id/day_sat" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background"/>
+                    <FrameLayout android:id="@+id/day_sun" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background"/>
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+        </HorizontalScrollView>
 
     </LinearLayout>
 

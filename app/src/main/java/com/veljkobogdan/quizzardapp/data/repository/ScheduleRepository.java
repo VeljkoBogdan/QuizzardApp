@@ -42,12 +42,12 @@ public class ScheduleRepository {
         executor.execute(() -> scheduleDao.deleteSubject(subject));
     }
 
-    public LiveData<List<ScheduleWithSubjects>> getScheduleForDay(DayOfWeek day) {
-        return scheduleDao.getEntriesWithSubjects(day);
-    }
-
     public LiveData<List<Subject>> getAllSubjects() {
         return scheduleDao.getAllSubjects();
+    }
+
+    public LiveData<List<ScheduleWithSubjects>> getAllSchedulesWithSubjects() {
+        return scheduleDao.getAllSchedulesWithSubjects();
     }
 
     public void insertScheduleWithSubjects(Schedule schedule, List<Subject> subjects) {
