@@ -5,15 +5,19 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.veljkobogdan.quizzardapp.R;
+import com.veljkobogdan.quizzardapp.util.DottedLineBackgroundDrawable;
 
 
 public class ScheduleFragment extends Fragment {
+
+    private RecyclerView subjectRecycler;
 
     public ScheduleFragment() {}
 
@@ -33,5 +37,8 @@ public class ScheduleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        subjectRecycler = view.findViewById(R.id.subjectRecycler);
+        DottedLineBackgroundDrawable backgroundDrawable = new DottedLineBackgroundDrawable();
+        subjectRecycler.setBackground(backgroundDrawable);
     }
 }
