@@ -4,8 +4,10 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 
+import java.io.Serializable;
+
 @Entity(primaryKeys = {"scheduleId", "subjectId"})
-public class ScheduleWithSubjectsCrossRef {
+public class ScheduleWithSubjectsCrossRef implements Serializable {
     @ColumnInfo
     public long scheduleId;
     @ColumnInfo

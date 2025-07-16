@@ -4,11 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 @Entity(tableName = "subjects")
-public class Subject {
+public class Subject implements Serializable {
     @PrimaryKey(autoGenerate = true)
     public long subjectId;
     @NonNull

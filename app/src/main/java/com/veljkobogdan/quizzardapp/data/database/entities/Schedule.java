@@ -1,15 +1,12 @@
 package com.veljkobogdan.quizzardapp.data.database.entities;
 
-import androidx.annotation.NonNull;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
+import java.io.Serializable;
 
 @Entity(tableName = "schedule")
-public class Schedule {
+public class Schedule implements Serializable {
     @PrimaryKey(autoGenerate = true)
     public long scheduleId;
 
