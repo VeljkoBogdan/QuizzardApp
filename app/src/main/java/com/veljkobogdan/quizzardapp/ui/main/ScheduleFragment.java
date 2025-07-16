@@ -149,6 +149,7 @@ public class ScheduleFragment extends Fragment {
 
     public void loadSchedulesWithSubjects() {
         scheduleRepository.getAllSchedulesWithSubjects().observe(requireActivity(), updatedSchedulesWithSubjects -> {
+            if (!isAdded() || getContext() == null || getView() == null) return; // wait for ui to assemble
             if (updatedSchedulesWithSubjects != null && !updatedSchedulesWithSubjects.isEmpty()) {
                 allSchedulesWithSubjects = updatedSchedulesWithSubjects;
 
