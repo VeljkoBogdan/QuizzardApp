@@ -103,13 +103,13 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <FrameLayout android:id="@+id/day_mon" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" />
-                    <FrameLayout android:id="@+id/day_tue" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background"/>
-                    <FrameLayout android:id="@+id/day_wed" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background"/>
-                    <FrameLayout android:id="@+id/day_thu" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background"/>
-                    <FrameLayout android:id="@+id/day_fri" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background"/>
-                    <FrameLayout android:id="@+id/day_sat" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background"/>
-                    <FrameLayout android:id="@+id/day_sun" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background"/>
+                    <FrameLayout android:id="@+id/day_mon" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
+                    <FrameLayout android:id="@+id/day_tue" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
+                    <FrameLayout android:id="@+id/day_wed" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
+                    <FrameLayout android:id="@+id/day_thu" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
+                    <FrameLayout android:id="@+id/day_fri" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
+                    <FrameLayout android:id="@+id/day_sat" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
+                    <FrameLayout android:id="@+id/day_sun" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
                 </LinearLayout>
 
             </HorizontalScrollView>
