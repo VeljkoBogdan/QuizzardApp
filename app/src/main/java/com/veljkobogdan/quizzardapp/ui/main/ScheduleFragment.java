@@ -29,7 +29,9 @@ import com.veljkobogdan.quizzardapp.data.models.FlashcardSetWithFlashcards;
 import com.veljkobogdan.quizzardapp.data.models.ScheduleWithSubjects;
 import com.veljkobogdan.quizzardapp.data.repository.ScheduleRepository;
 import com.veljkobogdan.quizzardapp.ui.schedule.AddScheduleActivity;
+import com.veljkobogdan.quizzardapp.ui.schedule.AddSubjectActivity;
 import com.veljkobogdan.quizzardapp.util.DisplayUtil;
+import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
@@ -40,6 +42,7 @@ public class ScheduleFragment extends Fragment {
 
     private ScheduleRepository scheduleRepository;
     private List<ScheduleWithSubjects> allSchedulesWithSubjects = new ArrayList<>();
+    private Schedule currentSchedule;
     private ImageButton addButton, menuButton;
     private Spinner scheduleSelectSpinner;
 
@@ -66,7 +69,9 @@ public class ScheduleFragment extends Fragment {
         scheduleSelectSpinner = view.findViewById(R.id.scheduleSpinner);
 
         addButton.setOnClickListener(v -> {
-            // TODO: go to Add subject instead
+            Intent i = new Intent(requireContext(), AddSubjectActivity.class);
+            i.putExtra(IntentGroup.SCHEDULE, currentSchedule);
+            startActivity(i);
         });
 
         menuButton.setOnClickListener(v -> {
@@ -165,6 +170,7 @@ public class ScheduleFragment extends Fragment {
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         ScheduleWithSubjects selectedSchedule = allSchedulesWithSubjects.get(position);
                         setupSchedule(List.of(selectedSchedule));
+                        currentSchedule = selectedSchedule.entry;
                     }
 
                     @Override
