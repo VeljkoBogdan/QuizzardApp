@@ -55,4 +55,6 @@
     <string name="notify_me">Notify me</string>
     <string name="schedule">Schedule</string>
     <string name="quizzardapp">QuizzardApp</string>
+    <string name="schedule_name">Schedule Name</string>
+    <string name="add_schedule">Add Schedule</string>
 </resources>

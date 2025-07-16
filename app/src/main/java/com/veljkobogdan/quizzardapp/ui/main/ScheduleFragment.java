@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -30,13 +32,14 @@ import com.veljkobogdan.quizzardapp.ui.schedule.AddScheduleActivity;
 import com.veljkobogdan.quizzardapp.util.DisplayUtil;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class ScheduleFragment extends Fragment {
 
     private ScheduleRepository scheduleRepository;
-    private List<ScheduleWithSubjects> scheduleWithSubjects;
+    private List<ScheduleWithSubjects> allSchedulesWithSubjects = new ArrayList<>();
     private ImageButton addButton, menuButton;
     private Spinner scheduleSelectSpinner;
 
@@ -63,8 +66,6 @@ public class ScheduleFragment extends Fragment {
         scheduleSelectSpinner = view.findViewById(R.id.scheduleSpinner);
 
         addButton.setOnClickListener(v -> {
-            Intent i = new Intent(requireContext(), AddScheduleActivity.class);
-            startActivity(i);
             // TODO: go to Add subject instead
         });
 
@@ -142,12 +143,41 @@ public class ScheduleFragment extends Fragment {
     }
 
     public void loadSchedulesWithSubjects() {
-        scheduleRepository.getAllSchedulesWithSubjects().observe(requireActivity(),
-                updatedSchedulesWithSubjects -> {
-            if (!updatedSchedulesWithSubjects.isEmpty()) {
-                setupSchedule(updatedSchedulesWithSubjects);
+        scheduleRepository.getAllSchedulesWithSubjects().observe(requireActivity(), updatedSchedulesWithSubjects -> {
+            if (updatedSchedulesWithSubjects != null && !updatedSchedulesWithSubjects.isEmpty()) {
+                allSchedulesWithSubjects = updatedSchedulesWithSubjects;
+
+                List<String> scheduleNames = new ArrayList<>();
+                for (ScheduleWithSubjects sws : updatedSchedulesWithSubjects) {
+                    scheduleNames.add(sws.entry.name);
+                }
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                        requireContext(),
+                        android.R.layout.simple_spinner_item,
+                        scheduleNames
+                );
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                scheduleSelectSpinner.setAdapter(adapter);
+
+                scheduleSelectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        ScheduleWithSubjects selectedSchedule = allSchedulesWithSubjects.get(position);
+                        setupSchedule(List.of(selectedSchedule));
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        // handle deselection
+                    }
+                });
+
+                // set the first one initially
+                setupSchedule(List.of(allSchedulesWithSubjects.get(0)));
             }
         });
+
     }
 
     private FrameLayout getDayColumn(DayOfWeek dayOfWeek) {

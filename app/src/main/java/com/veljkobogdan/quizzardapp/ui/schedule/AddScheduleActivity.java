@@ -55,6 +55,7 @@ public class AddScheduleActivity extends AppCompatActivity {
             schedule.name = scheduleName;
 
             scheduleRepository.insertScheduleEntry(schedule);
+            finish();
         });
     }
 }

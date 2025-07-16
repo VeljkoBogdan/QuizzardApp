@@ -46,7 +46,7 @@ import com.veljkobogdan.quizzardapp.data.database.entities.Tag;
         Schedule.class,
         Subject.class,
         ScheduleWithSubjectsCrossRef.class
-}, version = 23)
+}, version = 24)
 @TypeConverters({
         LocalDateConverter.class,
         LocalDateTimeConverter.class,
