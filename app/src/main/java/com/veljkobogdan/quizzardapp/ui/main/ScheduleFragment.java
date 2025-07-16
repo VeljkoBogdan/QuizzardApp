@@ -101,39 +101,37 @@ public class ScheduleFragment extends Fragment {
         loadSchedulesWithSubjects();
     }
 
-    private void setupSchedule(List<ScheduleWithSubjects> updatedSchedulesWithSubjects) {
+    private void setupSchedule(ScheduleWithSubjects updatedScheduleWithSubjects) {
         clearFrameLayouts();
 
-        for (ScheduleWithSubjects scheduleWithSubjects : updatedSchedulesWithSubjects) {
-            List<Subject> subjects = scheduleWithSubjects.subjectList;
+        List<Subject> subjects = updatedScheduleWithSubjects.subjectList;
 
-            for (Subject subject : subjects) {
-                FrameLayout targetDayColumn = getDayColumn(subject.dayOfWeek);
+        for (Subject subject : subjects) {
+            FrameLayout targetDayColumn = getDayColumn(subject.dayOfWeek);
 
-                if (targetDayColumn == null) continue;
+            if (targetDayColumn == null) continue;
 
-                MaterialCardView subjectCard = (MaterialCardView) LayoutInflater
-                        .from(requireContext())
-                        .inflate(R.layout.item_subject_card, targetDayColumn, false);
+            MaterialCardView subjectCard = (MaterialCardView) LayoutInflater
+                    .from(requireContext())
+                    .inflate(R.layout.item_subject_card, targetDayColumn, false);
 
-                int hourHeight = DisplayUtil.dpToPx(requireContext(), 60);
-                int startHour = subject.startTime.getHour();
-                int endHour = subject.endTime.getHour();
-                int topMargin = (startHour - 6) * hourHeight;
-                int height = (endHour - startHour) * hourHeight;
+            int hourHeight = DisplayUtil.dpToPx(requireContext(), 60);
+            int startHour = subject.startTime.getHour();
+            int endHour = subject.endTime.getHour();
+            int topMargin = (startHour - 6) * hourHeight;
+            int height = (endHour - startHour) * hourHeight;
 
-                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        height
-                );
-                params.topMargin = topMargin;
-                subjectCard.setLayoutParams(params);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    height
+            );
+            params.topMargin = topMargin;
+            subjectCard.setLayoutParams(params);
 
-                TextView title = subjectCard.findViewById(R.id.subjectCardTitle);
-                title.setText(subject.name);
+            TextView title = subjectCard.findViewById(R.id.subjectCardTitle);
+            title.setText(subject.name);
 
-                targetDayColumn.addView(subjectCard);
-            }
+            targetDayColumn.addView(subjectCard);
         }
     }
 
@@ -170,7 +168,7 @@ public class ScheduleFragment extends Fragment {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         ScheduleWithSubjects selectedSchedule = allSchedulesWithSubjects.get(position);
-                        setupSchedule(List.of(selectedSchedule));
+                        setupSchedule(selectedSchedule);
                         currentSchedule = selectedSchedule.entry;
                     }
 
@@ -181,7 +179,7 @@ public class ScheduleFragment extends Fragment {
                 });
 
                 // set the first one initially
-                setupSchedule(List.of(allSchedulesWithSubjects.get(0)));
+                setupSchedule(allSchedulesWithSubjects.get(0));
             }
         });
 
