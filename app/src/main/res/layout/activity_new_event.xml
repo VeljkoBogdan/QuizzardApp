@@ -13,44 +13,53 @@
         android:id="@+id/toolbarIncl"
         />
 
-    <EditText
-        android:id="@+id/eventName"
-        android:hint="@string/event_name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        />
-
-    <CheckBox
-        android:id="@+id/wholeDayCheckbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/whole_day" />
-
-    <TextView
-        android:id="@+id/timeTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:background="?android:attr/editTextBackground"
-        android:text="@string/select_time"
-        android:visibility="visible" />
-
-    <CheckBox
-        android:id="@+id/notificationCheckbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/notify_me"
-        android:checked="true"
-        />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/addEventButton"
+        android:orientation="vertical"
         android:layout_margin="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/add_event"
-        />
+        >
+
+        <EditText
+            android:id="@+id/eventName"
+            android:hint="@string/event_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            />
+
+        <CheckBox
+            android:id="@+id/wholeDayCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/whole_day" />
+
+        <TextView
+            android:id="@+id/timeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:background="?android:attr/editTextBackground"
+            android:text="@string/select_time"
+            android:visibility="visible" />
+
+        <CheckBox
+            android:id="@+id/notificationCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notify_me"
+            android:checked="true"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addEventButton"
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_event"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>

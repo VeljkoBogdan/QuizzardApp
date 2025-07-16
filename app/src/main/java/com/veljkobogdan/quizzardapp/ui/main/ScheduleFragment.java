@@ -6,8 +6,10 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.database.entities.Schedule;
 import com.veljkobogdan.quizzardapp.data.database.entities.Subject;
+import com.veljkobogdan.quizzardapp.data.models.FlashcardSetWithFlashcards;
 import com.veljkobogdan.quizzardapp.data.models.ScheduleWithSubjects;
 import com.veljkobogdan.quizzardapp.data.repository.ScheduleRepository;
 import com.veljkobogdan.quizzardapp.ui.schedule.AddScheduleActivity;
@@ -62,6 +65,30 @@ public class ScheduleFragment extends Fragment {
         addButton.setOnClickListener(v -> {
             Intent i = new Intent(requireContext(), AddScheduleActivity.class);
             startActivity(i);
+            // TODO: go to Add subject instead
+        });
+
+        menuButton.setOnClickListener(v -> {
+            PopupMenu menu = new PopupMenu(requireContext(), v);
+
+            menu.getMenuInflater().inflate(R.menu.schedule_menu, menu.getMenu());
+            menu.setOnMenuItemClickListener(menuItem -> {
+                int id = menuItem.getItemId();
+                if (id == R.id.addScheduleButton) {
+                    Intent i = new Intent(requireContext(), AddScheduleActivity.class);
+                    startActivity(i);
+                    return true;
+                } else if (id == R.id.editScheduleButton) {
+                    // TODO: Add Edit schedule activity
+                    return true;
+                } else if (id == R.id.deleteScheduleButton) {
+                    // TODO: Add a confirmation dialog to delete schedule
+                    return true;
+                }
+                return false;
+            });
+
+            menu.show();
         });
 
         scheduleRepository = new ScheduleRepository(requireContext());

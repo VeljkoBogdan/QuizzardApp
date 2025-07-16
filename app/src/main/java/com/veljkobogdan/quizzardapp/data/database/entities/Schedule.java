@@ -12,5 +12,7 @@ import java.time.LocalTime;
 public class Schedule {
     @PrimaryKey(autoGenerate = true)
     public long scheduleId;
+
+    public String name;
 }
 
