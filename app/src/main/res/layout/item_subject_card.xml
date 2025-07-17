@@ -6,7 +6,7 @@
     android:id="@+id/subjectCard"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:backgroundTint="@color/md_theme_inversePrimary"
+    app:cardBackgroundColor="@color/md_theme_inversePrimary"
     app:strokeWidth="0dp"
     >
 

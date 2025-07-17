@@ -45,6 +45,7 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation(libs.flexbox)
+    implementation(libs.ambilwarna)
 
     // The view calendar library for Android
     implementation("com.kizitonwose.calendar:view:2.6.1")

@@ -1,5 +1,6 @@
 [versions]
 agp = "8.10.1"
+ambilwarna = "2.0.1"
 flexbox = "3.0.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -12,6 +13,7 @@ roomVersion = "2.6.1"
 view = "<latest-version>"
 
 [libraries]
+ambilwarna = { module = "com.github.yukuku:ambilwarna", version.ref = "ambilwarna" }
 compose = { module = "com.kizitonwose.calendar:compose", version.ref = "view" }
 flexbox = { module = "com.google.android.flexbox:flexbox", version.ref = "flexbox" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

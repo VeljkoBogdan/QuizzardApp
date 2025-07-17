@@ -13,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.button.MaterialButton;
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.database.entities.Schedule;
 import com.veljkobogdan.quizzardapp.data.database.entities.Subject;
@@ -26,6 +27,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import yuku.ambilwarna.AmbilWarnaDialog;
+
 public class AddSubjectActivity extends AppCompatActivity {
 
     ActivityAddSubjectBinding binding;
@@ -34,6 +37,8 @@ public class AddSubjectActivity extends AppCompatActivity {
     Spinner startHourSpinner, startMinuteSpinner, endHourSpinner, endMinuteSpinner, dayOfWeekSpinner;
     EditText subjectNameEditText, teacherNameEditText, locationEditText;
     Button addSubjectButton;
+    MaterialButton addColorButton;
+    int cardColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,8 @@ public class AddSubjectActivity extends AppCompatActivity {
         startMinuteSpinner = binding.startMinuteSpinner;
         endHourSpinner = binding.endHourSpinner;
         endMinuteSpinner = binding.endMinuteSpinner;
+        addColorButton = binding.colorPickerButton;
+        cardColor = addColorButton.getBackgroundTintList().getDefaultColor();
 
         getIntentContent();
         setupTimeSpinners();
@@ -89,6 +96,7 @@ public class AddSubjectActivity extends AppCompatActivity {
             subject.dayOfWeek = dayOfWeek;
             subject.startTime = LocalTime.of(startHour, startMinute);
             subject.endTime = LocalTime.of(endHour, endMinute);
+            subject.color = cardColor;
 
             if (subject.endTime.isBefore(subject.startTime) || subject.endTime.equals(subject.startTime)) {
                 Toast.makeText(this, "End time must be after start time", Toast.LENGTH_SHORT).show();
@@ -97,6 +105,19 @@ public class AddSubjectActivity extends AppCompatActivity {
 
             scheduleRepository.addSubjectToSchedule(subject, schedule.scheduleId);
             finish();
+        });
+
+        addColorButton.setOnClickListener(view -> {
+            AmbilWarnaDialog colorPicker = new AmbilWarnaDialog(this, cardColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+                @Override
+                public void onOk(AmbilWarnaDialog dialog, int color) {
+                    cardColor = color;
+                }
+
+                @Override
+                public void onCancel(AmbilWarnaDialog dialog) {}
+            });
+            colorPicker.show();
         });
     }
 

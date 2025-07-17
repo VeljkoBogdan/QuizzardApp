@@ -22,5 +22,6 @@ public class Subject implements Serializable {
     public LocalTime startTime;
     @NonNull
     public LocalTime endTime;
+    public int color;
 }
 
