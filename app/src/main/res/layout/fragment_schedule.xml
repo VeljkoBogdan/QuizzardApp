@@ -69,6 +69,12 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <Space
+                    android:id="@+id/timeOffsetSpace"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    />
+
                 <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="06:00" android:gravity="end" android:paddingEnd="4dp"/>
                 <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="07:00" android:gravity="end" android:paddingEnd="4dp"/>
                 <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="08:00" android:gravity="end" android:paddingEnd="4dp"/>
@@ -96,20 +102,44 @@
                 android:fillViewport="true"
                 >
 
-                <!-- 7 Day Columns -->
+                <!-- Weekday Header and 7 Day Columns -->
                 <LinearLayout
-                    android:id="@+id/dayColumns"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
-                    <FrameLayout android:id="@+id/day_mon" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
-                    <FrameLayout android:id="@+id/day_tue" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
-                    <FrameLayout android:id="@+id/day_wed" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
-                    <FrameLayout android:id="@+id/day_thu" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
-                    <FrameLayout android:id="@+id/day_fri" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
-                    <FrameLayout android:id="@+id/day_sat" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
-                    <FrameLayout android:id="@+id/day_sun" android:layout_width="100dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
+                    <!-- Weekday Names -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:orientation="horizontal"
+                        android:paddingBottom="4dp">
+
+                        <TextView android:layout_width="160dp" android:layout_height="wrap_content" android:text="Mon" android:gravity="center" android:textStyle="bold"/>
+                        <TextView android:layout_width="160dp" android:layout_height="wrap_content" android:text="Tue" android:gravity="center" android:textStyle="bold"/>
+                        <TextView android:layout_width="160dp" android:layout_height="wrap_content" android:text="Wed" android:gravity="center" android:textStyle="bold"/>
+                        <TextView android:layout_width="160dp" android:layout_height="wrap_content" android:text="Thu" android:gravity="center" android:textStyle="bold"/>
+                        <TextView android:layout_width="160dp" android:layout_height="wrap_content" android:text="Fri" android:gravity="center" android:textStyle="bold"/>
+                        <TextView android:layout_width="160dp" android:layout_height="wrap_content" android:text="Sat" android:gravity="center" android:textStyle="bold"/>
+                        <TextView android:layout_width="160dp" android:layout_height="wrap_content" android:text="Sun" android:gravity="center" android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <!-- Actual Day Columns -->
+                    <LinearLayout
+                        android:id="@+id/dayColumns"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/day_mon" android:layout_width="160dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
+                        <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/day_tue" android:layout_width="160dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
+                        <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/day_wed" android:layout_width="160dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
+                        <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/day_thu" android:layout_width="160dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
+                        <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/day_fri" android:layout_width="160dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
+                        <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/day_sat" android:layout_width="160dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
+                        <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/day_sun" android:layout_width="160dp" android:layout_height="match_parent" android:background="@drawable/schedule_day_background" android:padding="4dp"/>
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </HorizontalScrollView>

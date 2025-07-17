@@ -1,22 +1,19 @@
 package com.veljkobogdan.quizzardapp.ui.main;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,7 +22,6 @@ import com.google.android.material.card.MaterialCardView;
 import com.veljkobogdan.quizzardapp.R;
 import com.veljkobogdan.quizzardapp.data.database.entities.Schedule;
 import com.veljkobogdan.quizzardapp.data.database.entities.Subject;
-import com.veljkobogdan.quizzardapp.data.models.FlashcardSetWithFlashcards;
 import com.veljkobogdan.quizzardapp.data.models.ScheduleWithSubjects;
 import com.veljkobogdan.quizzardapp.data.repository.ScheduleRepository;
 import com.veljkobogdan.quizzardapp.ui.schedule.AddScheduleActivity;
@@ -109,12 +105,12 @@ public class ScheduleFragment extends Fragment {
     }
 
     private void setupSchedule(ScheduleWithSubjects updatedScheduleWithSubjects) {
-        clearFrameLayouts();
+        clearLayouts();
 
         List<Subject> subjects = updatedScheduleWithSubjects.subjectList;
 
         for (Subject subject : subjects) {
-            FrameLayout targetDayColumn = getDayColumn(subject.dayOfWeek);
+            ConstraintLayout targetDayColumn = getDayColumn(subject.dayOfWeek);
 
             if (targetDayColumn == null) continue;
 
@@ -122,17 +118,22 @@ public class ScheduleFragment extends Fragment {
                     .from(requireContext())
                     .inflate(R.layout.item_subject_card, targetDayColumn, false);
 
-            int hourHeight = DisplayUtil.dpToPx(requireContext(), 60);
-            int startHour = subject.startTime.getHour();
-            int endHour = subject.endTime.getHour();
-            int topMargin = (startHour - 6) * hourHeight;
-            int height = (endHour - startHour) * hourHeight;
+            int offset = getView().findViewById(R.id.timeOffsetSpace).getHeight();
+            int layoutHeight = getView().findViewById(R.id.timeColumn).getHeight() - offset;
+            int hourHeight = layoutHeight / 17;
+            int startMinutes = subject.startTime.getHour() * 60 + subject.startTime.getMinute();
+            int endMinutes = subject.endTime.getHour() * 60 + subject.endTime.getMinute();
+            int baseMinutes = 6 * 60; // 06:00
 
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+            int top = (startMinutes - baseMinutes) * hourHeight / 60;
+            int height = (endMinutes - startMinutes) * hourHeight / 60;
+
+            ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     height
             );
-            params.topMargin = topMargin;
+            params.topToTop = ConstraintLayout.LayoutParams.PARENT_ID;
+            params.topMargin = top;
             subjectCard.setLayoutParams(params);
 
             TextView title = subjectCard.findViewById(R.id.subjectCardTitle);
@@ -142,14 +143,14 @@ public class ScheduleFragment extends Fragment {
         }
     }
 
-    private void clearFrameLayouts() {
-        ((FrameLayout) requireView().findViewById(R.id.day_mon)).removeAllViews();
-        ((FrameLayout) requireView().findViewById(R.id.day_tue)).removeAllViews();
-        ((FrameLayout) requireView().findViewById(R.id.day_wed)).removeAllViews();
-        ((FrameLayout) requireView().findViewById(R.id.day_thu)).removeAllViews();
-        ((FrameLayout) requireView().findViewById(R.id.day_fri)).removeAllViews();
-        ((FrameLayout) requireView().findViewById(R.id.day_sat)).removeAllViews();
-        ((FrameLayout) requireView().findViewById(R.id.day_sun)).removeAllViews();
+    private void clearLayouts() {
+        ((ConstraintLayout) requireView().findViewById(R.id.day_mon)).removeAllViews();
+        ((ConstraintLayout) requireView().findViewById(R.id.day_tue)).removeAllViews();
+        ((ConstraintLayout) requireView().findViewById(R.id.day_wed)).removeAllViews();
+        ((ConstraintLayout) requireView().findViewById(R.id.day_thu)).removeAllViews();
+        ((ConstraintLayout) requireView().findViewById(R.id.day_fri)).removeAllViews();
+        ((ConstraintLayout) requireView().findViewById(R.id.day_sat)).removeAllViews();
+        ((ConstraintLayout) requireView().findViewById(R.id.day_sun)).removeAllViews();
     }
 
     public void loadSchedulesWithSubjects() {
@@ -192,7 +193,7 @@ public class ScheduleFragment extends Fragment {
 
     }
 
-    private FrameLayout getDayColumn(DayOfWeek dayOfWeek) {
+    private ConstraintLayout getDayColumn(DayOfWeek dayOfWeek) {
         switch (dayOfWeek) {
             case MONDAY:
                 return requireView().findViewById(R.id.day_mon);
