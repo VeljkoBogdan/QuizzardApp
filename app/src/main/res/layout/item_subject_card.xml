@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/subjectCard"
     android:layout_width="wrap_content"
@@ -8,21 +9,50 @@
     app:strokeWidth="0dp"
     >
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="4dp"
         >
 
-        <TextView
-            android:id="@+id/subjectCardTitle"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Placeholder"
-            android:textAlignment="center"
-            />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="2dp"
+            >
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/subjectCardTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Placeholder Name"
+                android:textAlignment="center"
+                android:layout_marginBottom="2dp"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:id="@+id/subjectCardLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Placeholder Location"
+                android:textAlignment="center"
+                android:layout_marginBottom="2dp"
+                android:textSize="11sp"
+                />
+
+            <TextView
+                android:id="@+id/subjectCardTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Placeholder Time"
+                android:textAlignment="center"
+                android:layout_marginBottom="2dp"
+                android:textSize="11sp"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </com.google.android.material.card.MaterialCardView>

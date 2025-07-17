@@ -64,16 +64,17 @@ public class ScheduleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        addButton = view.findViewById(R.id.addButton);
-        menuButton = view.findViewById(R.id.menuButton);
         scheduleSelectSpinner = view.findViewById(R.id.scheduleSpinner);
 
-        addButton.setOnClickListener(v -> {
-            Intent i = new Intent(requireContext(), AddSubjectActivity.class);
-            i.putExtra(IntentGroup.SCHEDULE, currentSchedule);
-            startActivity(i);
-        });
+        setupAddButton(view);
+        setupMenuButton(view);
 
+        scheduleRepository = new ScheduleRepository(requireContext());
+        loadSchedulesWithSubjects();
+    }
+
+    private void setupMenuButton(@NonNull View view) {
+        menuButton = view.findViewById(R.id.menuButton);
         menuButton.setOnClickListener(v -> {
             PopupMenu menu = new PopupMenu(requireContext(), v);
 
@@ -96,9 +97,15 @@ public class ScheduleFragment extends Fragment {
 
             menu.show();
         });
+    }
 
-        scheduleRepository = new ScheduleRepository(requireContext());
-        loadSchedulesWithSubjects();
+    private void setupAddButton(@NonNull View view) {
+        addButton = view.findViewById(R.id.addButton);
+        addButton.setOnClickListener(v -> {
+            Intent i = new Intent(requireContext(), AddSubjectActivity.class);
+            i.putExtra(IntentGroup.SCHEDULE, currentSchedule);
+            startActivity(i);
+        });
     }
 
     private void setupSchedule(ScheduleWithSubjects updatedScheduleWithSubjects) {
