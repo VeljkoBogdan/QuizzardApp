@@ -76,4 +76,8 @@ public class ScheduleRepository {
             );
         });
     }
+
+    public LiveData<Subject> getSubject(long subjectId) {
+        return scheduleDao.getSubject(subjectId);
+    }
 }

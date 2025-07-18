@@ -28,6 +28,7 @@ import com.veljkobogdan.quizzardapp.data.models.ScheduleWithSubjects;
 import com.veljkobogdan.quizzardapp.data.repository.ScheduleRepository;
 import com.veljkobogdan.quizzardapp.ui.schedule.AddScheduleActivity;
 import com.veljkobogdan.quizzardapp.ui.schedule.AddSubjectActivity;
+import com.veljkobogdan.quizzardapp.ui.schedule.ViewSubjectActivity;
 import com.veljkobogdan.quizzardapp.util.DisplayUtil;
 import com.veljkobogdan.quizzardapp.util.IntentGroup;
 
@@ -119,6 +120,12 @@ public class ScheduleFragment extends Fragment {
             MaterialCardView subjectCard = (MaterialCardView) LayoutInflater
                     .from(requireContext())
                     .inflate(R.layout.item_subject_card, targetDayColumn, false);
+
+            subjectCard.setOnClickListener(view -> {
+                Intent i = new Intent(getContext(), ViewSubjectActivity.class);
+                i.putExtra(IntentGroup.SUBJECT, subject);
+                startActivity(i);
+            });
 
             int offset = getView().findViewById(R.id.timeOffsetSpace).getHeight();
             int layoutHeight = getView().findViewById(R.id.timeColumn).getHeight() - offset;

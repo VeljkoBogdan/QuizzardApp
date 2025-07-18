@@ -11,4 +11,5 @@ public interface IntentGroup {
     String QUESTION = "question";
     String SCHEDULE = "schedule";
     String SCHEDULE_WITH_SUBJECTS = "scheduleWithSubjects";
+    String SUBJECT = "subject";
 }

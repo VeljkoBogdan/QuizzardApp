@@ -46,5 +46,8 @@ public interface ScheduleDao {
     @Transaction
     @Query("SELECT * FROM schedule")
     LiveData<List<ScheduleWithSubjects>> getAllSchedulesWithSubjects();
+
+    @Query("SELECT * FROM subjects WHERE subjectId = :subjectId")
+    LiveData<Subject> getSubject(long subjectId);
 }
 
