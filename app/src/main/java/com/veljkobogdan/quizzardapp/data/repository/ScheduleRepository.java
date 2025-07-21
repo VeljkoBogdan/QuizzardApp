@@ -80,4 +80,8 @@ public class ScheduleRepository {
     public LiveData<Subject> getSubject(long subjectId) {
         return scheduleDao.getSubject(subjectId);
     }
+
+    public void updateSubject(Subject subject) {
+        executor.execute(() -> scheduleDao.updateSubject(subject));
+    }
 }

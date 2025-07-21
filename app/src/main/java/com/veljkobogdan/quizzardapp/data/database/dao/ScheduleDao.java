@@ -49,5 +49,8 @@ public interface ScheduleDao {
 
     @Query("SELECT * FROM subjects WHERE subjectId = :subjectId")
     LiveData<Subject> getSubject(long subjectId);
+
+    @Update
+    void updateSubject(Subject subject);
 }
 
