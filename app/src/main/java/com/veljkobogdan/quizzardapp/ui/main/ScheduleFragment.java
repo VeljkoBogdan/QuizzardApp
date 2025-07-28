@@ -30,6 +30,7 @@ import com.veljkobogdan.quizzardapp.data.models.ScheduleWithSubjects;
 import com.veljkobogdan.quizzardapp.data.repository.ScheduleRepository;
 import com.veljkobogdan.quizzardapp.ui.schedule.AddScheduleActivity;
 import com.veljkobogdan.quizzardapp.ui.schedule.AddSubjectActivity;
+import com.veljkobogdan.quizzardapp.ui.schedule.EditScheduleActivity;
 import com.veljkobogdan.quizzardapp.ui.schedule.ViewSubjectActivity;
 import com.veljkobogdan.quizzardapp.util.DisplayUtil;
 import com.veljkobogdan.quizzardapp.util.IntentGroup;
@@ -87,7 +88,9 @@ public class ScheduleFragment extends Fragment {
                     startActivity(i);
                     return true;
                 } else if (id == R.id.editScheduleButton) {
-                    // TODO: Add Edit schedule activity
+                    Intent i = new Intent(requireContext(), EditScheduleActivity.class);
+                    i.putExtra(IntentGroup.SCHEDULE, currentSchedule);
+                    startActivity(i);
                     return true;
                 } else if (id == R.id.deleteScheduleButton) {
                     new AlertDialog.Builder(requireContext())

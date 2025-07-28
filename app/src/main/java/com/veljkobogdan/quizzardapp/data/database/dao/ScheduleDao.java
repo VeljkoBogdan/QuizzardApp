@@ -52,5 +52,8 @@ public interface ScheduleDao {
 
     @Update
     void updateSubject(Subject subject);
+
+    @Update
+    void updateSchedule(Schedule schedule);
 }
 

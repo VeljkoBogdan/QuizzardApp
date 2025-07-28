@@ -87,4 +87,8 @@ public class ScheduleRepository {
     public void updateSubject(Subject subject) {
         executor.execute(() -> scheduleDao.updateSubject(subject));
     }
+
+    public void updateSchedule(Schedule schedule) {
+        executor.execute(() -> scheduleDao.updateSchedule(schedule));
+    }
 }
