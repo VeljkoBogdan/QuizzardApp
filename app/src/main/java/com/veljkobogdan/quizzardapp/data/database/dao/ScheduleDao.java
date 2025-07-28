@@ -55,5 +55,11 @@ public interface ScheduleDao {
 
     @Update
     void updateSchedule(Schedule schedule);
+
+    @Query("DELETE FROM schedule")
+    void deleteAll();
+
+    @Query("DELETE FROM schedulewithsubjectscrossref")
+    void deleteAllReferences();
 }
 
