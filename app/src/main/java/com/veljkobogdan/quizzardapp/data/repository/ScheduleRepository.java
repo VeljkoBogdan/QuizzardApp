@@ -35,7 +35,10 @@ public class ScheduleRepository {
     }
 
     public void deleteScheduleEntry(Schedule entry) {
-        executor.execute(() -> scheduleDao.deleteScheduleEntry(entry));
+        executor.execute(() -> {
+            scheduleDao.deleteSubjectsInSchedule(entry.scheduleId);
+            scheduleDao.deleteScheduleEntry(entry);
+        });
     }
 
     public void deleteSubject(Subject subject) {

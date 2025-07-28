@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.ColorUtils;
@@ -19,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.card.MaterialCardView;
 import com.veljkobogdan.quizzardapp.R;
@@ -88,7 +90,15 @@ public class ScheduleFragment extends Fragment {
                     // TODO: Add Edit schedule activity
                     return true;
                 } else if (id == R.id.deleteScheduleButton) {
-                    // TODO: Add a confirmation dialog to delete schedule
+                    new AlertDialog.Builder(requireContext())
+                            .setTitle("Delete Schedule")
+                            .setMessage("Are you sure you want to delete this schedule? This action cannot be undone.")
+                            .setPositiveButton("Delete", (dialog, which) -> {
+                                scheduleRepository.deleteScheduleEntry(currentSchedule);
+                                Toast.makeText(requireContext(), "Schedule deleted", Toast.LENGTH_SHORT).show();
+                            })
+                            .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                            .show();
                     return true;
                 }
                 return false;
