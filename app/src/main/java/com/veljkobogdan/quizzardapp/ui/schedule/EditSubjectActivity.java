@@ -26,6 +26,8 @@ import com.veljkobogdan.quizzardapp.util.IntentGroup;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
+import yuku.ambilwarna.AmbilWarnaDialog;
+
 public class EditSubjectActivity extends AppCompatActivity {
 
     ActivityEditSubjectBinding binding;
@@ -68,6 +70,7 @@ public class EditSubjectActivity extends AppCompatActivity {
         endMinuteSpinner = binding.endMinuteSpinner;
         colorPickerButton = binding.colorPickerButton;
         saveSubjectButton = binding.saveSubjectButton;
+        cardColor = colorPickerButton.getBackgroundTintList().getDefaultColor();
 
         getIntentContent();
         setupDayOfWeekSpinner();
@@ -84,15 +87,14 @@ public class EditSubjectActivity extends AppCompatActivity {
                 return;
             }
 
-            int startHour = (int) startHourSpinner.getSelectedItem();
-            int startMinute = (int) startMinuteSpinner.getSelectedItem();
-            int endHour = (int) endHourSpinner.getSelectedItem();
-            int endMinute = (int) endMinuteSpinner.getSelectedItem();
+            int startHour = Integer.parseInt(startHourSpinner.getSelectedItem().toString());
+            int startMinute = Integer.parseInt(startMinuteSpinner.getSelectedItem().toString());
+            int endHour = Integer.parseInt(endHourSpinner.getSelectedItem().toString());
+            int endMinute = Integer.parseInt(endMinuteSpinner.getSelectedItem().toString());
 
             String selectedDay = dayOfWeekSpinner.getSelectedItem().toString();
             DayOfWeek dayOfWeek = DayOfWeek.valueOf(selectedDay.toUpperCase());
 
-            Subject subject = new Subject();
             subject.name = name;
             subject.teacherName = teacherNameString;
             subject.location = locationName;
@@ -111,7 +113,8 @@ public class EditSubjectActivity extends AppCompatActivity {
         });
 
         colorPickerButton.setOnClickListener(view -> {
-            AmbilWarnaDialog colorPicker = new AmbilWarnaDialog(this, cardColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+            AmbilWarnaDialog colorPicker = new AmbilWarnaDialog(this, cardColor,
+                    new AmbilWarnaDialog.OnAmbilWarnaListener() {
                 @Override
                 public void onOk(AmbilWarnaDialog dialog, int color) {
                     cardColor = color;
@@ -137,8 +140,8 @@ public class EditSubjectActivity extends AppCompatActivity {
                 subject.dayOfWeek.name().substring(1).toLowerCase();
         setSpinnerToValue(dayOfWeekSpinner, dayName);
 
-        int color = subject.color;
-        colorPickerButton.setBackgroundTintList(android.content.res.ColorStateList.valueOf(color));
+        cardColor = subject.color;
+        colorPickerButton.setBackgroundTintList(android.content.res.ColorStateList.valueOf(cardColor));
     }
 
     private void setupDayOfWeekSpinner() {

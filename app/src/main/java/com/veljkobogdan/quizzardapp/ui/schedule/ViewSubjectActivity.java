@@ -1,6 +1,7 @@
 package com.veljkobogdan.quizzardapp.ui.schedule;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -62,7 +63,9 @@ public class ViewSubjectActivity extends AppCompatActivity {
         setInfo(subject);
 
         editButton.setOnClickListener(view -> {
-            // TODO: Go to edit activity
+            Intent i = new Intent(ViewSubjectActivity.this, EditSubjectActivity.class);
+            i.putExtra(IntentGroup.SUBJECT, subject);
+            startActivity(i);
         });
 
         loadSubject();
